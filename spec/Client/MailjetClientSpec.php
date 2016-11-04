@@ -37,4 +37,100 @@ class MailjetClientSpec extends ObjectBehavior
             ]
         ]);
     }
+
+    function it_can_get()
+    {
+
+        $response = $this->get(Resources::$Campaign, ['id'=>'azrt', 'body'=>[]], ['options']);
+
+        $this->getCalls()->shouldReturn([
+            [
+                'method' => 'GET',
+                'resource' => Resources::$Campaign,
+                'args' => ['id'=>'azrt', 'body'=>[]],
+                'options' => ['options'],
+                'success' => $response->success(),
+                'response' => $response->getBody(),
+            ]
+        ]);
+    }
+
+    function it_can_put()
+    {
+
+        $response = $this->put(Resources::$Campaign, ['id'=>'azrt', 'body'=>[]], ['options']);
+
+        $this->getCalls()->shouldReturn([
+            [
+                'method' => 'PUT',
+                'resource' => Resources::$Campaign,
+                'args' => ['id'=>'azrt', 'body'=>[]],
+                'options' => ['options'],
+                'success' => $response->success(),
+                'response' => $response->getBody(),
+            ]
+        ]);
+    }
+
+    function it_can_delete()
+    {
+
+        $response = $this->delete(Resources::$Campaign, ['id'=>'azrt', 'body'=>[]], ['options']);
+
+        $this->getCalls()->shouldReturn([
+            [
+                'method' => 'DELETE',
+                'resource' => Resources::$Campaign,
+                'args' => ['id'=>'azrt', 'body'=>[]],
+                'options' => ['options'],
+                'success' => $response->success(),
+                'response' => $response->getBody(),
+            ]
+        ]);
+    }
+
+    function it_can_retrieve_several_calls()
+    {
+
+        $response = $this->post(Resources::$Campaign, ['id'=>'azrt', 'body'=>[]], ['options']);
+        $response = $this->get(Resources::$Campaign, ['id'=>'azrt', 'body'=>[]], ['options']);
+        $response = $this->put(Resources::$Campaign, ['id'=>'azrt', 'body'=>[]], ['options']);
+        $response = $this->delete(Resources::$Campaign, ['id'=>'azrt', 'body'=>[]], ['options']);
+
+        $this->getCalls()->shouldReturn([
+            [
+                'method' => 'POST',
+                'resource' => Resources::$Campaign,
+                'args' => ['id'=>'azrt', 'body'=>[]],
+                'options' => ['options'],
+                'success' => $response->success(),
+                'response' => $response->getBody(),
+            ],
+            [
+                'method' => 'GET',
+                'resource' => Resources::$Campaign,
+                'args' => ['id'=>'azrt', 'body'=>[]],
+                'options' => ['options'],
+                'success' => $response->success(),
+                'response' => $response->getBody(),
+            ],
+            [
+                'method' => 'PUT',
+                'resource' => Resources::$Campaign,
+                'args' => ['id'=>'azrt', 'body'=>[]],
+                'options' => ['options'],
+                'success' => $response->success(),
+                'response' => $response->getBody(),
+            ],
+            [
+                'method' => 'DELETE',
+                'resource' => Resources::$Campaign,
+                'args' => ['id'=>'azrt', 'body'=>[]],
+                'options' => ['options'],
+                'success' => $response->success(),
+                'response' => $response->getBody(),
+            ]
+        ]);
+    }
+
 }
