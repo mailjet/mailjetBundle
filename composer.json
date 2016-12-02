@@ -1,0 +1,38 @@
+{
+    "name": "welp/mailjet-bundle",
+    "description": "MailChimp API V3 Symfony Bundle",
+    "version": "1.0.0-dev",
+    "type": "symfony-bundle",
+    "homepage": "https://github.com/welpdev/mailjetBundle",
+    "license": "MIT",
+    "keywords": [
+        "Symfony",
+        "MailJet",
+        "API",
+        "V3",
+        "User",
+        "bundle"
+    ],
+    "authors": [
+        {
+            "name": "Titouan BENOIT",
+            "email": "titouan@welp.today"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Welp\\MailjetBundle\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.6",
+        "mailjet/mailjet-apiv3-php": "^1.1"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2@dev",
+        "symfony/symfony": "~2.7 | ~3.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}

@@ -1,0 +1,7 @@
+parameters:
+    welp_mailjet.api.class: Mailjet\Client
+
+services:
+    welp_mailjet.api:
+        class: "%welp_mailjet.api.class%"
+        arguments: ["%welp_mailjet.api_key%", "%welp_mailjet.secret_key%"]

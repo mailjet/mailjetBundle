@@ -1,0 +1,4 @@
+suites:
+    default:
+        namespace: Welp\MailjetBundle
+        psr4_prefix: Welp\MailjetBundle

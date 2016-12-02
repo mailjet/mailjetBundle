@@ -1,0 +1,23 @@
+language: php
+php:
+  - 5.6
+  - 7.0
+
+env:
+  - SYMFONY_VERSION=2.7.*
+  - SYMFONY_VERSION=2.8.*
+  - SYMFONY_VERSION=3.0.*
+  - SYMFONY_VERSION=3.1.*
+
+before_install:
+  - composer require "symfony/config:${SYMFONY_VERSION}" --no-update
+  - composer require "symfony/dependency-injection:${SYMFONY_VERSION}" --no-update
+  - composer require "symfony/http-foundation:${SYMFONY_VERSION}" --no-update
+  - composer require "symfony/http-kernel:${SYMFONY_VERSION}" --no-update
+  - composer require "symfony/yaml:${SYMFONY_VERSION}" --no-update
+
+install:
+  - composer update --prefer-source
+
+script:
+  - bin/phpspec run -fpretty --verbose
