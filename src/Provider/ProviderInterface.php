@@ -6,5 +6,5 @@ use Welp\MailjetBundle\Model\Contact;
 
 interface ProviderInterface
 {
-    public function getSubscribers();
+    public function getContacts();
 }

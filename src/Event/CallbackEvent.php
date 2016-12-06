@@ -8,6 +8,7 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class CallbackEvent extends Event
 {
+    
     const EVENT_SENT = 'welp.mailjet.event.sent';
     const EVENT_OPEN = 'welp.mailjet.event.open';
     const EVENT_CLICK = 'welp.mailjet.event.click';

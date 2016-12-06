@@ -24,7 +24,7 @@ class ExampleContactProvider implements ProviderInterface
         $this->userRepository = $userRepository;
     }
 
-    public function getSubscribers()
+    public function getContacts()
     {
         $users = $this->userRepository->findUsers();
 

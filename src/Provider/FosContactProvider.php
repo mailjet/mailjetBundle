@@ -20,7 +20,7 @@ class FosContactProvider implements ProviderInterface
         $this->userManager = $userManager;
     }
 
-    public function getSubscribers()
+    public function getContacts()
     {
         $users = $this->userManager->findUsers();
         // or find only enabled users :

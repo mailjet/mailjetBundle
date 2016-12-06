@@ -10,6 +10,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use Welp\MailjetBundle\Model\Contact;
+
 /**
  * Class SyncUserCommand
  * Sync users in a mailjet contact list
@@ -24,9 +26,9 @@ class SyncUserCommand extends ContainerAwareCommand
     private $mailjet;
 
     /**
-     * @var int
+     * @var Array
      */
-    private $list;
+    private $lists;
 
     /**
      * {@inheritDoc}
@@ -35,8 +37,20 @@ class SyncUserCommand extends ContainerAwareCommand
     {
         $this
             ->setName('mailjet:user:sync')
-            ->setDescription('Synchronize users with mailjet contact list')
-            ->addArgument('list', InputArgument::REQUIRED, 'List ID to synchronize with');
+            ->setDescription('Synchronize users with mailjet contact list');
+            // @TODO add params : listId, providerServiceKey
+    }
+
+    /**
+    * {@inheritDoc}
+    */
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        $output->writeln(sprintf('<info>%s</info>', $this->getDescription()));
+
+        $this->mailjet = $this->getContainer()->get('welp_mailjet.api');
+        //$this->mailjetError = $this->getContainer()->get('guzzle.client.api_mailjet');
+        $this->lists = $this->getContainer()->getParameter('welp_mailjet.lists');
     }
 
     /**
@@ -44,27 +58,30 @@ class SyncUserCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var User[] $users */
-        $users = $this->em->getRepository(User::class)->findAll();
-        $body = [
-            'Action' => 'addnoforce',
-            'Contacts' => [],
-        ];
-        foreach ($users as $user) {
-            $body['Contacts'][] = [
-                'Email' => $user->getEmail(),
-                'Name' => (string) $user,
-                'Properties' => [
-                    'nom' => $user->getLastName(),
-                    'prenom' => $user->getFirstName(),
-                    'nb_commandes' => $user->getOrderCount(),
-                ],
-            ];
-        }
 
-        $response = $this->mailjet->post(Resources::$ContactslistManagemanycontacts, ['id' => $this->list, 'body' => $body]);
-        if ($response->success()) {
-            $this->processJob($response->getData()[0]['JobID'], $output);
+        foreach ($this->lists as $listId => $listParameters) {
+            $providerServiceKey = $listParameters['contact_provider'];
+            $provider = $this->getProvider($providerServiceKey);
+
+            $body = [
+                'Action' => 'addforce',
+                'Contacts' => [],
+            ];
+
+            $contacts = $provider->getContacts();
+            $contacsArray = array_map(function(Contact $contact) {
+                return $contact->format();
+            }, $contacts);
+
+            $body['Contacts'] = $contacsArray;
+
+            $response = $this->mailjet->post(Resources::$ContactslistManagemanycontacts,
+                ['id' => $listId, 'body' => $body]
+            );
+            if ($response->success()) {
+                $this->processJob($response->getData()[0]['JobID'], $output);
+            }
+
         }
     }
 
@@ -78,6 +95,7 @@ class SyncUserCommand extends ContainerAwareCommand
     {
         $response = $this->mailjet->get(Resources::$ContactslistManagemanycontacts, ['id' => $this->list, 'actionid' => $jobId]);
         $status = $response->getData()[0]['Status'];
+        /*
         switch ($status) {
             case 'Error':
                 $file = $response->getData()[0]['ErrorFile'];
@@ -94,5 +112,24 @@ class SyncUserCommand extends ContainerAwareCommand
                 }
                 break;
         }
+        */
+    }
+
+    /**
+     * Get contact provider
+     * @param String $providerServiceKey
+     * @return ProviderInterface $provider
+     */
+    private function getProvider($providerServiceKey)
+    {
+        try {
+            $provider = $this->getContainer()->get($providerServiceKey);
+        } catch (ServiceNotFoundException $e) {
+            throw new \InvalidArgumentException(sprintf('Provider "%s" should be defined as a service.', $providerServiceKey), $e->getCode(), $e);
+        }
+        if (!$provider instanceof ProviderInterface) {
+            throw new \InvalidArgumentException(sprintf('Provider "%s" should implement Welp\MailjetBundle\Provider\ProviderInterface.', $providerServiceKey));
+        }
+        return $provider;
     }
 }

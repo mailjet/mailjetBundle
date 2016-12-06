@@ -8,6 +8,11 @@ namespace Welp\MailjetBundle\Model;
 */
 class Contact
 {
+
+    const EMAIL_KEY = 'Email';
+    const NAME_KEY = 'Name';
+    const PROPERTIES_KEY = 'Properties';
+
     protected $email;
     protected $name;
     protected $properties;
@@ -25,14 +30,14 @@ class Contact
      */
     public function format(){
         $result = [
-            "Email" => $this->email,
+            self::EMAIL_KEY => $this->email,
         ];
 
         if(!is_null($this->name))
-            $result['Name'] = $this->name;
+            $result[self::NAME_KEY] = $this->name;
 
         if(!is_null($this->properties))
-            $result['Properties'] = $this->properties;
+            $result[self::PROPERTIES_KEY] = $this->properties;
 
         return $result;
     }
