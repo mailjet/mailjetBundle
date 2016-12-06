@@ -3,7 +3,6 @@
 namespace Welp\MailjetBundle\Provider;
 
 use Welp\MailjetBundle\Provider\ProviderInterface;
-use Welp\MailjetBundle\Model\Contact;
 
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Model\User;

@@ -1,11 +1,9 @@
 # Setup
 
-## Installation
-
 Add bundle to your project:
 
 ```bash
-composer require welp/mailchimp-bundle
+composer require welp/mailjet-bundle
 ```
 
 Add `Welp\MailjetBundle\WelpMailjetBundle` to your `AppKernel.php`:
@@ -22,8 +20,9 @@ $bundles = [
 In your `config.yml`:
 
 ```yaml
-welp_mailchimp:
-    api_key: YOURMAILCHIMPAPIKEY
+welp_mailjet:
+    api_key:    "%mailjet_api_key%"
+    secret_key: "%mailjet_secret_key%"
 ```
 
 [More configuration](configuration.md)
