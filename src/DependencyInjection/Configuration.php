@@ -29,7 +29,7 @@ class Configuration implements ConfigurationInterface
                     ->info('Route name of the event API endpoint')
                 ->end()
                 ->scalarNode('event_endpoint_token')
-                    ->defaultNull()
+                    ->defaultValue('123456789')
                     ->info('Security token to validate endpoint request with')
                 ->end()
             ->end()

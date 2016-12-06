@@ -3,37 +3,86 @@ namespace Welp\MailjetBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
+use Welp\MailjetBundle\Event\CallbackEvent;
+
 /**
  * @Route("/mailjet-event")
+ * Best practice
+ * We advise you to follow some basic guidelines for implementation and usage.
+ *
+ * Process the payload received asynchronously : as much as possible, the webhook script should rely on an asynchronous consumer process that will use the data saved by your webhook. You should keep out of your webhook logic all cross matches of the delivered events with other ressources of our API or your internal database. This step will allow your webhook to answer in a timely manner to our calls and avoid it to timeout and being retried by our server.
+ * Check regularly your server logs for any errors : all non 200 errors would be retried and could cause an increasing volume of calls to your system.
+ * Leverage the transactional message tagging to simplify reconciliation between the events and your own system.
  */
-class EventController
+class EventController extends Controller
 {
 
     /**
      * Endpoint for the mailjet events (webhooks)
      * https://dev.mailjet.com/guides/#events
      * https://live-event-dashboard-demo.mailjet.com/
-     * @Route("/endpoint", name="welp_mailjet_event_endpoint")
+     * @Route("/endpoint/{token}", name="welp_mailjet_event_endpoint")
      * @Method({"POST"})
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, $token)
     {
-        if ($this->token !== $token) {
-            return false;
+        // Token validation
+        if ($this->getToken() !== $token) {
+            throw $this->createAccessDeniedException('Token mismatch');
         }
 
         $data = $this->extractData($request);
-        //$event = $this->eventFactory->createEvent($data);
         /*
             Please note that the event types in the collection can be mixed.
             We group together all the events of the last second for the same webhook url.
         */
-        //$this->eventDispatcher->dispatch($event->getType(), $event);
+        // NOTE: use a better dispatcher such as rabbitMQ if you have a huge amount of events
+        $dispatcher = $this->getDispatcher();
 
+        foreach ($data as $key => $callbackData) {
+            $type = $callbackData['event'];
+            switch ($type) {
+                case 'sent':
+                    $dispatcher->dispatch(CallbackEvent::EVENT_SENT, new CallbackEvent($callbackData));
+                    break;
+                case 'open':
+                    $dispatcher->dispatch(CallbackEvent::EVENT_OPEN, new CallbackEvent($callbackData));
+                    break;
+                case 'click':
+                    $dispatcher->dispatch(CallbackEvent::EVENT_CLICK, new CallbackEvent($callbackData));
+                    break;
+                case 'bounce':
+                    $dispatcher->dispatch(CallbackEvent::EVENT_BOUNCE, new CallbackEvent($callbackData));
+                    break;
+                case 'spam':
+                    $dispatcher->dispatch(CallbackEvent::EVENT_SPAM, new CallbackEvent($callbackData));
+                    break;
+                case 'blocked':
+                    $dispatcher->dispatch(CallbackEvent::EVENT_BLOCKED, new CallbackEvent($callbackData));
+                    break;
+                case 'unsub':
+                    $dispatcher->dispatch(CallbackEvent::EVENT_UNSUB, new CallbackEvent($callbackData));
+                    break;
+                default:
+                    throw $this->createAccessDeniedException('Type mismatch');
+                    break;
+            }
+        }
+
+    }
+
+    /**
+     * Override this to use another event dispatcher
+     */
+    public function getDispatcher(){
+        // NOTE: use a better dispatcher such as rabbitMQ if you have a huge amount of events
+        return $this->get('event_dispatcher');
     }
 
     private function extractData(Request $request)
@@ -44,5 +93,13 @@ class EventController
     private function prepareResponse($status)
     {
         return new JsonResponse(array(), $status);
+    }
+
+    /**
+     * @return string
+     */
+    private function getToken()
+    {
+        return $this->container->getParameter('welp_mailjet.event_endpoint_token');
     }
 }
