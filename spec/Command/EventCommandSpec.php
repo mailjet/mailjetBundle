@@ -2,6 +2,7 @@
 
 namespace spec\Welp\MailjetBundle\Command;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -14,7 +15,7 @@ class EventCommandSpec extends ObjectBehavior
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      */
-    function let($container)
+    function let(ContainerInterface $container)
     {
         $this->setContainer($container);
     }
@@ -63,8 +64,8 @@ class EventCommandSpec extends ObjectBehavior
         $input->hasArgument(Argument::any())->willReturn(false);
         $input->bind(Argument::any())->shouldBeCalled();
         $input->getArgument('baseurl')->shouldBeCalled()->willReturn($this->baseurl);
-        $container->getParameter('knp_mailjet.event.endpoint_route')->shouldBeCalled()->willReturn($this->routeName);
-        $container->getParameter('knp_mailjet.event.endpoint_token')->shouldBeCalled()->willReturn($token);
+        $container->getParameter('welp_mailjet.event_endpoint_route')->shouldBeCalled()->willReturn($this->routeName);
+        $container->getParameter('welp_mailjet.event_endpoint_token')->shouldBeCalled()->willReturn($token);
 
         $uri = $this->uri.($token ? '/'.$token : '');
         $router->generate($this->routeName, array('token' => $token))->shouldBeCalled()->willReturn($uri);

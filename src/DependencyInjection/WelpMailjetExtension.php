@@ -17,8 +17,8 @@ class WelpMailjetExtension extends Extension
 
         $container->setParameter('welp_mailjet.api_key',    $config['api_key']);
         $container->setParameter('welp_mailjet.secret_key', $config['secret_key']);
-        $container->setParameter('welp_mailjet.event.endpoint_route', $config['event_endpoint_route']);
-        $container->setParameter('welp_mailjet.event.endpoint_token', $config['event_endpoint_token']);
+        $container->setParameter('welp_mailjet.event_endpoint_route', $config['event_endpoint_route']);
+        $container->setParameter('welp_mailjet.event_endpoint_token', $config['event_endpoint_token']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');

@@ -1,9 +1,11 @@
 <?php
-namespace Knp\Bundle\MailjetBundle\Command;
+namespace Welp\MailjetBundle\Command;
+
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+
 class EventCommand extends ContainerAwareCommand
 {
     protected function configure()
@@ -17,7 +19,7 @@ class EventCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $domain = $input->getArgument('domain');
+        $domain = $input->getArgument('baseurl');
         $uri = $this->getRouter()->generate($this->getRouteName(), array(
             'token' => $this->getToken()
         ));
@@ -37,14 +39,14 @@ class EventCommand extends ContainerAwareCommand
      */
     protected function getRouteName()
     {
-        return $this->getContainer()->getParameter('welp_mailjet.event.endpoint_route');
+        return $this->getContainer()->getParameter('welp_mailjet.event_endpoint_route');
     }
-    
+
     /**
      * @return string
      */
     protected function getToken()
     {
-        return $this->getContainer()->getParameter('welp_mailjet.event.endpoint_token');
+        return $this->getContainer()->getParameter('welp_mailjet.event_endpoint_token');
     }
 }
