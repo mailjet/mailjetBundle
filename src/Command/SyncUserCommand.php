@@ -21,10 +21,6 @@ use Welp\MailjetBundle\Model\ContactsList;
  */
 class SyncUserCommand extends ContainerAwareCommand
 {
-    /**
-     * @var Client
-     */
-    private $mailjet;
 
     /**
      * @var Array
@@ -49,8 +45,6 @@ class SyncUserCommand extends ContainerAwareCommand
     {
         $output->writeln(sprintf('<info>%s</info>', $this->getDescription()));
 
-        $this->mailjet = $this->getContainer()->get('welp_mailjet.api');
-        //$this->mailjetError = $this->getContainer()->get('guzzle.client.api_mailjet');
         $this->lists = $this->getContainer()->getParameter('welp_mailjet.lists');
     }
 
@@ -63,46 +57,12 @@ class SyncUserCommand extends ContainerAwareCommand
         foreach ($this->lists as $listId => $listParameters) {
             $provider = $this->getProvider($listParameters['contact_provider']);
 
-            $contactList = new ContactsList($listId, ContactsList::ACTION_ADDFORCE, $provider->getContacts());
+            $contactList = new ContactsList($listId, ContactsList::ACTION_ADDNOFORCE, $provider->getContacts());
 
-            $response = $this->mailjet->post(Resources::$ContactslistManagemanycontacts,
-                ['id' => $listId, 'body' => $contactList->format()]
-            );
-            if ($response->success()) {
-                $this->processJob($response->getData()[0]['JobID'], $output);
-            }
+            $response = $this->getContainer()->get('welp_mailjet.service.contacts_list_synchronizer')->synchronize($contactList);
 
+            $output->writeln(sprintf('<info>OK listId: %s</info>', $listId));
         }
-    }
-
-    /**
-     * Treat job content
-     *
-     * @param int             $jobId
-     * @param OutputInterface $output
-     */
-    private function processJob($jobId, OutputInterface $output)
-    {
-        $response = $this->mailjet->get(Resources::$ContactslistManagemanycontacts, ['id' => $this->list, 'actionid' => $jobId]);
-        $status = $response->getData()[0]['Status'];
-        /*
-        switch ($status) {
-            case 'Error':
-                $file = $response->getData()[0]['ErrorFile'];
-                $response = $this->mailjetError->get($file);
-                $response->getBody()->rewind();
-                $data = json_decode($response->getBody()->getContents(), true);
-
-                foreach ($data['Contacts'] as $user) {
-                    foreach ($user['Error'] as $errors) {
-                        foreach ($errors as $property => $message) {
-                            $output->writeln(sprintf('<error>Error on property "%s" : %s for user with email %s', $property, $message, $user['Email']));
-                        }
-                    }
-                }
-                break;
-        }
-        */
     }
 
     /**

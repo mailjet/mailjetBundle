@@ -9,13 +9,20 @@ namespace Welp\MailjetBundle\Model;
 class Contact
 {
 
+    const ACTION_ADDFORCE = 'addforce'; # adds the contact and resets the unsub status to false
+    const ACTION_ADDNOFORCE = 'addnoforce'; # adds the contact and does not change the subscription status of the contact
+    const ACTION_REMOVE = 'remove'; # removes the contact from the list
+    const ACTION_UNSUB = 'unsub'; # unsubscribes a contact from the list
+
     const EMAIL_KEY = 'Email';
     const NAME_KEY = 'Name';
+    const ACTION_KEY = 'Action';
     const PROPERTIES_KEY = 'Properties';
 
     protected $email;
     protected $name;
     protected $properties;
+    protected $action;
 
     public function __construct($email, $name = null, array $properties = [])
     {
@@ -35,6 +42,9 @@ class Contact
 
         if(!is_null($this->name))
             $result[self::NAME_KEY] = $this->name;
+
+        if(!is_null($this->action))
+            $result[self::ACTION_KEY] = $this->action;
 
         if(!is_null($this->properties))
             $result[self::PROPERTIES_KEY] = $this->properties;
@@ -65,6 +75,26 @@ class Contact
     public function getProperties()
     {
         return $this->properties;
+    }
+
+    /**
+     * Action to the contact for Synchronization
+     * @return String
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
+     * Action to the contact for Synchronization
+     * @param String action ACTION_*
+     * @return Contact
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
+        return $this;
     }
 
 }

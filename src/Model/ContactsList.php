@@ -9,10 +9,10 @@ namespace Welp\MailjetBundle\Model;
 class ContactsList
 {
 
-    const ACTION_ADDFORCE = 'addforce';
-    const ACTION_ADDNOFORCE = 'addnoforce';
-    const ACTION_REMOVE = 'remove';
-    const ACTION_UNSUB = 'unsub';
+    const ACTION_ADDFORCE = 'addforce'; # adds the contact and resets the unsub status to false
+    const ACTION_ADDNOFORCE = 'addnoforce'; # adds the contact and does not change the subscription status of the contact
+    const ACTION_REMOVE = 'remove'; # removes the contact from the list
+    const ACTION_UNSUB = 'unsub'; # unsubscribes a contact from the list
 
     protected $listId;
     protected $action;
