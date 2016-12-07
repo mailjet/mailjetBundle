@@ -33,7 +33,7 @@ class SyncUserCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('mailjet:user:sync')
+            ->setName('welp:mailjet:user-sync')
             ->setDescription('Synchronize users with mailjet contact list');
             // @TODO add params : listId, providerServiceKey
     }

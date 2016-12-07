@@ -93,6 +93,14 @@ class ContactManage
         return $reponse->getData();
     }
 
+    /*
+     * Change email a Contact
+     *
+    public function changeEmail(Contact $contact, $oldEmail)
+    {
+        //@TODO
+    }*/
+
     /**
     * An action for adding a contact to a contact list. Only POST is supported.
     * The API will internally create the new contact if it does not exist,

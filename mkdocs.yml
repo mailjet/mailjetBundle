@@ -9,4 +9,9 @@ pages:
     - Home: index.md
     - Setup: setup.md
     - Configuration: configuration.md
+    - Contact Provider: contact-provider.md
+    - Usage: usage.md
+    - Event API (webhook): event-api.md
+    - Tests: tests.md
+    - MailJet Doc: mailjet-doc.md
 theme: readthedocs

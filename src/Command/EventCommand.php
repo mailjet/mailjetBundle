@@ -11,7 +11,7 @@ class EventCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('mailjet:event-endpoint')
+            ->setName('welp:mailjet:event-endpoint')
             ->setDescription('Prints URL endpoint that should be configured at mailjet.com website')
             ->addArgument('baseurl', InputArgument::REQUIRED, 'Baseurl with domain to be used in URL, i.e. https://example.com')
         ;
