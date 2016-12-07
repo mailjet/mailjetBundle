@@ -32,6 +32,15 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('123456789')
                     ->info('Security token to validate endpoint request with')
                 ->end()
+                // lists
+                ->arrayNode('lists')
+                    ->useAttributeAsKey('listId')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('contact_provider')->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

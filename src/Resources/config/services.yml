@@ -1,7 +1,19 @@
 parameters:
-    welp_mailjet.api.class: Mailjet\Client
+    welp_mailjet.api.class: \Mailjet\Client
+    welp_mailjet.contact_list_synchronizer.class: Welp\MailjetBundle\Service\ContactListSynchronizer
+    welp_mailjet.event_callback_manager.class: Welp\MailjetBundle\Service\EventCallbackManager
 
 services:
     welp_mailjet.api:
         class: "%welp_mailjet.api.class%"
         arguments: ["%welp_mailjet.api_key%", "%welp_mailjet.secret_key%"]
+
+    welp_mailjet.service.contact_list_synchronizer:
+        class: "%welp_mailjet.contact_list_synchronizer.class%"
+        arguments:
+            - "@welp_mailjet.api"
+
+    welp_mailjet.service.event_callback_manager:
+        class: "%welp_mailjet.event_callback_manager.class%"
+        arguments:
+            - "@welp_mailjet.api"

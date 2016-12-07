@@ -35,6 +35,27 @@ class ContactList
         $this->contacts = $contacts;
     }
 
+    /**
+     * Formate contactList for MailJet API request
+     * @return array
+     */
+    public function format(){
+
+        $result = [
+            'Action' => $this->action,
+            'Contacts' => [],
+        ];
+
+        $contacts = $this->contacts;
+        $contacsArray = array_map(function(Contact $contact) {
+            return $contact->format();
+        }, $contacts);
+
+        $result['Contacts'] = $contacsArray;
+
+        return $result;
+    }
+
 
     /**
      *

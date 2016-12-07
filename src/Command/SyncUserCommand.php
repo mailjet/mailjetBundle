@@ -2,8 +2,8 @@
 
 namespace Welp\MailjetBundle\Command;
 
-use Mailjet\Client;
-use Mailjet\Resources;
+use \Mailjet\Client;
+use \Mailjet\Resources;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -11,6 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use Welp\MailjetBundle\Model\Contact;
+use Welp\MailjetBundle\Model\ContactList;
 
 /**
  * Class SyncUserCommand
@@ -60,23 +61,12 @@ class SyncUserCommand extends ContainerAwareCommand
     {
 
         foreach ($this->lists as $listId => $listParameters) {
-            $providerServiceKey = $listParameters['contact_provider'];
-            $provider = $this->getProvider($providerServiceKey);
+            $provider = $this->getProvider($listParameters['contact_provider']);
 
-            $body = [
-                'Action' => 'addforce',
-                'Contacts' => [],
-            ];
-
-            $contacts = $provider->getContacts();
-            $contacsArray = array_map(function(Contact $contact) {
-                return $contact->format();
-            }, $contacts);
-
-            $body['Contacts'] = $contacsArray;
+            $contactList = new ContactList($listId, ContactList::ACTION_ADDFORCE, $provider->getContacts());
 
             $response = $this->mailjet->post(Resources::$ContactslistManagemanycontacts,
-                ['id' => $listId, 'body' => $body]
+                ['id' => $listId, 'body' => $contactList->format()]
             );
             if ($response->success()) {
                 $this->processJob($response->getData()[0]['JobID'], $output);

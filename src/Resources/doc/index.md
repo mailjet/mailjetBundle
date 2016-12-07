@@ -7,7 +7,7 @@ Symfony bundle for handling Mailjet API V3
 
 * [x] Retrieve [\Mailjet\Client](https://github.com/mailjet/mailjet-apiv3-php) to make custom MailJet API V3 requests
 * [ ] Synchronize your user with MailJet contact list
-*  [ ] Use your own userProvider (basic `FosContactProvider` included to interface with FosUserBundle)
+* [x] Use your own userProvider (basic `FosContactProvider` included to interface with FosUserBundle)
 * [ ] Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List
 * [ ] Register Event API - real time notifications (webhook)
 
