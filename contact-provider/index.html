@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Titouan BENOIT">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Contact Provider - MailJet Bundle</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Contact Provider";
+    var mkdocs_page_input_path = "contact-provider.md";
+    var mkdocs_page_url = "/contact-provider/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> MailJet Bundle</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../setup/">Setup</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../configuration/">Configuration</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Contact Provider</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#contact-provider">Contact Provider</a></li>
+                
+                    <li><a class="toctree-l4" href="#example">Example</a></li>
+                
+                    <li><a class="toctree-l4" href="#foscontactprovider">FosContactProvider</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../usage/">Usage</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../event-api/">Event API (webhook)</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../tests/">Tests</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../mailjet-doc/">MailJet Doc</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">MailJet Bundle</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Contact Provider</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/welpdev/mailjetBundle/edit/master/docs/contact-provider.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="contact-provider">Contact Provider</h1>
+<p>After <a href="../configuration/">configuring your lists</a> in <code>config.yml</code>, you need to create at least one <code>Provider</code> that will be used by the SyncUser command.
+Your provider should be accessible via a service key (the same you reference in <code>contact_provider</code> in your configuration file):</p>
+<pre><code>services:
+    yourapp.mailjet.contact_provider1:
+        class: YourApp\AppBundle\Mailjet\MyContactProvider
+        arguments: [@yourapp.user.repository]
+</code></pre>
+<p>You provider class should implement <code>Welp\MailjetBundle\Provider\ProviderInterface</code> and the method <code>getContacts</code> must return an array of <code>Welp\MailjetBundle\Model\Contact</code> objects.</p>
+<h2 id="example">Example</h2>
+<p>Here is an example of ContactProvider:</p>
+<pre><code class="php">
+&lt;?php
+
+namespace YourApp\App\Mailjet;
+
+use Welp\MailjetBundle\Provider\ProviderInterface;
+
+use YourApp\Model\User\UserRepository;
+use YourApp\Model\User\User;
+
+class ExampleContactProvider implements ProviderInterface
+{
+
+    const PROP_NICKNAME =           'nickname';
+    const PROP_GENDER =             'gender';
+    const PROP_CITY =               'city';
+    const PROP_BIRTHDATE =          'birthdate';
+    const PROP_LAST_ACTIVITY_DATE = 'last_activity';
+    const PROP_REGISTRATION_DATE =  'registration_date';
+
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this-&gt;userRepository = $userRepository;
+    }
+
+    public function getContacts()
+    {
+        $users = $this-&gt;userRepository-&gt;findUsers();
+
+        $contacts = array_map(function(User $user) {
+            $userProperties = [
+                self::PROP_NICKNAME =&gt; $user-&gt;getNickname(),
+                self::PROP_GENDER =&gt; $user-&gt;getGender(),
+                self::PROP_CITY =&gt; $user-&gt;getCity(),
+                self::PROP_BIRTHDATE =&gt; $user-&gt;getBirthday() ? $user-&gt;getBirthday()-&gt;format('Y-m-d') : null,
+                self::PROP_LAST_ACTIVITY_DATE =&gt; $user-&gt;getLastActivity() ? $user-&gt;getLastActivity()-&gt;format('Y-m-d') : null
+                self::PROP_REGISTRATION_DATE =&gt; $user-&gt;getRegistrateAt() ? $user-&gt;getRegistrateAt()-&gt;format('Y-m-d') : null
+            ];
+
+            $contact = new Contact($user-&gt;getEmail(), $user-&gt;getUsername(), $userProperties);
+
+            return $contact;
+        }, $users);
+
+        return $contacts;
+    }
+}
+</code></pre>
+
+<h2 id="foscontactprovider">FosContactProvider</h2>
+<p>We also provide a ready to use provider for FosUserBundle: <code>FosContactProvider</code>. You just need to register the service into your app:</p>
+<pre><code>services:
+    yourapp.mailjet.fos_contact_provider:
+        class: Welp\MailjetBundle\Provider\FosContactProvider
+        arguments: [@fos_user.user_manager]
+</code></pre>
+<p>After this, don't forget to add the service key for your list into your <code>config.yml</code>:</p>
+<pre><code>...
+listId1:
+    contact_provider: 'yourapp.mailjet.fos_contact_provider'
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../usage/" class="btn btn-neutral float-right" title="Usage">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../configuration/" class="btn btn-neutral" title="Configuration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>MIT</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/welpdev/mailjetBundle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../configuration/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../usage/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

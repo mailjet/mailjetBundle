@@ -8,7 +8,7 @@
   
   <meta name="author" content="Titouan BENOIT">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Setup - MailJet Bundle</title>
+  <title>Event API (webhook) - MailJet Bundle</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Setup";
-    var mkdocs_page_input_path = "setup.md";
-    var mkdocs_page_url = "/setup/";
+    var mkdocs_page_name = "Event API (webhook)";
+    var mkdocs_page_input_path = "event-api.md";
+    var mkdocs_page_url = "/event-api/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -54,17 +54,8 @@
 <li>
           
             <li>
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Setup</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#setup">Setup</a></li>
-                
-                    <li><a class="toctree-l4" href="#minimal-configuration">Minimal Configuration</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../setup/">Setup</a>
         
     </li>
 <li>
@@ -91,8 +82,15 @@
 <li>
           
             <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../event-api/">Event API (webhook)</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Event API (webhook)</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#event-api-real-time-notifications-webhook">Event API: real-time notifications (webhook)</a></li>
+                
+            
+            </ul>
         
     </li>
 <li>
@@ -133,10 +131,10 @@
     
       
     
-    <li>Setup</li>
+    <li>Event API (webhook)</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/welpdev/mailjetBundle/edit/master/docs/setup.md"
+        <a href="https://github.com/welpdev/mailjetBundle/edit/master/docs/event-api.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -146,26 +144,8 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="setup">Setup</h1>
-<p>Add bundle to your project:</p>
-<pre><code class="bash">composer require welp/mailjet-bundle
-</code></pre>
-
-<p>Add <code>Welp\MailjetBundle\WelpMailjetBundle</code> to your <code>AppKernel.php</code>:</p>
-<pre><code class="php">$bundles = [
-    // ...
-    new Welp\MailjetBundle\WelpMailjetBundle(),
-];
-</code></pre>
-
-<h2 id="minimal-configuration">Minimal Configuration</h2>
-<p>In your <code>config.yml</code>:</p>
-<pre><code class="yaml">welp_mailjet:
-    api_key:    &quot;%mailjet_api_key%&quot;
-    secret_key: &quot;%mailjet_secret_key%&quot;
-</code></pre>
-
-<p><a href="../configuration/">More configuration</a></p>
+                <h1 id="event-api-real-time-notifications-webhook">Event API: real-time notifications (webhook)</h1>
+<p>https://dev.mailjet.com/guides/#event-api-real-time-notifications</p>
               
             </div>
           </div>
@@ -173,10 +153,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../configuration/" class="btn btn-neutral float-right" title="Configuration">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../tests/" class="btn btn-neutral float-right" title="Tests">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../usage/" class="btn btn-neutral" title="Usage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -206,10 +186,10 @@
           <a href="https://github.com/welpdev/mailjetBundle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../usage/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../configuration/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../tests/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "MailJet Bundle\n\n\n\n\n\n\n\n\nSymfony bundle for handling Mailjet API V3 using this wrapper: \nhttps://github.com/mailjet/mailjet-apiv3-php\n\n\n/!\\ WORK IN PROGRESS... NOT READY TO USE /!\\ Wait for a release before using it.\n\n\nFeatures\n\n\n\n\n[x] Retrieve \n\\Mailjet\\Client\n to make custom MailJet API V3 requests\n\n\n[x] Synchronize your user with MailJet contact list\n\n\n[x] Use your own userProvider (basic \nFosContactProvider\n included to interface with FosUserBundle)\n\n\n[x] Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List\n\n\n[ ] Register Event API - real time notifications (webhook)\n\n\n\n\nSetup\n\n\nAdd bundle to your project:\n\n\ncomposer require welp/mailjet-bundle\n\n\n\n\nAdd \nWelp\\MailjetBundle\\WelpMailjetBundle\n to your \nAppKernel.php\n:\n\n\n$bundles = [\n    // ...\n    new Welp\\MailjetBundle\\WelpMailjetBundle(),\n];\n\n\n\n\nMinimal Configuration\n\n\nIn your \nconfig.yml\n:\n\n\nwelp_mailjet:\n    api_key:    \n%mailjet_api_key%\n\n    secret_key: \n%mailjet_secret_key%\n\n\n\n\n\nToDo\n\n\n\n\nMoar tests...\n\n\nhandle when user changes email\n\n\nMANAGING LIST SUBSCRIPTIONS FOR A SINGLE CONTACT ( /CONTACT/$ID/MANAGECONTACTSLISTS )\n\n\nMANAGING AND UPLOADING MULTIPLE CONTACTS ( /CONTACT/MANAGEMANYCONTACTS )\n\n\nMANAGING CONTACTS THROUGH CSV UPLOAD\n\n\n\n\nMailJet issues\n\n\n\n\nHow to change user email? (workaround: remove old, add new...)\n\n\nEvent API/webhook: how to synchronize subscribe event from admin or form ith our app? (available sent, open, click, bounce, spam, blocked, unsub)", 
+            "text": "MailJet Bundle\n\n\n\n\n\n\n\n\nSymfony bundle for handling Mailjet API V3 using this wrapper: \nhttps://github.com/mailjet/mailjet-apiv3-php\n\n\n/!\\ WORK IN PROGRESS... NOT READY TO USE /!\\ Wait for a release before using it.\n\n\nFeatures\n\n\n\n\n[x] Retrieve \n\\Mailjet\\Client\n to make custom MailJet API V3 requests\n\n\n[x] Synchronize your user with MailJet contact list\n\n\n[x] Use your own userProvider (basic \nFosContactProvider\n included to interface with FosUserBundle)\n\n\n[x] Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List\n\n\n[x] Register Event API - real time notifications (webhook)\n\n\n\n\nSetup\n\n\nAdd bundle to your project:\n\n\ncomposer require welp/mailjet-bundle\n\n\n\n\nAdd \nWelp\\MailjetBundle\\WelpMailjetBundle\n to your \nAppKernel.php\n:\n\n\n$bundles = [\n    // ...\n    new Welp\\MailjetBundle\\WelpMailjetBundle(),\n];\n\n\n\n\nMinimal Configuration\n\n\nIn your \nconfig.yml\n:\n\n\nwelp_mailjet:\n    api_key:    \n%mailjet_api_key%\n\n    secret_key: \n%mailjet_secret_key%\n\n\n\n\n\nToDo\n\n\n\n\nMoar tests...\n\n\nhandle when user changes email\n\n\nMANAGING LIST SUBSCRIPTIONS FOR A SINGLE CONTACT ( /CONTACT/$ID/MANAGECONTACTSLISTS )\n\n\nMANAGING AND UPLOADING MULTIPLE CONTACTS ( /CONTACT/MANAGEMANYCONTACTS )\n\n\nMANAGING CONTACTS THROUGH CSV UPLOAD\n\n\n\n\nMailJet issues\n\n\n\n\nHow to change user email? (workaround: remove old, add new...)\n\n\nEvent API/webhook: how to synchronize subscribe event from admin or form ith our app? (available sent, open, click, bounce, spam, blocked, unsub)", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/#features", 
-            "text": "[x] Retrieve  \\Mailjet\\Client  to make custom MailJet API V3 requests  [x] Synchronize your user with MailJet contact list  [x] Use your own userProvider (basic  FosContactProvider  included to interface with FosUserBundle)  [x] Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List  [ ] Register Event API - real time notifications (webhook)", 
+            "text": "[x] Retrieve  \\Mailjet\\Client  to make custom MailJet API V3 requests  [x] Synchronize your user with MailJet contact list  [x] Use your own userProvider (basic  FosContactProvider  included to interface with FosUserBundle)  [x] Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List  [x] Register Event API - real time notifications (webhook)", 
             "title": "Features"
         }, 
         {
@@ -52,7 +52,7 @@
         }, 
         {
             "location": "/configuration/", 
-            "text": "Configuration\n\n\nYou need to have MailJet account available\n\n\nconfig.yml\n\n\nDefine a configuration in your \nconfig.yml\n:\n\n\nwelp_mailjet:\n    api_key:    \n%mailjet_api_key%\n\n    secret_key: \n%mailjet_secret_key%\n\n    event_endpoint_route: app_event_endpoint_route # route name to handle the callback\n    event_endpoint_token: \nsecretCode12345678\n # secret to secure callback\n    lists:\n        1346789:\n            contact_provider: 'yourapp.provider1'\n        987456321:\n            contact_provider: 'yourapp.provider2'\n        ...", 
+            "text": "Configuration\n\n\nYou need to have MailJet account available\n\n\nconfig.yml\n\n\nDefine a configuration in your \nconfig.yml\n:\n\n\nwelp_mailjet:\n    api_key:    \n%mailjet_api_key%\n\n    secret_key: \n%mailjet_secret_key%\n\n    # route name to handle the callback\n    event_endpoint_route: app_event_endpoint_route\n    # secret to secure callback\n    event_endpoint_token: \nsecretCode12345678\n\n    lists:\n        listId1:\n            # provider used in full synchronization\n            contact_provider: 'yourapp.provider1'\n        listId2:\n            contact_provider: 'yourapp.provider2'\n        ...\n\n\n\n\nWhere \nlistIdX\n is the list id of your MailJet lists, and \nyourapp.providerX\n is the key of your provider's service that will provide the contacts that need to be synchronized in MailJet. See the documentation on create \nyour own Contact provider\n.", 
             "title": "Configuration"
         }, 
         {
@@ -62,8 +62,123 @@
         }, 
         {
             "location": "/configuration/#configyml", 
-            "text": "Define a configuration in your  config.yml :  welp_mailjet:\n    api_key:     %mailjet_api_key% \n    secret_key:  %mailjet_secret_key% \n    event_endpoint_route: app_event_endpoint_route # route name to handle the callback\n    event_endpoint_token:  secretCode12345678  # secret to secure callback\n    lists:\n        1346789:\n            contact_provider: 'yourapp.provider1'\n        987456321:\n            contact_provider: 'yourapp.provider2'\n        ...", 
+            "text": "Define a configuration in your  config.yml :  welp_mailjet:\n    api_key:     %mailjet_api_key% \n    secret_key:  %mailjet_secret_key% \n    # route name to handle the callback\n    event_endpoint_route: app_event_endpoint_route\n    # secret to secure callback\n    event_endpoint_token:  secretCode12345678 \n    lists:\n        listId1:\n            # provider used in full synchronization\n            contact_provider: 'yourapp.provider1'\n        listId2:\n            contact_provider: 'yourapp.provider2'\n        ...  Where  listIdX  is the list id of your MailJet lists, and  yourapp.providerX  is the key of your provider's service that will provide the contacts that need to be synchronized in MailJet. See the documentation on create  your own Contact provider .", 
             "title": "config.yml"
+        }, 
+        {
+            "location": "/contact-provider/", 
+            "text": "Contact Provider\n\n\nAfter \nconfiguring your lists\n in \nconfig.yml\n, you need to create at least one \nProvider\n that will be used by the SyncUser command.\nYour provider should be accessible via a service key (the same you reference in \ncontact_provider\n in your configuration file):\n\n\nservices:\n    yourapp.mailjet.contact_provider1:\n        class: YourApp\\AppBundle\\Mailjet\\MyContactProvider\n        arguments: [@yourapp.user.repository]\n\n\n\nYou provider class should implement \nWelp\\MailjetBundle\\Provider\\ProviderInterface\n and the method \ngetContacts\n must return an array of \nWelp\\MailjetBundle\\Model\\Contact\n objects.\n\n\nExample\n\n\nHere is an example of ContactProvider:\n\n\n\n\n?php\n\nnamespace YourApp\\App\\Mailjet;\n\nuse Welp\\MailjetBundle\\Provider\\ProviderInterface;\n\nuse YourApp\\Model\\User\\UserRepository;\nuse YourApp\\Model\\User\\User;\n\nclass ExampleContactProvider implements ProviderInterface\n{\n\n    const PROP_NICKNAME =           'nickname';\n    const PROP_GENDER =             'gender';\n    const PROP_CITY =               'city';\n    const PROP_BIRTHDATE =          'birthdate';\n    const PROP_LAST_ACTIVITY_DATE = 'last_activity';\n    const PROP_REGISTRATION_DATE =  'registration_date';\n\n    protected $userRepository;\n\n    public function __construct(UserRepository $userRepository)\n    {\n        $this-\nuserRepository = $userRepository;\n    }\n\n    public function getContacts()\n    {\n        $users = $this-\nuserRepository-\nfindUsers();\n\n        $contacts = array_map(function(User $user) {\n            $userProperties = [\n                self::PROP_NICKNAME =\n $user-\ngetNickname(),\n                self::PROP_GENDER =\n $user-\ngetGender(),\n                self::PROP_CITY =\n $user-\ngetCity(),\n                self::PROP_BIRTHDATE =\n $user-\ngetBirthday() ? $user-\ngetBirthday()-\nformat('Y-m-d') : null,\n                self::PROP_LAST_ACTIVITY_DATE =\n $user-\ngetLastActivity() ? $user-\ngetLastActivity()-\nformat('Y-m-d') : null\n                self::PROP_REGISTRATION_DATE =\n $user-\ngetRegistrateAt() ? $user-\ngetRegistrateAt()-\nformat('Y-m-d') : null\n            ];\n\n            $contact = new Contact($user-\ngetEmail(), $user-\ngetUsername(), $userProperties);\n\n            return $contact;\n        }, $users);\n\n        return $contacts;\n    }\n}\n\n\n\n\nFosContactProvider\n\n\nWe also provide a ready to use provider for FosUserBundle: \nFosContactProvider\n. You just need to register the service into your app:\n\n\nservices:\n    yourapp.mailjet.fos_contact_provider:\n        class: Welp\\MailjetBundle\\Provider\\FosContactProvider\n        arguments: [@fos_user.user_manager]\n\n\n\nAfter this, don't forget to add the service key for your list into your \nconfig.yml\n:\n\n\n...\nlistId1:\n    contact_provider: 'yourapp.mailjet.fos_contact_provider'", 
+            "title": "Contact Provider"
+        }, 
+        {
+            "location": "/contact-provider/#contact-provider", 
+            "text": "After  configuring your lists  in  config.yml , you need to create at least one  Provider  that will be used by the SyncUser command.\nYour provider should be accessible via a service key (the same you reference in  contact_provider  in your configuration file):  services:\n    yourapp.mailjet.contact_provider1:\n        class: YourApp\\AppBundle\\Mailjet\\MyContactProvider\n        arguments: [@yourapp.user.repository]  You provider class should implement  Welp\\MailjetBundle\\Provider\\ProviderInterface  and the method  getContacts  must return an array of  Welp\\MailjetBundle\\Model\\Contact  objects.", 
+            "title": "Contact Provider"
+        }, 
+        {
+            "location": "/contact-provider/#example", 
+            "text": "Here is an example of ContactProvider:   ?php\n\nnamespace YourApp\\App\\Mailjet;\n\nuse Welp\\MailjetBundle\\Provider\\ProviderInterface;\n\nuse YourApp\\Model\\User\\UserRepository;\nuse YourApp\\Model\\User\\User;\n\nclass ExampleContactProvider implements ProviderInterface\n{\n\n    const PROP_NICKNAME =           'nickname';\n    const PROP_GENDER =             'gender';\n    const PROP_CITY =               'city';\n    const PROP_BIRTHDATE =          'birthdate';\n    const PROP_LAST_ACTIVITY_DATE = 'last_activity';\n    const PROP_REGISTRATION_DATE =  'registration_date';\n\n    protected $userRepository;\n\n    public function __construct(UserRepository $userRepository)\n    {\n        $this- userRepository = $userRepository;\n    }\n\n    public function getContacts()\n    {\n        $users = $this- userRepository- findUsers();\n\n        $contacts = array_map(function(User $user) {\n            $userProperties = [\n                self::PROP_NICKNAME =  $user- getNickname(),\n                self::PROP_GENDER =  $user- getGender(),\n                self::PROP_CITY =  $user- getCity(),\n                self::PROP_BIRTHDATE =  $user- getBirthday() ? $user- getBirthday()- format('Y-m-d') : null,\n                self::PROP_LAST_ACTIVITY_DATE =  $user- getLastActivity() ? $user- getLastActivity()- format('Y-m-d') : null\n                self::PROP_REGISTRATION_DATE =  $user- getRegistrateAt() ? $user- getRegistrateAt()- format('Y-m-d') : null\n            ];\n\n            $contact = new Contact($user- getEmail(), $user- getUsername(), $userProperties);\n\n            return $contact;\n        }, $users);\n\n        return $contacts;\n    }\n}", 
+            "title": "Example"
+        }, 
+        {
+            "location": "/contact-provider/#foscontactprovider", 
+            "text": "We also provide a ready to use provider for FosUserBundle:  FosContactProvider . You just need to register the service into your app:  services:\n    yourapp.mailjet.fos_contact_provider:\n        class: Welp\\MailjetBundle\\Provider\\FosContactProvider\n        arguments: [@fos_user.user_manager]  After this, don't forget to add the service key for your list into your  config.yml :  ...\nlistId1:\n    contact_provider: 'yourapp.mailjet.fos_contact_provider'", 
+            "title": "FosContactProvider"
+        }, 
+        {
+            "location": "/usage/", 
+            "text": "Usage\n\n\nFull synchronization with command\n\n\nYou can synchronize all users of your project with a MailJet list at once by calling the Symfony command:\n\n\nphp app/console welp:mailjet:user-sync\n\n\n\nIt will get all your User throught your Contact Provider and will add/update all your User to the configured list.\n\n\nNOTE: you must have configured and created \nyour own contact provider\n.\n\n\nUnit synchronization with events\n\n\nIf you want realtime synchronization, you can dispatch custom events on your controllers/managers (or anywhere). The subscribe event can be used both for adding a new contact or updating an existing one. You can fired these events to trigger sync with MailJet:\n\n\nContactEvent::EVENT_SUBSCRIBE = 'welp.mailjet.subscribe';\nContactEvent::EVENT_UNSUBSCRIBE = 'welp.mailjet.unsubscribe';\nContactEvent::EVENT_UPDATE = 'welp.mailjet.update';\nContactEvent::EVENT_DELETE = 'welp.mailjet.delete';\n// NOT IMPLETENTED YET // ContactEvent::EVENT_CHANGE_EMAIL = 'welp.mailjet.change_email';\n\n\n\nSubscribe new User\n\n\nHere is an example of a subscribe event dispatch:\n\n\n?php\n\nuse Welp\\MailjetBundle\\Event\\ContactEvent;\nuse Welp\\MailjetBundle\\Model\\Contact;\n\n// ...\n\npublic function newUser(User $user)\n{\n    // ...\n\n    $contact = new Contact($user-\ngetEmail(), $user-\ngetNickname(), [\n        'firstname' =\n $user-\ngetFirstname(),\n        'lastname' =\n $user-\ngetLastname(),\n        'city' =\n $user-\ngetCity(),\n        'language' =\n 'fr'\n    ]);\n\n    $this-\ncontainer-\nget('event_dispatcher')-\ndispatch(\n        ContactEvent::EVENT_SUBSCRIBE,\n        new ContactEvent('your_list_id', $contact)\n    );\n}\n\n\n\n\nUnsubscribe a User\n\n\nUnsubscribe is simpler, you only need the email:\n\n\n?php\n\nuse Welp\\MailjetBundle\\Event\\ContactEvent;\nuse Welp\\MailjetBundle\\Model\\Contact;\n\n// ...\n\npublic function unsubscribeUser(User $user)\n{\n    // ...\n\n    $contact = new Contact($user-\ngetEmail());\n\n    $this-\ncontainer-\nget('event_dispatcher')-\ndispatch(\n        ContactEvent::EVENT_UNSUBSCRIBE,\n        new ContactEvent('your_list_id', $contact)\n    );\n}\n\n\n\n\nUpdate a User\n\n\nIf your User changes his information, you can sync with MailChimp:\n\n\n?php\n\nuse Welp\\MailjetBundle\\Event\\ContactEvent;\nuse Welp\\MailjetBundle\\Model\\Contact;\n\n// ...\n\npublic function updateUser(User $user)\n{\n    // ...\n\n    $contact = new Contact($user-\ngetEmail(), $user-\ngetNickname(), [\n        'firstname' =\n $user-\ngetFirstname(),\n        'lastname' =\n $user-\ngetLastname(),\n        'city' =\n $user-\ngetCity(),\n        'language' =\n 'fr'\n    ]);\n\n    $this-\ncontainer-\nget('event_dispatcher')-\ndispatch(\n        ContactEvent::EVENT_UPDATE,\n        new ContactEvent('your_list_id', $contact)\n    );\n}\n\n\n\n\nNote: we can't change the address email of a user... MailJet API V3 doesn't permit it so far.\n\n\nDelete a User\n\n\nAnd finally delete a User:\n\n\n?php\n\nuse Welp\\MailjetBundle\\Event\\ContactEvent;\nuse Welp\\MailjetBundle\\Model\\Contact;\n\n// ...\n\npublic function deleteUser(User $user)\n{\n    // ...\n\n    $contact = new Contact($user-\ngetEmail());\n\n    $this-\ncontainer-\nget('event_dispatcher')-\ndispatch(\n        ContactEvent::EVENT_DELETE,\n        new ContactEvent('your_list_id', $contact)\n    );\n}\n\n\n\n\nChange User's email address\n\n\nNOT POSSIBLE YET...(WORKAROUND: remove old, add new)\n\n\nRetrieve MailJet Client Object to make custom MailJet API V3 requests\n\n\nYou can also retrieve the MailJet Client Object which comes from the wrapper \nmailjet/mailjet-apiv3-php\n.\n\n\nThe service key is \nwelp_mailjet.api\n.\n\n\nExample:\n\n\n?php\n    use \\Mailjet\\Resources;\n\n    // in any controller action...\n    ...\n    $mailjet = $this-\ncontainer-\nget('welp_mailjet.api');\n\n    // Resources are all located in the Resources class\n    $response = $mailjet-\nget(Resources::$Contact);\n\n    /*\n      Read the response\n    */\n    if ($response-\nsuccess())\n      var_dump($response-\ngetData());\n    else\n      var_dump($response-\ngetStatus());\n\n    ...\n    // Send transactional emails\n\n    $body = [\n        'FromEmail' =\n \npilot@mailjet.com\n,\n        'FromName' =\n \nMailjet Pilot\n,\n        'Subject' =\n \nYour email flight plan!\n,\n        'Text-part' =\n \nDear passenger, welcome to Mailjet! May the delivery force be with you!\n,\n        'Html-part' =\n \nh3\nDear passenger, welcome to Mailjet!\n/h3\nbr /\nMay the delivery force be with you!\n,\n        'Recipients' =\n [['Email' =\n \npassenger@mailjet.com\n]]\n    ];\n\n    $response = $mailjet-\npost(Resources::$Email, ['body' =\n $body]);", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/usage/#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/usage/#full-synchronization-with-command", 
+            "text": "You can synchronize all users of your project with a MailJet list at once by calling the Symfony command:  php app/console welp:mailjet:user-sync  It will get all your User throught your Contact Provider and will add/update all your User to the configured list.  NOTE: you must have configured and created  your own contact provider .", 
+            "title": "Full synchronization with command"
+        }, 
+        {
+            "location": "/usage/#unit-synchronization-with-events", 
+            "text": "If you want realtime synchronization, you can dispatch custom events on your controllers/managers (or anywhere). The subscribe event can be used both for adding a new contact or updating an existing one. You can fired these events to trigger sync with MailJet:  ContactEvent::EVENT_SUBSCRIBE = 'welp.mailjet.subscribe';\nContactEvent::EVENT_UNSUBSCRIBE = 'welp.mailjet.unsubscribe';\nContactEvent::EVENT_UPDATE = 'welp.mailjet.update';\nContactEvent::EVENT_DELETE = 'welp.mailjet.delete';\n// NOT IMPLETENTED YET // ContactEvent::EVENT_CHANGE_EMAIL = 'welp.mailjet.change_email';", 
+            "title": "Unit synchronization with events"
+        }, 
+        {
+            "location": "/usage/#subscribe-new-user", 
+            "text": "Here is an example of a subscribe event dispatch:  ?php\n\nuse Welp\\MailjetBundle\\Event\\ContactEvent;\nuse Welp\\MailjetBundle\\Model\\Contact;\n\n// ...\n\npublic function newUser(User $user)\n{\n    // ...\n\n    $contact = new Contact($user- getEmail(), $user- getNickname(), [\n        'firstname' =  $user- getFirstname(),\n        'lastname' =  $user- getLastname(),\n        'city' =  $user- getCity(),\n        'language' =  'fr'\n    ]);\n\n    $this- container- get('event_dispatcher')- dispatch(\n        ContactEvent::EVENT_SUBSCRIBE,\n        new ContactEvent('your_list_id', $contact)\n    );\n}", 
+            "title": "Subscribe new User"
+        }, 
+        {
+            "location": "/usage/#unsubscribe-a-user", 
+            "text": "Unsubscribe is simpler, you only need the email:  ?php\n\nuse Welp\\MailjetBundle\\Event\\ContactEvent;\nuse Welp\\MailjetBundle\\Model\\Contact;\n\n// ...\n\npublic function unsubscribeUser(User $user)\n{\n    // ...\n\n    $contact = new Contact($user- getEmail());\n\n    $this- container- get('event_dispatcher')- dispatch(\n        ContactEvent::EVENT_UNSUBSCRIBE,\n        new ContactEvent('your_list_id', $contact)\n    );\n}", 
+            "title": "Unsubscribe a User"
+        }, 
+        {
+            "location": "/usage/#update-a-user", 
+            "text": "If your User changes his information, you can sync with MailChimp:  ?php\n\nuse Welp\\MailjetBundle\\Event\\ContactEvent;\nuse Welp\\MailjetBundle\\Model\\Contact;\n\n// ...\n\npublic function updateUser(User $user)\n{\n    // ...\n\n    $contact = new Contact($user- getEmail(), $user- getNickname(), [\n        'firstname' =  $user- getFirstname(),\n        'lastname' =  $user- getLastname(),\n        'city' =  $user- getCity(),\n        'language' =  'fr'\n    ]);\n\n    $this- container- get('event_dispatcher')- dispatch(\n        ContactEvent::EVENT_UPDATE,\n        new ContactEvent('your_list_id', $contact)\n    );\n}  Note: we can't change the address email of a user... MailJet API V3 doesn't permit it so far.", 
+            "title": "Update a User"
+        }, 
+        {
+            "location": "/usage/#delete-a-user", 
+            "text": "And finally delete a User:  ?php\n\nuse Welp\\MailjetBundle\\Event\\ContactEvent;\nuse Welp\\MailjetBundle\\Model\\Contact;\n\n// ...\n\npublic function deleteUser(User $user)\n{\n    // ...\n\n    $contact = new Contact($user- getEmail());\n\n    $this- container- get('event_dispatcher')- dispatch(\n        ContactEvent::EVENT_DELETE,\n        new ContactEvent('your_list_id', $contact)\n    );\n}", 
+            "title": "Delete a User"
+        }, 
+        {
+            "location": "/usage/#change-users-email-address", 
+            "text": "NOT POSSIBLE YET...(WORKAROUND: remove old, add new)", 
+            "title": "Change User's email address"
+        }, 
+        {
+            "location": "/usage/#retrieve-mailjet-client-object-to-make-custom-mailjet-api-v3-requests", 
+            "text": "You can also retrieve the MailJet Client Object which comes from the wrapper  mailjet/mailjet-apiv3-php .  The service key is  welp_mailjet.api .  Example:  ?php\n    use \\Mailjet\\Resources;\n\n    // in any controller action...\n    ...\n    $mailjet = $this- container- get('welp_mailjet.api');\n\n    // Resources are all located in the Resources class\n    $response = $mailjet- get(Resources::$Contact);\n\n    /*\n      Read the response\n    */\n    if ($response- success())\n      var_dump($response- getData());\n    else\n      var_dump($response- getStatus());\n\n    ...\n    // Send transactional emails\n\n    $body = [\n        'FromEmail' =   pilot@mailjet.com ,\n        'FromName' =   Mailjet Pilot ,\n        'Subject' =   Your email flight plan! ,\n        'Text-part' =   Dear passenger, welcome to Mailjet! May the delivery force be with you! ,\n        'Html-part' =   h3 Dear passenger, welcome to Mailjet! /h3 br / May the delivery force be with you! ,\n        'Recipients' =  [['Email' =   passenger@mailjet.com ]]\n    ];\n\n    $response = $mailjet- post(Resources::$Email, ['body' =  $body]);", 
+            "title": "Retrieve MailJet Client Object to make custom MailJet API V3 requests"
+        }, 
+        {
+            "location": "/event-api/", 
+            "text": "Event API: real-time notifications (webhook)\n\n\nhttps://dev.mailjet.com/guides/#event-api-real-time-notifications", 
+            "title": "Event API (webhook)"
+        }, 
+        {
+            "location": "/event-api/#event-api-real-time-notifications-webhook", 
+            "text": "https://dev.mailjet.com/guides/#event-api-real-time-notifications", 
+            "title": "Event API: real-time notifications (webhook)"
+        }, 
+        {
+            "location": "/tests/", 
+            "text": "Tests\n\n\n\n\nhttp://www.phpspec.net/\n\n\n\n\nUnit tests\n\n\nbin/phpspec run\n\n\n\nEvents(Webhook) tests\n\n\nuse ngrok and http://requestb.in/\n\n\nDebug/dev mode\n\n\nThe best solution to debug or dev environment is to create a new MailJet account and use the API key of this new \"debug/dev\" MailJet account.\n\n\nWe are waiting for a sandbox from MailJet developer in order to implements a pretty debug/dev mode. /!\\", 
+            "title": "Tests"
+        }, 
+        {
+            "location": "/tests/#tests", 
+            "text": "http://www.phpspec.net/", 
+            "title": "Tests"
+        }, 
+        {
+            "location": "/tests/#unit-tests", 
+            "text": "bin/phpspec run", 
+            "title": "Unit tests"
+        }, 
+        {
+            "location": "/tests/#eventswebhook-tests", 
+            "text": "use ngrok and http://requestb.in/", 
+            "title": "Events(Webhook) tests"
+        }, 
+        {
+            "location": "/tests/#debugdev-mode", 
+            "text": "The best solution to debug or dev environment is to create a new MailJet account and use the API key of this new \"debug/dev\" MailJet account.  We are waiting for a sandbox from MailJet developer in order to implements a pretty debug/dev mode. /!\\", 
+            "title": "Debug/dev mode"
+        }, 
+        {
+            "location": "/mailjet-doc/", 
+            "text": "MailJet Documentation\n\n\n\n\nAPI Guides\n\n\nAPI Reference\n\n\nSwitch from Mandrill\n\n\nAutomation (FR)", 
+            "title": "MailJet Doc"
+        }, 
+        {
+            "location": "/mailjet-doc/#mailjet-documentation", 
+            "text": "API Guides  API Reference  Switch from Mandrill  Automation (FR)", 
+            "title": "MailJet Documentation"
         }
     ]
 }

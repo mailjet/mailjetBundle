@@ -25,4 +25,44 @@
     </url>
     
 
+    
+    <url>
+     <loc>/contact-provider/</loc>
+     <lastmod>2016-12-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/usage/</loc>
+     <lastmod>2016-12-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/event-api/</loc>
+     <lastmod>2016-12-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/tests/</loc>
+     <lastmod>2016-12-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/mailjet-doc/</loc>
+     <lastmod>2016-12-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
 </urlset>

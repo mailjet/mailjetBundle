@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Titouan BENOIT">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Usage - MailJet Bundle</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Usage";
+    var mkdocs_page_input_path = "usage.md";
+    var mkdocs_page_url = "/usage/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> MailJet Bundle</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../setup/">Setup</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../configuration/">Configuration</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../contact-provider/">Contact Provider</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Usage</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#usage">Usage</a></li>
+                
+                    <li><a class="toctree-l4" href="#full-synchronization-with-command">Full synchronization with command</a></li>
+                
+                    <li><a class="toctree-l4" href="#unit-synchronization-with-events">Unit synchronization with events</a></li>
+                
+                    <li><a class="toctree-l4" href="#retrieve-mailjet-client-object-to-make-custom-mailjet-api-v3-requests">Retrieve MailJet Client Object to make custom MailJet API V3 requests</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../event-api/">Event API (webhook)</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../tests/">Tests</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../mailjet-doc/">MailJet Doc</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">MailJet Bundle</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Usage</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/welpdev/mailjetBundle/edit/master/docs/usage.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="usage">Usage</h1>
+<h2 id="full-synchronization-with-command">Full synchronization with command</h2>
+<p>You can synchronize all users of your project with a MailJet list at once by calling the Symfony command:</p>
+<pre><code>php app/console welp:mailjet:user-sync
+</code></pre>
+<p>It will get all your User throught your Contact Provider and will add/update all your User to the configured list.</p>
+<p>NOTE: you must have configured and created <a href="../contact-provider/">your own contact provider</a>.</p>
+<h2 id="unit-synchronization-with-events">Unit synchronization with events</h2>
+<p>If you want realtime synchronization, you can dispatch custom events on your controllers/managers (or anywhere). The subscribe event can be used both for adding a new contact or updating an existing one. You can fired these events to trigger sync with MailJet:</p>
+<pre><code>ContactEvent::EVENT_SUBSCRIBE = 'welp.mailjet.subscribe';
+ContactEvent::EVENT_UNSUBSCRIBE = 'welp.mailjet.unsubscribe';
+ContactEvent::EVENT_UPDATE = 'welp.mailjet.update';
+ContactEvent::EVENT_DELETE = 'welp.mailjet.delete';
+// NOT IMPLETENTED YET // ContactEvent::EVENT_CHANGE_EMAIL = 'welp.mailjet.change_email';
+</code></pre>
+<h3 id="subscribe-new-user">Subscribe new User</h3>
+<p>Here is an example of a subscribe event dispatch:</p>
+<pre><code class="php">&lt;?php
+
+use Welp\MailjetBundle\Event\ContactEvent;
+use Welp\MailjetBundle\Model\Contact;
+
+// ...
+
+public function newUser(User $user)
+{
+    // ...
+
+    $contact = new Contact($user-&gt;getEmail(), $user-&gt;getNickname(), [
+        'firstname' =&gt; $user-&gt;getFirstname(),
+        'lastname' =&gt; $user-&gt;getLastname(),
+        'city' =&gt; $user-&gt;getCity(),
+        'language' =&gt; 'fr'
+    ]);
+
+    $this-&gt;container-&gt;get('event_dispatcher')-&gt;dispatch(
+        ContactEvent::EVENT_SUBSCRIBE,
+        new ContactEvent('your_list_id', $contact)
+    );
+}
+</code></pre>
+
+<h3 id="unsubscribe-a-user">Unsubscribe a User</h3>
+<p>Unsubscribe is simpler, you only need the email:</p>
+<pre><code class="php">&lt;?php
+
+use Welp\MailjetBundle\Event\ContactEvent;
+use Welp\MailjetBundle\Model\Contact;
+
+// ...
+
+public function unsubscribeUser(User $user)
+{
+    // ...
+
+    $contact = new Contact($user-&gt;getEmail());
+
+    $this-&gt;container-&gt;get('event_dispatcher')-&gt;dispatch(
+        ContactEvent::EVENT_UNSUBSCRIBE,
+        new ContactEvent('your_list_id', $contact)
+    );
+}
+</code></pre>
+
+<h3 id="update-a-user">Update a User</h3>
+<p>If your User changes his information, you can sync with MailChimp:</p>
+<pre><code class="php">&lt;?php
+
+use Welp\MailjetBundle\Event\ContactEvent;
+use Welp\MailjetBundle\Model\Contact;
+
+// ...
+
+public function updateUser(User $user)
+{
+    // ...
+
+    $contact = new Contact($user-&gt;getEmail(), $user-&gt;getNickname(), [
+        'firstname' =&gt; $user-&gt;getFirstname(),
+        'lastname' =&gt; $user-&gt;getLastname(),
+        'city' =&gt; $user-&gt;getCity(),
+        'language' =&gt; 'fr'
+    ]);
+
+    $this-&gt;container-&gt;get('event_dispatcher')-&gt;dispatch(
+        ContactEvent::EVENT_UPDATE,
+        new ContactEvent('your_list_id', $contact)
+    );
+}
+</code></pre>
+
+<p>Note: we can't change the address email of a user... MailJet API V3 doesn't permit it so far.</p>
+<h3 id="delete-a-user">Delete a User</h3>
+<p>And finally delete a User:</p>
+<pre><code class="php">&lt;?php
+
+use Welp\MailjetBundle\Event\ContactEvent;
+use Welp\MailjetBundle\Model\Contact;
+
+// ...
+
+public function deleteUser(User $user)
+{
+    // ...
+
+    $contact = new Contact($user-&gt;getEmail());
+
+    $this-&gt;container-&gt;get('event_dispatcher')-&gt;dispatch(
+        ContactEvent::EVENT_DELETE,
+        new ContactEvent('your_list_id', $contact)
+    );
+}
+</code></pre>
+
+<h3 id="change-users-email-address">Change User's email address</h3>
+<p>NOT POSSIBLE YET...(WORKAROUND: remove old, add new)</p>
+<h2 id="retrieve-mailjet-client-object-to-make-custom-mailjet-api-v3-requests">Retrieve MailJet Client Object to make custom MailJet API V3 requests</h2>
+<p>You can also retrieve the MailJet Client Object which comes from the wrapper <a href="https://github.com/mailjet/mailjet-apiv3-php">mailjet/mailjet-apiv3-php</a>.</p>
+<p>The service key is <code>welp_mailjet.api</code>.</p>
+<p>Example:</p>
+<pre><code class="php">&lt;?php
+    use \Mailjet\Resources;
+
+    // in any controller action...
+    ...
+    $mailjet = $this-&gt;container-&gt;get('welp_mailjet.api');
+
+    // Resources are all located in the Resources class
+    $response = $mailjet-&gt;get(Resources::$Contact);
+
+    /*
+      Read the response
+    */
+    if ($response-&gt;success())
+      var_dump($response-&gt;getData());
+    else
+      var_dump($response-&gt;getStatus());
+
+    ...
+    // Send transactional emails
+
+    $body = [
+        'FromEmail' =&gt; &quot;pilot@mailjet.com&quot;,
+        'FromName' =&gt; &quot;Mailjet Pilot&quot;,
+        'Subject' =&gt; &quot;Your email flight plan!&quot;,
+        'Text-part' =&gt; &quot;Dear passenger, welcome to Mailjet! May the delivery force be with you!&quot;,
+        'Html-part' =&gt; &quot;&lt;h3&gt;Dear passenger, welcome to Mailjet!&lt;/h3&gt;&lt;br /&gt;May the delivery force be with you!&quot;,
+        'Recipients' =&gt; [['Email' =&gt; &quot;passenger@mailjet.com&quot;]]
+    ];
+
+    $response = $mailjet-&gt;post(Resources::$Email, ['body' =&gt; $body]);
+
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../event-api/" class="btn btn-neutral float-right" title="Event API (webhook)">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../contact-provider/" class="btn btn-neutral" title="Contact Provider"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>MIT</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/welpdev/mailjetBundle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../contact-provider/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../event-api/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>
