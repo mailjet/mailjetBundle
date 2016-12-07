@@ -42,7 +42,7 @@ class EventController extends Controller
             Please note that the event types in the collection can be mixed.
             We group together all the events of the last second for the same webhook url.
         */
-        // NOTE: use a better dispatcher such as rabbitMQ if you have a huge amount of events
+        // NOTE: use a better dispatcher such as rabbitMQ if you have a huge amount of events (sent, open, click can be a lot...)
         $dispatcher = $this->getDispatcher();
 
         foreach ($data as $key => $callbackData) {
@@ -74,6 +74,8 @@ class EventController extends Controller
                     break;
             }
         }
+
+        return $this->prepareResponse(200);
 
     }
 

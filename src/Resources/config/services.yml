@@ -3,6 +3,7 @@ parameters:
     welp_mailjet.contacts_list_synchronizer.class: Welp\MailjetBundle\Service\ContactsListSynchronizer
     welp_mailjet.event_callback_manager.class: Welp\MailjetBundle\Service\EventCallbackManager
     welp_mailjet.contact_manager.class: Welp\MailjetBundle\Service\ContactManager
+    welp_mailjet.contact_listener.class: Welp\MailjetBundle\Listener\ContactListener
 
 services:
     welp_mailjet.api:
@@ -23,3 +24,15 @@ services:
         class: "%welp_mailjet.contact_manager.class%"
         arguments:
             - "@welp_mailjet.api"
+
+    # Listener
+    welp_mailjet.contact_listener:
+        class: %welp_mailjet.contact_listener.class%
+        arguments:
+            - '@welp_mailjet.service.contact_manager'
+        tags:
+            - { name: kernel.event_listener, event: welp.mailjet.subscribe, method: onSubscribe }
+            - { name: kernel.event_listener, event: welp.mailjet.unsubscribe, method: onUnsubscribe }
+            - { name: kernel.event_listener, event: welp.mailjet.update, method: onUpdate }
+            - { name: kernel.event_listener, event: welp.mailjet.delete, method: onDelete }
+            #- { name: kernel.event_listener, event: welp.mailjet.change_email, method: onChangeEmail }

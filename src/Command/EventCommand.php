@@ -17,6 +17,9 @@ class EventCommand extends ContainerAwareCommand
         ;
     }
 
+    /**
+     * @TODO automatically add callbackurl with MailJet API V3
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $domain = $input->getArgument('baseurl');

@@ -54,7 +54,7 @@ class ContactManage
     /**
      * re/subscribe a Contact to listId
      */
-    public function sub($listId, Contact $contact)
+    public function subscribe($listId, Contact $contact)
     {
         $contact->setAction(Contact::ACTION_ADDFORCE);
         $this->_exec($listId, $contact);
@@ -68,7 +68,7 @@ class ContactManage
     /**
      * unsubscribe a Contact from listId
      */
-    public function unsub($listId, Contact $contact)
+    public function unsubscribe($listId, Contact $contact)
     {
         $contact->setAction(Contact::ACTION_UNSUB);
         $this->_exec($listId, $contact);
@@ -80,9 +80,9 @@ class ContactManage
     }
 
     /**
-     * remove a Contact from listId
+     * Delete a Contact from listId
      */
-    public function remove($listId, Contact $contact)
+    public function delete($listId, Contact $contact)
     {
         $contact->setAction(Contact::ACTION_REMOVE);
         $this->_exec($listId, $contact);

@@ -60,6 +60,7 @@ class SyncUserCommand extends ContainerAwareCommand
             $contactList = new ContactsList($listId, ContactsList::ACTION_ADDNOFORCE, $provider->getContacts());
 
             $response = $this->getContainer()->get('welp_mailjet.service.contacts_list_synchronizer')->synchronize($contactList);
+            //@TODO get responses + parse all batch responses + show/format error + show result/count import
 
             $output->writeln(sprintf('<info>OK listId: %s</info>', $listId));
         }
