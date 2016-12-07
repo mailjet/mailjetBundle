@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Symfony bundle for handling Mailjet API V3.">
+  <meta name="author" content="Titouan BENOIT">
+  <link rel="shortcut icon" href="./img/favicon.ico">
+  <title>Home - MailJet Bundle</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Home";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/";
+  </script>
+  
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> MailJet Bundle</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href=".">Home</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#mailjet-bundle">MailJet Bundle</a></li>
+                
+                    <li><a class="toctree-l4" href="#features">Features</a></li>
+                
+                    <li><a class="toctree-l4" href="#setup">Setup</a></li>
+                
+                    <li><a class="toctree-l4" href="#minimal-configuration">Minimal Configuration</a></li>
+                
+                    <li><a class="toctree-l4" href="#todo">ToDo</a></li>
+                
+                    <li><a class="toctree-l4" href="#mailjet-issues">MailJet issues</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="setup/">Setup</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="configuration/">Configuration</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">MailJet Bundle</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/welpdev/mailjetBundle/edit/master/docs/index.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="mailjet-bundle">MailJet Bundle</h1>
+<p><a href="https://travis-ci.org/welpdev/mailjetBundle"><img alt="Build Status" src="https://travis-ci.org/welpdev/mailjetBundle.svg?branch=master" /></a>
+<a href="https://github.com/welpdev/mailjetBundle/blob/master/LICENSE.md"><img alt="GitHub license" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
+<a href="https://welpdev.github.io/mailjetBundle/"><img alt="Documentation" src="https://img.shields.io/badge/documentation-gh--pages-blue.svg" /></a></p>
+<p>Symfony bundle for handling Mailjet API V3 using this wrapper: <a href="https://github.com/mailjet/mailjet-apiv3-php">https://github.com/mailjet/mailjet-apiv3-php</a></p>
+<p><strong>/!\ WORK IN PROGRESS... NOT READY TO USE /!\ Wait for a release before using it.</strong></p>
+<h2 id="features">Features</h2>
+<ul>
+<li>[x] Retrieve <a href="https://github.com/mailjet/mailjet-apiv3-php">\Mailjet\Client</a> to make custom MailJet API V3 requests</li>
+<li>[x] Synchronize your user with MailJet contact list</li>
+<li>[x] Use your own userProvider (basic <code>FosContactProvider</code> included to interface with FosUserBundle)</li>
+<li>[x] Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List</li>
+<li>[ ] Register Event API - real time notifications (webhook)</li>
+</ul>
+<h2 id="setup">Setup</h2>
+<p>Add bundle to your project:</p>
+<pre><code class="bash">composer require welp/mailjet-bundle
+</code></pre>
+
+<p>Add <code>Welp\MailjetBundle\WelpMailjetBundle</code> to your <code>AppKernel.php</code>:</p>
+<pre><code class="php">$bundles = [
+    // ...
+    new Welp\MailjetBundle\WelpMailjetBundle(),
+];
+</code></pre>
+
+<h2 id="minimal-configuration">Minimal Configuration</h2>
+<p>In your <code>config.yml</code>:</p>
+<pre><code class="yaml">welp_mailjet:
+    api_key:    &quot;%mailjet_api_key%&quot;
+    secret_key: &quot;%mailjet_secret_key%&quot;
+</code></pre>
+
+<h2 id="todo">ToDo</h2>
+<ul>
+<li>Moar tests...</li>
+<li>handle when user changes email</li>
+<li>MANAGING LIST SUBSCRIPTIONS FOR A SINGLE CONTACT ( /CONTACT/$ID/MANAGECONTACTSLISTS )</li>
+<li>MANAGING AND UPLOADING MULTIPLE CONTACTS ( /CONTACT/MANAGEMANYCONTACTS )</li>
+<li>MANAGING CONTACTS THROUGH CSV UPLOAD</li>
+</ul>
+<h2 id="mailjet-issues">MailJet issues</h2>
+<ul>
+<li>How to change user email? (workaround: remove old, add new...)</li>
+<li>Event API/webhook: how to synchronize subscribe event from admin or form ith our app? (available sent, open, click, bounce, spam, blocked, unsub)</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="setup/" class="btn btn-neutral float-right" title="Setup">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>MIT</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/welpdev/mailjetBundle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+        <span style="margin-left: 15px"><a href="setup/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="./js/theme.js"></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 0.16.0
+Build Date UTC : 2016-12-07 11:50:35
+-->

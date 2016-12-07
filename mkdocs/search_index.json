@@ -1,0 +1,69 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "MailJet Bundle\n\n\n\n\n\n\n\n\nSymfony bundle for handling Mailjet API V3 using this wrapper: \nhttps://github.com/mailjet/mailjet-apiv3-php\n\n\n/!\\ WORK IN PROGRESS... NOT READY TO USE /!\\ Wait for a release before using it.\n\n\nFeatures\n\n\n\n\n[x] Retrieve \n\\Mailjet\\Client\n to make custom MailJet API V3 requests\n\n\n[x] Synchronize your user with MailJet contact list\n\n\n[x] Use your own userProvider (basic \nFosContactProvider\n included to interface with FosUserBundle)\n\n\n[x] Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List\n\n\n[ ] Register Event API - real time notifications (webhook)\n\n\n\n\nSetup\n\n\nAdd bundle to your project:\n\n\ncomposer require welp/mailjet-bundle\n\n\n\n\nAdd \nWelp\\MailjetBundle\\WelpMailjetBundle\n to your \nAppKernel.php\n:\n\n\n$bundles = [\n    // ...\n    new Welp\\MailjetBundle\\WelpMailjetBundle(),\n];\n\n\n\n\nMinimal Configuration\n\n\nIn your \nconfig.yml\n:\n\n\nwelp_mailjet:\n    api_key:    \n%mailjet_api_key%\n\n    secret_key: \n%mailjet_secret_key%\n\n\n\n\n\nToDo\n\n\n\n\nMoar tests...\n\n\nhandle when user changes email\n\n\nMANAGING LIST SUBSCRIPTIONS FOR A SINGLE CONTACT ( /CONTACT/$ID/MANAGECONTACTSLISTS )\n\n\nMANAGING AND UPLOADING MULTIPLE CONTACTS ( /CONTACT/MANAGEMANYCONTACTS )\n\n\nMANAGING CONTACTS THROUGH CSV UPLOAD\n\n\n\n\nMailJet issues\n\n\n\n\nHow to change user email? (workaround: remove old, add new...)\n\n\nEvent API/webhook: how to synchronize subscribe event from admin or form ith our app? (available sent, open, click, bounce, spam, blocked, unsub)", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#mailjet-bundle", 
+            "text": "Symfony bundle for handling Mailjet API V3 using this wrapper:  https://github.com/mailjet/mailjet-apiv3-php  /!\\ WORK IN PROGRESS... NOT READY TO USE /!\\ Wait for a release before using it.", 
+            "title": "MailJet Bundle"
+        }, 
+        {
+            "location": "/#features", 
+            "text": "[x] Retrieve  \\Mailjet\\Client  to make custom MailJet API V3 requests  [x] Synchronize your user with MailJet contact list  [x] Use your own userProvider (basic  FosContactProvider  included to interface with FosUserBundle)  [x] Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List  [ ] Register Event API - real time notifications (webhook)", 
+            "title": "Features"
+        }, 
+        {
+            "location": "/#setup", 
+            "text": "Add bundle to your project:  composer require welp/mailjet-bundle  Add  Welp\\MailjetBundle\\WelpMailjetBundle  to your  AppKernel.php :  $bundles = [\n    // ...\n    new Welp\\MailjetBundle\\WelpMailjetBundle(),\n];", 
+            "title": "Setup"
+        }, 
+        {
+            "location": "/#minimal-configuration", 
+            "text": "In your  config.yml :  welp_mailjet:\n    api_key:     %mailjet_api_key% \n    secret_key:  %mailjet_secret_key%", 
+            "title": "Minimal Configuration"
+        }, 
+        {
+            "location": "/#todo", 
+            "text": "Moar tests...  handle when user changes email  MANAGING LIST SUBSCRIPTIONS FOR A SINGLE CONTACT ( /CONTACT/$ID/MANAGECONTACTSLISTS )  MANAGING AND UPLOADING MULTIPLE CONTACTS ( /CONTACT/MANAGEMANYCONTACTS )  MANAGING CONTACTS THROUGH CSV UPLOAD", 
+            "title": "ToDo"
+        }, 
+        {
+            "location": "/#mailjet-issues", 
+            "text": "How to change user email? (workaround: remove old, add new...)  Event API/webhook: how to synchronize subscribe event from admin or form ith our app? (available sent, open, click, bounce, spam, blocked, unsub)", 
+            "title": "MailJet issues"
+        }, 
+        {
+            "location": "/setup/", 
+            "text": "Setup\n\n\nAdd bundle to your project:\n\n\ncomposer require welp/mailjet-bundle\n\n\n\n\nAdd \nWelp\\MailjetBundle\\WelpMailjetBundle\n to your \nAppKernel.php\n:\n\n\n$bundles = [\n    // ...\n    new Welp\\MailjetBundle\\WelpMailjetBundle(),\n];\n\n\n\n\nMinimal Configuration\n\n\nIn your \nconfig.yml\n:\n\n\nwelp_mailjet:\n    api_key:    \n%mailjet_api_key%\n\n    secret_key: \n%mailjet_secret_key%\n\n\n\n\n\nMore configuration", 
+            "title": "Setup"
+        }, 
+        {
+            "location": "/setup/#setup", 
+            "text": "Add bundle to your project:  composer require welp/mailjet-bundle  Add  Welp\\MailjetBundle\\WelpMailjetBundle  to your  AppKernel.php :  $bundles = [\n    // ...\n    new Welp\\MailjetBundle\\WelpMailjetBundle(),\n];", 
+            "title": "Setup"
+        }, 
+        {
+            "location": "/setup/#minimal-configuration", 
+            "text": "In your  config.yml :  welp_mailjet:\n    api_key:     %mailjet_api_key% \n    secret_key:  %mailjet_secret_key%   More configuration", 
+            "title": "Minimal Configuration"
+        }, 
+        {
+            "location": "/configuration/", 
+            "text": "Configuration\n\n\nYou need to have MailJet account available\n\n\nconfig.yml\n\n\nDefine a configuration in your \nconfig.yml\n:\n\n\nwelp_mailjet:\n    api_key:    \n%mailjet_api_key%\n\n    secret_key: \n%mailjet_secret_key%\n\n    event_endpoint_route: app_event_endpoint_route # route name to handle the callback\n    event_endpoint_token: \nsecretCode12345678\n # secret to secure callback\n    lists:\n        1346789:\n            contact_provider: 'yourapp.provider1'\n        987456321:\n            contact_provider: 'yourapp.provider2'\n        ...", 
+            "title": "Configuration"
+        }, 
+        {
+            "location": "/configuration/#configuration", 
+            "text": "You need to have MailJet account available", 
+            "title": "Configuration"
+        }, 
+        {
+            "location": "/configuration/#configyml", 
+            "text": "Define a configuration in your  config.yml :  welp_mailjet:\n    api_key:     %mailjet_api_key% \n    secret_key:  %mailjet_secret_key% \n    event_endpoint_route: app_event_endpoint_route # route name to handle the callback\n    event_endpoint_token:  secretCode12345678  # secret to secure callback\n    lists:\n        1346789:\n            contact_provider: 'yourapp.provider1'\n        987456321:\n            contact_provider: 'yourapp.provider2'\n        ...", 
+            "title": "config.yml"
+        }
+    ]
+}
