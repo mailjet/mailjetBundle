@@ -6,7 +6,7 @@ namespace Welp\MailjetBundle\Model;
 * https://dev.mailjet.com/email-api/v3/contactslist-managemanycontacts/
 * Object to manage many contacts from list
 */
-class ContactList
+class ContactsList
 {
 
     const ACTION_ADDFORCE = 'addforce';

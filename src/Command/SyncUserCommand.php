@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use Welp\MailjetBundle\Model\Contact;
-use Welp\MailjetBundle\Model\ContactList;
+use Welp\MailjetBundle\Model\ContactsList;
 
 /**
  * Class SyncUserCommand
@@ -63,7 +63,7 @@ class SyncUserCommand extends ContainerAwareCommand
         foreach ($this->lists as $listId => $listParameters) {
             $provider = $this->getProvider($listParameters['contact_provider']);
 
-            $contactList = new ContactList($listId, ContactList::ACTION_ADDFORCE, $provider->getContacts());
+            $contactList = new ContactsList($listId, ContactsList::ACTION_ADDFORCE, $provider->getContacts());
 
             $response = $this->mailjet->post(Resources::$ContactslistManagemanycontacts,
                 ['id' => $listId, 'body' => $contactList->format()]
