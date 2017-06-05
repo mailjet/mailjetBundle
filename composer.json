@@ -26,7 +26,7 @@
     },
     "require": {
         "php": ">=5.6",
-        "mailjet/mailjet-apiv3-php": "^1.1"
+        "mailjet/mailjet-apiv3-php": "^1.2"
     },
     "require-dev": {
         "phpspec/phpspec": "~2@dev",

@@ -46,7 +46,9 @@ welp_mailjet:
 ## ToDo
 
 * Moar tests...
+* Moar documentation
 * handle when user changes email
+* Manage new Mailjet Wrapper (constructor options)
 * MANAGING LIST SUBSCRIPTIONS FOR A SINGLE CONTACT ( /CONTACT/$ID/MANAGECONTACTSLISTS )
 * MANAGING AND UPLOADING MULTIPLE CONTACTS ( /CONTACT/MANAGEMANYCONTACTS )
 * MANAGING CONTACTS THROUGH CSV UPLOAD

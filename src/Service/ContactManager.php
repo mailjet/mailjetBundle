@@ -12,7 +12,7 @@ use Welp\MailjetBundle\Model\Contact;
 * manage Contact (create, update, delete, ...)
 *
 */
-class ContactManage
+class ContactManager
 {
 
     protected $mailjet;
@@ -30,7 +30,7 @@ class ContactManage
         $contact->setAction($action);
         $response = $this->_exec($listId, $contact);
         if(!$response->success()){
-            $this->throwError("ContactManage:create() failed:", $response);
+            $this->throwError("ContactManager:create() failed:", $response);
         }
 
         return $reponse->getData();
@@ -45,7 +45,7 @@ class ContactManage
         $contact->setAction($action);
         $this->_exec($listId, $contact);
         if(!$response->success()){
-            $this->throwError("ContactManage:update() failed:", $response);
+            $this->throwError("ContactManager:update() failed:", $response);
         }
 
         return $reponse->getData();
@@ -59,7 +59,7 @@ class ContactManage
         $contact->setAction(Contact::ACTION_ADDFORCE);
         $this->_exec($listId, $contact);
         if(!$response->success()){
-            $this->throwError("ContactManage:sub() failed:", $response);
+            $this->throwError("ContactManager:sub() failed:", $response);
         }
 
         return $reponse->getData();
@@ -73,7 +73,7 @@ class ContactManage
         $contact->setAction(Contact::ACTION_UNSUB);
         $this->_exec($listId, $contact);
         if(!$response->success()){
-            $this->throwError("ContactManage:unsub() failed:", $response);
+            $this->throwError("ContactManager:unsub() failed:", $response);
         }
 
         return $reponse->getData();
@@ -87,7 +87,7 @@ class ContactManage
         $contact->setAction(Contact::ACTION_REMOVE);
         $this->_exec($listId, $contact);
         if(!$response->success()){
-            $this->throwError("ContactManage:remove() failed:", $response);
+            $this->throwError("ContactManager:remove() failed:", $response);
         }
 
         return $reponse->getData();
