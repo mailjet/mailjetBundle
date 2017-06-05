@@ -14,7 +14,6 @@ use Welp\MailjetBundle\Model\Contact;
 */
 class ContactManager
 {
-
     protected $mailjet;
 
     public function __construct(\Mailjet\Client $mailjet)
@@ -29,12 +28,11 @@ class ContactManager
     {
         $contact->setAction($action);
         $response = $this->_exec($listId, $contact);
-        if(!$response->success()){
+        if (!$response->success()) {
             $this->throwError("ContactManager:create() failed:", $response);
         }
 
         return $reponse->getData();
-
     }
 
     /**
@@ -44,7 +42,7 @@ class ContactManager
     {
         $contact->setAction($action);
         $this->_exec($listId, $contact);
-        if(!$response->success()){
+        if (!$response->success()) {
             $this->throwError("ContactManager:update() failed:", $response);
         }
 
@@ -58,7 +56,7 @@ class ContactManager
     {
         $contact->setAction(Contact::ACTION_ADDFORCE);
         $this->_exec($listId, $contact);
-        if(!$response->success()){
+        if (!$response->success()) {
             $this->throwError("ContactManager:sub() failed:", $response);
         }
 
@@ -72,7 +70,7 @@ class ContactManager
     {
         $contact->setAction(Contact::ACTION_UNSUB);
         $this->_exec($listId, $contact);
-        if(!$response->success()){
+        if (!$response->success()) {
             $this->throwError("ContactManager:unsub() failed:", $response);
         }
 
@@ -86,7 +84,7 @@ class ContactManager
     {
         $contact->setAction(Contact::ACTION_REMOVE);
         $this->_exec($listId, $contact);
-        if(!$response->success()){
+        if (!$response->success()) {
             $this->throwError("ContactManager:remove() failed:", $response);
         }
 
@@ -114,7 +112,7 @@ class ContactManager
     */
     private function _exec($listId, Contact $contact)
     {
-        return $this->mailjet->post(Resources:$ContactslistManagecontact,
+        return $this->mailjet->post(Resources::$ContactslistManagecontact,
             ['id' => $listId, 'body' => $contact->format()]
         );
     }
@@ -123,5 +121,4 @@ class ContactManager
     {
         throw new \RuntimeException($title.": ".$response->getData['StatusCode']." - ".$response->getData['ErrorInfo']." - ".$response->getData['ErrorMessage']);
     }
-
 }
