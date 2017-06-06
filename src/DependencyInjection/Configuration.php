@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('api_key')->->isRequired()->info('Mailjet API key')->end()
+                ->scalarNode('api_key')->isRequired()->info('Mailjet API key')->end()
                 ->scalarNode('secret_key')->isRequired()->info('Mailjet API token')->end()
                 ->scalarNode('event_endpoint_route')
                     ->defaultValue('welp_mailjet_event_endpoint')

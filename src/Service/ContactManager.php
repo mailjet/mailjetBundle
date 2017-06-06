@@ -2,7 +2,6 @@
 
 namespace Welp\MailjetBundle\Service;
 
-use \Mailjet\Client;
 use \Mailjet\Resources;
 
 use Welp\MailjetBundle\Model\Contact;
@@ -14,6 +13,10 @@ use Welp\MailjetBundle\Model\Contact;
 */
 class ContactManager
 {
+    /**
+     * Mailjet client
+     * @var \Mailjet\Client
+     */
     protected $mailjet;
 
     public function __construct(\Mailjet\Client $mailjet)

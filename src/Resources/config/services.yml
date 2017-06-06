@@ -10,6 +10,17 @@ services:
         class: "%welp_mailjet.api.class%"
         arguments: ["%welp_mailjet.api_key%", "%welp_mailjet.secret_key%"]
 
+    swiftmailer.transport.eventdispatcher.welp_mailjet:
+        class: Swift_Events_SimpleEventDispatcher
+
+    swiftmailer.mailer.transport.welp_mailjet:
+        alias: welp_mailjet
+        class: Welp\MailjetSwiftMailer\SwiftMailer\MailjetTransport
+        arguments:
+            - "@swiftmailer.transport.eventdispatcher.welp_mailjet"
+            - "%welp_mailjet.api_key%"
+            - "%welp_mailjet.secret_key%"
+
     welp_mailjet.service.contacts_list_synchronizer:
         class: "%welp_mailjet.contacts_list_synchronizer.class%"
         arguments:
