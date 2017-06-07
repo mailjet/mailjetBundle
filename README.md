@@ -1,6 +1,8 @@
 # MailJet Bundle
 
 [![Build Status](https://travis-ci.org/welpdev/mailjetBundle.svg?branch=master)](https://travis-ci.org/welpdev/mailjetBundle)
+[![Packagist](https://img.shields.io/packagist/v/welp/mailjet-bundle.svg)](https://packagist.org/packages/welp/mailjet-bundle)
+[![Packagist](https://img.shields.io/packagist/dt/welp/mailjet-bundle.svg)](https://packagist.org/packages/welp/mailjet-bundle)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/welpdev/mailjetBundle/blob/master/LICENSE.md)
 [![Documentation](https://img.shields.io/badge/documentation-gh--pages-blue.svg)](https://welpdev.github.io/mailjetBundle/)
 
@@ -48,11 +50,14 @@ welp_mailjet:
 
 * Moar tests...
 * handle when user changes email
-* MANAGING LIST SUBSCRIPTIONS FOR A SINGLE CONTACT ( /CONTACT/$ID/MANAGECONTACTSLISTS )
-* MANAGING AND UPLOADING MULTIPLE CONTACTS ( /CONTACT/MANAGEMANYCONTACTS )
-* MANAGING CONTACTS THROUGH CSV UPLOAD
+* Unit Synchronize User
 
 ## MailJet issues
 
 * How to change user email? (workaround: remove old, add new...)
-* Event API/webhook: how to synchronize subscribe event from admin or form ith our app? (available sent, open, click, bounce, spam, blocked, unsub)
+* Event API/webhook: how to synchronize specific contact subscribe event ? (available sent, open, click, bounce, spam, blocked, unsub)
+
+
+## Contributing
+
+If you want to contribute to this project, look at [over here](CONTRIBUTING.md)
