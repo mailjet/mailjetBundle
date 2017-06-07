@@ -2,7 +2,7 @@
 
 ## Full synchronization with command
 
-You can synchronize all users of your project with a MailJet list at once by calling the Symfony command:
+You can synchronize all users of your project with a Mailjet list at once by calling the Symfony command:
 
     php app/console welp:mailjet:user-sync
 
@@ -13,7 +13,7 @@ NOTE: you must have configured and created [your own contact provider](contact-p
 
 ## Unit synchronization with events
 
-If you want realtime synchronization, you can dispatch custom events on your controllers/managers (or anywhere). The subscribe event can be used both for adding a new contact or updating an existing one. You can fired these events to trigger sync with MailJet:
+If you want realtime synchronization, you can dispatch custom events on your controllers/managers (or anywhere). The subscribe event can be used both for adding a new contact or updating an existing one. You can fired these events to trigger sync with Mailjet:
 
     ContactEvent::EVENT_SUBSCRIBE = 'welp.mailjet.subscribe';
     ContactEvent::EVENT_UNSUBSCRIBE = 'welp.mailjet.unsubscribe';
@@ -140,7 +140,7 @@ public function deleteUser(User $user)
 NOT POSSIBLE YET...(WORKAROUND: remove old, add new)
 
 
-## Retrieve MailJet Client Object to make custom MailJet API V3 requests
+## Retrieve Mailjet Client Object to make custom MailJet API V3 requests
 
 You can also retrieve the MailJet Client Object which comes from the wrapper [mailjet/mailjet-apiv3-php](https://github.com/mailjet/mailjet-apiv3-php).
 
@@ -151,7 +151,7 @@ Example:
 ``` php
 <?php
     use \Mailjet\Resources;
-    
+
     // in any controller action...
     ...
     $mailjet = $this->container->get('welp_mailjet.api');

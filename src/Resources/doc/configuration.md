@@ -1,6 +1,6 @@
 # Configuration
 
-You need to have MailJet account available
+You need to have Mailjet account available
 
 ## config.yml
 
@@ -23,4 +23,4 @@ welp_mailjet:
         ...
 ```
 
-Where `listIdX` is the list id of your MailJet lists, and `yourapp.providerX` is the key of your provider's service that will provide the contacts that need to be synchronized in MailJet. See the documentation on create [your own Contact provider](contact-provider.md).
+Where `listIdX` is the list id of your Mailjet lists, and `yourapp.providerX` is the key of your provider's service that will provide the contacts that need to be synchronized in Mailjet. See the documentation on create [your own Contact provider](contact-provider.md).

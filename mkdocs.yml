@@ -1,4 +1,4 @@
-site_name: MailJet Bundle
+site_name: Mailjet Bundle
 site_description: Symfony bundle for handling Mailjet API V3.
 site_author: Titouan BENOIT
 copyright: MIT
@@ -14,5 +14,8 @@ pages:
     - Usage: usage.md
     - Event API (webhook): event-api.md
     - Tests: tests.md
-    - MailJet Doc: mailjet-doc.md
+    - Mailjet Doc: mailjet-doc.md
+    - Contributing: CONTRIBUTING.md
 theme: readthedocs
+markdown_extensions:
+    - pymdownx.github

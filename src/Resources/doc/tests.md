@@ -4,7 +4,7 @@
 
 ## Unit tests
 
-    bin/phpspec run
+    bin/phpspec run --fpretty --verbose
 
 
 ## Events(Webhook) tests
@@ -13,6 +13,4 @@ use ngrok and http://requestb.in/
 
 ## Debug/dev mode
 
-The best solution to debug or dev environment is to create a new MailJet account and use the API key of this new "debug/dev" MailJet account.
-
-We are waiting for a sandbox from MailJet developer in order to implements a pretty debug/dev mode. /!\
+The best solution to debug or dev environment is to create a new MailJet account and use the API key of this new "debug/dev" Mailjet account.
