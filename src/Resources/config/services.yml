@@ -1,5 +1,5 @@
 parameters:
-    welp_mailjet.api.class: \Mailjet\Client
+    welp_mailjet.api.class: Mailjet\Client
     welp_mailjet.contacts_list_synchronizer.class: Welp\MailjetBundle\Service\ContactsListSynchronizer
     welp_mailjet.event_callback_manager.class: Welp\MailjetBundle\Service\EventCallbackManager
     welp_mailjet.contact_manager.class: Welp\MailjetBundle\Service\ContactManager
@@ -14,7 +14,6 @@ services:
         class: Swift_Events_SimpleEventDispatcher
 
     swiftmailer.mailer.transport.welp_mailjet:
-        alias: welp_mailjet
         class: Welp\MailjetSwiftMailer\SwiftMailer\MailjetTransport
         arguments:
             - "@swiftmailer.transport.eventdispatcher.welp_mailjet"
