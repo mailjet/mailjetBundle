@@ -8,7 +8,7 @@
   
   <meta name="author" content="Titouan BENOIT">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Contact Provider - MailJet Bundle</title>
+  <title>Contact Provider - Mailjet Bundle</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -35,7 +35,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> MailJet Bundle</a>
+        <a href=".." class="icon icon-home"> Mailjet Bundle</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -63,6 +63,13 @@
             <li>
     <li class="toctree-l1 ">
         <a class="" href="../configuration/">Configuration</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../swiftmailer/">SwiftMailer</a>
         
     </li>
 <li>
@@ -108,7 +115,14 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../mailjet-doc/">MailJet Doc</a>
+        <a class="" href="../mailjet-doc/">Mailjet Doc</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../CONTRIBUTING/">Contributing</a>
         
     </li>
 <li>
@@ -123,7 +137,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">MailJet Bundle</a>
+        <a href="..">Mailjet Bundle</a>
       </nav>
 
       
@@ -159,7 +173,7 @@ Your provider should be accessible via a service key (the same you reference in 
 <p>You provider class should implement <code>Welp\MailjetBundle\Provider\ProviderInterface</code> and the method <code>getContacts</code> must return an array of <code>Welp\MailjetBundle\Model\Contact</code> objects.</p>
 <h2 id="example">Example</h2>
 <p>Here is an example of ContactProvider:</p>
-<pre><code class="php">
+<pre class="highlight"><code class="language-php linenums">
 &lt;?php
 
 namespace YourApp\App\Mailjet;
@@ -207,8 +221,7 @@ class ExampleContactProvider implements ProviderInterface
 
         return $contacts;
     }
-}
-</code></pre>
+}</code></pre>
 
 <h2 id="foscontactprovider">FosContactProvider</h2>
 <p>We also provide a ready to use provider for FosUserBundle: <code>FosContactProvider</code>. You just need to register the service into your app:</p>
@@ -232,7 +245,7 @@ listId1:
         <a href="../usage/" class="btn btn-neutral float-right" title="Usage">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../configuration/" class="btn btn-neutral" title="Configuration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../swiftmailer/" class="btn btn-neutral" title="SwiftMailer"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -262,7 +275,7 @@ listId1:
           <a href="https://github.com/welpdev/mailjetBundle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../configuration/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../swiftmailer/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../usage/" style="color: #fcfcfc">Next &raquo;</a></span>

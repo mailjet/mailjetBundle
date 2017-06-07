@@ -8,7 +8,7 @@
   
   <meta name="author" content="Titouan BENOIT">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Configuration - MailJet Bundle</title>
+  <title>Configuration - Mailjet Bundle</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -35,7 +35,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> MailJet Bundle</a>
+        <a href=".." class="icon icon-home"> Mailjet Bundle</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -78,6 +78,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="../swiftmailer/">SwiftMailer</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="../contact-provider/">Contact Provider</a>
         
     </li>
@@ -106,7 +113,14 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../mailjet-doc/">MailJet Doc</a>
+        <a class="" href="../mailjet-doc/">Mailjet Doc</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../CONTRIBUTING/">Contributing</a>
         
     </li>
 <li>
@@ -121,7 +135,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">MailJet Bundle</a>
+        <a href="..">Mailjet Bundle</a>
       </nav>
 
       
@@ -147,10 +161,10 @@
             <div class="section">
               
                 <h1 id="configuration">Configuration</h1>
-<p>You need to have MailJet account available</p>
+<p>You need to have Mailjet account available</p>
 <h2 id="configyml">config.yml</h2>
 <p>Define a configuration in your <code>config.yml</code>:</p>
-<pre><code class="yaml">welp_mailjet:
+<pre class="highlight"><code class="language-yaml linenums">welp_mailjet:
     api_key:    &quot;%mailjet_api_key%&quot;
     secret_key: &quot;%mailjet_secret_key%&quot;
     # route name to handle the callback
@@ -163,10 +177,9 @@
             contact_provider: 'yourapp.provider1'
         listId2:
             contact_provider: 'yourapp.provider2'
-        ...
-</code></pre>
+        ...</code></pre>
 
-<p>Where <code>listIdX</code> is the list id of your MailJet lists, and <code>yourapp.providerX</code> is the key of your provider's service that will provide the contacts that need to be synchronized in MailJet. See the documentation on create <a href="../contact-provider/">your own Contact provider</a>.</p>
+<p>Where <code>listIdX</code> is the list id of your Mailjet lists, and <code>yourapp.providerX</code> is the key of your provider's service that will provide the contacts that need to be synchronized in Mailjet. See the documentation on create <a href="../contact-provider/">your own Contact provider</a>.</p>
               
             </div>
           </div>
@@ -174,7 +187,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../contact-provider/" class="btn btn-neutral float-right" title="Contact Provider">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../swiftmailer/" class="btn btn-neutral float-right" title="SwiftMailer">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../setup/" class="btn btn-neutral" title="Setup"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -210,7 +223,7 @@
         <span><a href="../setup/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../contact-provider/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../swiftmailer/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

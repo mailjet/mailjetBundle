@@ -8,7 +8,7 @@
   <meta name="description" content="Symfony bundle for handling Mailjet API V3.">
   <meta name="author" content="Titouan BENOIT">
   <link rel="shortcut icon" href="./img/favicon.ico">
-  <title>Home - MailJet Bundle</title>
+  <title>Home - Mailjet Bundle</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="./css/theme.css" type="text/css" />
@@ -35,7 +35,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> MailJet Bundle</a>
+        <a href="." class="icon icon-home"> Mailjet Bundle</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -52,7 +52,7 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#mailjet-bundle">MailJet Bundle</a></li>
+                <li class="toctree-l3"><a href="#mailjet-bundle">Mailjet Bundle</a></li>
                 
                     <li><a class="toctree-l4" href="#features">Features</a></li>
                 
@@ -63,6 +63,8 @@
                     <li><a class="toctree-l4" href="#todo">ToDo</a></li>
                 
                     <li><a class="toctree-l4" href="#mailjet-issues">MailJet issues</a></li>
+                
+                    <li><a class="toctree-l4" href="#contributing">Contributing</a></li>
                 
             
             </ul>
@@ -80,6 +82,13 @@
             <li>
     <li class="toctree-l1 ">
         <a class="" href="configuration/">Configuration</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="swiftmailer/">SwiftMailer</a>
         
     </li>
 <li>
@@ -114,7 +123,14 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="mailjet-doc/">MailJet Doc</a>
+        <a class="" href="mailjet-doc/">Mailjet Doc</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="CONTRIBUTING/">Contributing</a>
         
     </li>
 <li>
@@ -129,7 +145,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">MailJet Bundle</a>
+        <a href=".">Mailjet Bundle</a>
       </nav>
 
       
@@ -154,52 +170,52 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="mailjet-bundle">MailJet Bundle</h1>
+                <h1 id="mailjet-bundle">Mailjet Bundle</h1>
 <p><a href="https://travis-ci.org/welpdev/mailjetBundle"><img alt="Build Status" src="https://travis-ci.org/welpdev/mailjetBundle.svg?branch=master" /></a>
+<a href="https://packagist.org/packages/welp/mailjet-bundle"><img alt="Packagist" src="https://img.shields.io/packagist/v/welp/mailjet-bundle.svg" /></a>
+<a href="https://packagist.org/packages/welp/mailjet-bundle"><img alt="Packagist" src="https://img.shields.io/packagist/dt/welp/mailjet-bundle.svg" /></a>
 <a href="https://github.com/welpdev/mailjetBundle/blob/master/LICENSE.md"><img alt="GitHub license" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
 <a href="https://welpdev.github.io/mailjetBundle/"><img alt="Documentation" src="https://img.shields.io/badge/documentation-gh--pages-blue.svg" /></a></p>
 <p>Symfony bundle for handling Mailjet API V3 using this wrapper: <a href="https://github.com/mailjet/mailjet-apiv3-php">https://github.com/mailjet/mailjet-apiv3-php</a></p>
-<p><strong>/!\ WORK IN PROGRESS... NOT READY TO USE /!\ Wait for a release before using it.</strong></p>
+<p>🚧 <strong>WORK IN PROGRESS...</strong> 🚧</p>
 <h2 id="features">Features</h2>
-<ul>
-<li>[x] Retrieve <a href="https://github.com/mailjet/mailjet-apiv3-php">\Mailjet\Client</a> to make custom MailJet API V3 requests</li>
-<li>[x] Synchronize your user with MailJet contact list</li>
-<li>[x] Use your own userProvider (basic <code>FosContactProvider</code> included to interface with FosUserBundle)</li>
-<li>[x] Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List</li>
-<li>[x] Register Event API - real time notifications (webhook)</li>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" disabled checked> Retrieve <a href="https://github.com/mailjet/mailjet-apiv3-php">\Mailjet\Client</a> to make custom Mailjet API V3 requests</li>
+<li class="task-list-item"><input type="checkbox" disabled checked> Synchronize your user with MailJet contact list <em>(need more tests)</em></li>
+<li class="task-list-item"><input type="checkbox" disabled checked> Use your own userProvider (basic <code>FosContactProvider</code> included to interface with FosUserBundle) <em>(need more tests)</em></li>
+<li class="task-list-item"><input type="checkbox" disabled checked> Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List <em>(need more tests)</em></li>
+<li class="task-list-item"><input type="checkbox" disabled> Register Event API - real time notifications (webhook) <em>(need more tests)</em></li>
+<li class="task-list-item"><input type="checkbox" disabled> <a href="https://github.com/welpdev/MailjetSwiftMailer">SwiftMailer Transport integration</a></li>
 </ul>
 <h2 id="setup">Setup</h2>
 <p>Add bundle to your project:</p>
-<pre><code class="bash">composer require welp/mailjet-bundle
-</code></pre>
+<pre class="highlight"><code class="language-bash linenums">composer require welp/mailjet-bundle</code></pre>
 
 <p>Add <code>Welp\MailjetBundle\WelpMailjetBundle</code> to your <code>AppKernel.php</code>:</p>
-<pre><code class="php">$bundles = [
+<pre class="highlight"><code class="language-php linenums">$bundles = [
     // ...
     new Welp\MailjetBundle\WelpMailjetBundle(),
-];
-</code></pre>
+];</code></pre>
 
 <h2 id="minimal-configuration">Minimal Configuration</h2>
 <p>In your <code>config.yml</code>:</p>
-<pre><code class="yaml">welp_mailjet:
+<pre class="highlight"><code class="language-yaml linenums">welp_mailjet:
     api_key:    &quot;%mailjet_api_key%&quot;
-    secret_key: &quot;%mailjet_secret_key%&quot;
-</code></pre>
+    secret_key: &quot;%mailjet_secret_key%&quot;</code></pre>
 
 <h2 id="todo">ToDo</h2>
 <ul>
 <li>Moar tests...</li>
 <li>handle when user changes email</li>
-<li>MANAGING LIST SUBSCRIPTIONS FOR A SINGLE CONTACT ( /CONTACT/$ID/MANAGECONTACTSLISTS )</li>
-<li>MANAGING AND UPLOADING MULTIPLE CONTACTS ( /CONTACT/MANAGEMANYCONTACTS )</li>
-<li>MANAGING CONTACTS THROUGH CSV UPLOAD</li>
+<li>Unit Synchronize User</li>
 </ul>
 <h2 id="mailjet-issues">MailJet issues</h2>
 <ul>
 <li>How to change user email? (workaround: remove old, add new...)</li>
-<li>Event API/webhook: how to synchronize subscribe event from admin or form ith our app? (available sent, open, click, bounce, spam, blocked, unsub)</li>
+<li>Event API/webhook: how to synchronize specific contact subscribe event ? (available sent, open, click, bounce, spam, blocked, unsub)</li>
 </ul>
+<h2 id="contributing">Contributing</h2>
+<p>If you want to contribute to this project, look at <a href="CONTRIBUTING/">over here</a></p>
               
             </div>
           </div>
@@ -250,5 +266,5 @@
 
 <!--
 MkDocs version : 0.16.0
-Build Date UTC : 2016-12-07 14:17:23
+Build Date UTC : 2017-06-07 10:10:32
 -->

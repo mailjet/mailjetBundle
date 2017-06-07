@@ -8,7 +8,7 @@
   
   <meta name="author" content="Titouan BENOIT">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Usage - MailJet Bundle</title>
+  <title>Usage - Mailjet Bundle</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -35,7 +35,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> MailJet Bundle</a>
+        <a href=".." class="icon icon-home"> Mailjet Bundle</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -69,6 +69,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="../swiftmailer/">SwiftMailer</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="../contact-provider/">Contact Provider</a>
         
     </li>
@@ -86,7 +93,7 @@
                 
                     <li><a class="toctree-l4" href="#unit-synchronization-with-events">Unit synchronization with events</a></li>
                 
-                    <li><a class="toctree-l4" href="#retrieve-mailjet-client-object-to-make-custom-mailjet-api-v3-requests">Retrieve MailJet Client Object to make custom MailJet API V3 requests</a></li>
+                    <li><a class="toctree-l4" href="#retrieve-mailjet-client-object-to-make-custom-mailjet-api-v3-requests">Retrieve Mailjet Client Object to make custom MailJet API V3 requests</a></li>
                 
             
             </ul>
@@ -110,7 +117,14 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../mailjet-doc/">MailJet Doc</a>
+        <a class="" href="../mailjet-doc/">Mailjet Doc</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../CONTRIBUTING/">Contributing</a>
         
     </li>
 <li>
@@ -125,7 +139,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">MailJet Bundle</a>
+        <a href="..">Mailjet Bundle</a>
       </nav>
 
       
@@ -152,13 +166,13 @@
               
                 <h1 id="usage">Usage</h1>
 <h2 id="full-synchronization-with-command">Full synchronization with command</h2>
-<p>You can synchronize all users of your project with a MailJet list at once by calling the Symfony command:</p>
+<p>You can synchronize all users of your project with a Mailjet list at once by calling the Symfony command:</p>
 <pre><code>php app/console welp:mailjet:user-sync
 </code></pre>
 <p>It will get all your User throught your Contact Provider and will add/update all your User to the configured list.</p>
 <p>NOTE: you must have configured and created <a href="../contact-provider/">your own contact provider</a>.</p>
 <h2 id="unit-synchronization-with-events">Unit synchronization with events</h2>
-<p>If you want realtime synchronization, you can dispatch custom events on your controllers/managers (or anywhere). The subscribe event can be used both for adding a new contact or updating an existing one. You can fired these events to trigger sync with MailJet:</p>
+<p>If you want realtime synchronization, you can dispatch custom events on your controllers/managers (or anywhere). The subscribe event can be used both for adding a new contact or updating an existing one. You can fired these events to trigger sync with Mailjet:</p>
 <pre><code>ContactEvent::EVENT_SUBSCRIBE = 'welp.mailjet.subscribe';
 ContactEvent::EVENT_UNSUBSCRIBE = 'welp.mailjet.unsubscribe';
 ContactEvent::EVENT_UPDATE = 'welp.mailjet.update';
@@ -167,7 +181,7 @@ ContactEvent::EVENT_DELETE = 'welp.mailjet.delete';
 </code></pre>
 <h3 id="subscribe-new-user">Subscribe new User</h3>
 <p>Here is an example of a subscribe event dispatch:</p>
-<pre><code class="php">&lt;?php
+<pre class="highlight"><code class="language-php linenums">&lt;?php
 
 use Welp\MailjetBundle\Event\ContactEvent;
 use Welp\MailjetBundle\Model\Contact;
@@ -189,12 +203,11 @@ public function newUser(User $user)
         ContactEvent::EVENT_SUBSCRIBE,
         new ContactEvent('your_list_id', $contact)
     );
-}
-</code></pre>
+}</code></pre>
 
 <h3 id="unsubscribe-a-user">Unsubscribe a User</h3>
 <p>Unsubscribe is simpler, you only need the email:</p>
-<pre><code class="php">&lt;?php
+<pre class="highlight"><code class="language-php linenums">&lt;?php
 
 use Welp\MailjetBundle\Event\ContactEvent;
 use Welp\MailjetBundle\Model\Contact;
@@ -211,12 +224,11 @@ public function unsubscribeUser(User $user)
         ContactEvent::EVENT_UNSUBSCRIBE,
         new ContactEvent('your_list_id', $contact)
     );
-}
-</code></pre>
+}</code></pre>
 
 <h3 id="update-a-user">Update a User</h3>
 <p>If your User changes his information, you can sync with MailChimp:</p>
-<pre><code class="php">&lt;?php
+<pre class="highlight"><code class="language-php linenums">&lt;?php
 
 use Welp\MailjetBundle\Event\ContactEvent;
 use Welp\MailjetBundle\Model\Contact;
@@ -238,13 +250,12 @@ public function updateUser(User $user)
         ContactEvent::EVENT_UPDATE,
         new ContactEvent('your_list_id', $contact)
     );
-}
-</code></pre>
+}</code></pre>
 
 <p>Note: we can't change the address email of a user... MailJet API V3 doesn't permit it so far.</p>
 <h3 id="delete-a-user">Delete a User</h3>
 <p>And finally delete a User:</p>
-<pre><code class="php">&lt;?php
+<pre class="highlight"><code class="language-php linenums">&lt;?php
 
 use Welp\MailjetBundle\Event\ContactEvent;
 use Welp\MailjetBundle\Model\Contact;
@@ -261,16 +272,15 @@ public function deleteUser(User $user)
         ContactEvent::EVENT_DELETE,
         new ContactEvent('your_list_id', $contact)
     );
-}
-</code></pre>
+}</code></pre>
 
 <h3 id="change-users-email-address">Change User's email address</h3>
 <p>NOT POSSIBLE YET...(WORKAROUND: remove old, add new)</p>
-<h2 id="retrieve-mailjet-client-object-to-make-custom-mailjet-api-v3-requests">Retrieve MailJet Client Object to make custom MailJet API V3 requests</h2>
+<h2 id="retrieve-mailjet-client-object-to-make-custom-mailjet-api-v3-requests">Retrieve Mailjet Client Object to make custom MailJet API V3 requests</h2>
 <p>You can also retrieve the MailJet Client Object which comes from the wrapper <a href="https://github.com/mailjet/mailjet-apiv3-php">mailjet/mailjet-apiv3-php</a>.</p>
 <p>The service key is <code>welp_mailjet.api</code>.</p>
 <p>Example:</p>
-<pre><code class="php">&lt;?php
+<pre class="highlight"><code class="language-php linenums">&lt;?php
     use \Mailjet\Resources;
 
     // in any controller action...
@@ -301,7 +311,6 @@ public function deleteUser(User $user)
     ];
 
     $response = $mailjet-&gt;post(Resources::$Email, ['body' =&gt; $body]);
-
 </code></pre>
               
             </div>

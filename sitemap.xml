@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2016-12-07</lastmod>
+     <lastmod>2017-06-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/setup/</loc>
-     <lastmod>2016-12-07</lastmod>
+     <lastmod>2017-06-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +20,15 @@
     
     <url>
      <loc>/configuration/</loc>
-     <lastmod>2016-12-07</lastmod>
+     <lastmod>2017-06-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/swiftmailer/</loc>
+     <lastmod>2017-06-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -28,7 +36,7 @@
     
     <url>
      <loc>/contact-provider/</loc>
-     <lastmod>2016-12-07</lastmod>
+     <lastmod>2017-06-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -36,7 +44,7 @@
     
     <url>
      <loc>/usage/</loc>
-     <lastmod>2016-12-07</lastmod>
+     <lastmod>2017-06-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -44,7 +52,7 @@
     
     <url>
      <loc>/event-api/</loc>
-     <lastmod>2016-12-07</lastmod>
+     <lastmod>2017-06-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -52,7 +60,7 @@
     
     <url>
      <loc>/tests/</loc>
-     <lastmod>2016-12-07</lastmod>
+     <lastmod>2017-06-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -60,7 +68,15 @@
     
     <url>
      <loc>/mailjet-doc/</loc>
-     <lastmod>2016-12-07</lastmod>
+     <lastmod>2017-06-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/CONTRIBUTING/</loc>
+     <lastmod>2017-06-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

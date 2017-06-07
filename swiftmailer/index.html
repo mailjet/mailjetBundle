@@ -8,7 +8,7 @@
   
   <meta name="author" content="Titouan BENOIT">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Mailjet Doc - Mailjet Bundle</title>
+  <title>SwiftMailer - Mailjet Bundle</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Mailjet Doc";
-    var mkdocs_page_input_path = "mailjet-doc.md";
-    var mkdocs_page_url = "/mailjet-doc/";
+    var mkdocs_page_name = "SwiftMailer";
+    var mkdocs_page_input_path = "swiftmailer.md";
+    var mkdocs_page_url = "/swiftmailer/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -68,8 +68,19 @@
 <li>
           
             <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../swiftmailer/">SwiftMailer</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">SwiftMailer</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#mailjet-swiftmailer-transport">Mailjet SwiftMailer Transport</a></li>
+                
+                    <li><a class="toctree-l4" href="#configuration">Configuration</a></li>
+                
+                    <li><a class="toctree-l4" href="#documentation">Documentation</a></li>
+                
+            
+            </ul>
         
     </li>
 <li>
@@ -103,15 +114,8 @@
 <li>
           
             <li>
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Mailjet Doc</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#mailjet-documentation">Mailjet Documentation</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../mailjet-doc/">Mailjet Doc</a>
         
     </li>
 <li>
@@ -145,10 +149,10 @@
     
       
     
-    <li>Mailjet Doc</li>
+    <li>SwiftMailer</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/welpdev/mailjetBundle/edit/master/docs/mailjet-doc.md"
+        <a href="https://github.com/welpdev/mailjetBundle/edit/master/docs/swiftmailer.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -158,13 +162,14 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="mailjet-documentation">Mailjet Documentation</h1>
-<ul>
-<li><a href="https://dev.mailjet.com/guides/">API Guides</a></li>
-<li><a href="https://dev.mailjet.com/email-api/v3/">API Reference</a></li>
-<li><a href="https://dev.mailjet.com/mandrill/">Switch from Mandrill</a></li>
-<li><a href="http://devblog.lexik.fr/tips/automatisation-de-relance-email-ne-developpez-pas-3082">Automation (FR)</a></li>
-</ul>
+                <h1 id="mailjet-swiftmailer-transport">Mailjet SwiftMailer Transport</h1>
+<h2 id="configuration">Configuration</h2>
+<pre><code># Swiftmailer Configuration
+swiftmailer:
+    transport: welp_mailjet
+</code></pre>
+<h2 id="documentation">Documentation</h2>
+<p><a href="https://github.com/welpdev/mailjetBundle">here</a></p>
               
             </div>
           </div>
@@ -172,10 +177,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../CONTRIBUTING/" class="btn btn-neutral float-right" title="Contributing">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../contact-provider/" class="btn btn-neutral float-right" title="Contact Provider">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../tests/" class="btn btn-neutral" title="Tests"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../configuration/" class="btn btn-neutral" title="Configuration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -205,10 +210,10 @@
           <a href="https://github.com/welpdev/mailjetBundle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../tests/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../configuration/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../CONTRIBUTING/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../contact-provider/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
