@@ -7,21 +7,19 @@ use Prophecy\Argument;
 
 class ContactSpec extends ObjectBehavior
 {
-
-    function let()
+    public function let()
     {
-
         $this->beConstructedWith('toto@mail.fr', 'toto TATA', ['firstname' => 'toto', 'lastname'=>'tata', "gender" => "undefined"]);
-
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Welp\MailjetBundle\Model\Contact');
     }
 
 
-    function it_can_format(){
+    public function it_can_format()
+    {
         $result = [
             "Email" => 'toto@mail.fr',
             "Name"  =>  'toto TATA',

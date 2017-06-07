@@ -8,11 +8,11 @@ use Welp\MailjetBundle\Event\ContactEvent;
 class ContactListener
 {
     /**
-     * @var ContactManager
+     * @var ContactsListManager
      */
     protected $contactManager;
 
-    public function __construct(ContactManager $contactManager)
+    public function __construct(ContactsListManager $contactManager)
     {
         $this->contactManager = $contactManager;
     }

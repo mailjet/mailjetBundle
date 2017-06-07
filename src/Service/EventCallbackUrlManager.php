@@ -28,20 +28,6 @@ class EventCallbackUrlManager
     }
 
     /**
-     * Retrieve EventCallbackUrl
-     * @return array
-     */
-    public function get()
-    {
-        $response = $this->mailjet->post(Resources::$Eventcallbackurl);
-        if (!$response->success()) {
-            $this->throwError("EventCallbackUrlManager:get() failed:", $response);
-        }
-
-        return $reponse->getData();
-    }
-
-    /**
      * Retrieve all EventCallbackUrl
      * @return array
      */
