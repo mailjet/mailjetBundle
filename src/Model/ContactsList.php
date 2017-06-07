@@ -8,7 +8,6 @@ namespace Welp\MailjetBundle\Model;
 */
 class ContactsList
 {
-
     const ACTION_ADDFORCE = 'addforce'; # adds the contact and resets the unsub status to false
     const ACTION_ADDNOFORCE = 'addnoforce'; # adds the contact and does not change the subscription status of the contact
     const ACTION_REMOVE = 'remove'; # removes the contact from the list
@@ -20,13 +19,13 @@ class ContactsList
 
 
     /**
-     * @param Int $listId
-     * @param String $action see const ACTION_*
-     * @param Array of Contact
+     * @param int $listId
+     * @param string $action see const ACTION_*
+     * @param array $contacts
      */
     public function __construct($listId, $action, $contacts)
     {
-        if(!$this->validateAction($action)){
+        if (!$this->validateAction($action)) {
             throw new \RuntimeException("$action: is not a valide Action.");
         }
 
@@ -39,19 +38,19 @@ class ContactsList
      * Formate contactList for MailJet API request
      * @return array
      */
-    public function format(){
-
+    public function format()
+    {
         $result = [
             'Action' => $this->action,
             'Contacts' => [],
         ];
 
         $contacts = $this->contacts;
-        $contacsArray = array_map(function(Contact $contact) {
+        $contactsArray = array_map(function (Contact $contact) {
             return $contact->format();
         }, $contacts);
 
-        $result['Contacts'] = $contacsArray;
+        $result['Contacts'] = $contactsArray;
 
         return $result;
     }
@@ -85,16 +84,15 @@ class ContactsList
 
     /**
      * Validate if action is authorized
-     * @return Boolean
+     * @param string $action
+     * @return bool
      */
     private function validateAction($action)
     {
         $actionAvailable = [self::ACTION_ADDFORCE, self::ACTION_ADDNOFORCE, self::ACTION_REMOVE, self::ACTION_UNSUB];
-        if(in_array($action, $actionAvailable)){
+        if (in_array($action, $actionAvailable)) {
             return true;
         }
         return false;
     }
-
-
 }

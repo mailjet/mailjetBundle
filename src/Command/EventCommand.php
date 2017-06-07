@@ -18,10 +18,12 @@ class EventCommand extends ContainerAwareCommand
     }
 
     /**
-     * @TODO automatically add callbackurl with MailJet API V3
+     * @param InputInterface $input
+     * @param OutputInterface $output
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        // @TODO automatically add callbackurl with MailJet API V3
         $domain = $input->getArgument('baseurl');
         $uri = $this->getRouter()->generate($this->getRouteName(), array(
             'token' => $this->getToken()

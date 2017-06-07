@@ -8,10 +8,10 @@ use Welp\MailjetBundle\Model\Contact;
 
 /**
 * https://dev.mailjet.com/email-api/v3/contactslist-managecontact/
-* manage Contact (create, update, delete, ...)
+* manage ContactsList (create, update, delete, ...)
 *
 */
-class ContactManager
+class ContactsListManager
 {
     /**
      * Mailjet client
@@ -19,6 +19,9 @@ class ContactManager
      */
     protected $mailjet;
 
+    /**
+     * @param \Mailjet\Client $mailjet
+     */
     public function __construct(\Mailjet\Client $mailjet)
     {
         $this->mailjet = $mailjet;
@@ -26,13 +29,16 @@ class ContactManager
 
     /**
      * create a new fresh Contact to listId
+     * @param string $listId
+     * @param Contact $contact
+     * @param string $action
      */
     public function create($listId, Contact $contact, $action=Contact::ACTION_ADDFORCE)
     {
         $contact->setAction($action);
         $response = $this->_exec($listId, $contact);
         if (!$response->success()) {
-            $this->throwError("ContactManager:create() failed:", $response);
+            $this->throwError("ContactsListManager:create() failed:", $response);
         }
 
         return $reponse->getData();
@@ -44,9 +50,9 @@ class ContactManager
     public function update($listId, Contact $contact, $action=Contact::ACTION_ADDNOFORCE)
     {
         $contact->setAction($action);
-        $this->_exec($listId, $contact);
+        $response = $this->_exec($listId, $contact);
         if (!$response->success()) {
-            $this->throwError("ContactManager:update() failed:", $response);
+            $this->throwError("ContactsListManager:update() failed:", $response);
         }
 
         return $reponse->getData();
@@ -55,12 +61,16 @@ class ContactManager
     /**
      * re/subscribe a Contact to listId
      */
-    public function subscribe($listId, Contact $contact)
+    public function subscribe($listId, Contact $contact, $force = true)
     {
-        $contact->setAction(Contact::ACTION_ADDFORCE);
-        $this->_exec($listId, $contact);
+        if ($force) {
+            $contact->setAction(Contact::ACTION_ADDFORCE);
+        } else {
+            $contact->setAction(Contact::ACTION_ADDNOFORCE);
+        }
+        $response = $this->_exec($listId, $contact);
         if (!$response->success()) {
-            $this->throwError("ContactManager:sub() failed:", $response);
+            $this->throwError("ContactsListManager:sub() failed:", $response);
         }
 
         return $reponse->getData();
@@ -72,9 +82,9 @@ class ContactManager
     public function unsubscribe($listId, Contact $contact)
     {
         $contact->setAction(Contact::ACTION_UNSUB);
-        $this->_exec($listId, $contact);
+        $response = $this->_exec($listId, $contact);
         if (!$response->success()) {
-            $this->throwError("ContactManager:unsub() failed:", $response);
+            $this->throwError("ContactsListManager:unsub() failed:", $response);
         }
 
         return $reponse->getData();
@@ -86,9 +96,9 @@ class ContactManager
     public function delete($listId, Contact $contact)
     {
         $contact->setAction(Contact::ACTION_REMOVE);
-        $this->_exec($listId, $contact);
+        $response = $this->_exec($listId, $contact);
         if (!$response->success()) {
-            $this->throwError("ContactManager:remove() failed:", $response);
+            $this->throwError("ContactsListManager:remove() failed:", $response);
         }
 
         return $reponse->getData();
@@ -120,6 +130,11 @@ class ContactManager
         );
     }
 
+    /**
+     * Helper to throw error
+     * @param  string $title
+     * @param  array $response
+     */
     private function throwError($title, $response)
     {
         throw new \RuntimeException($title.": ".$response->getData['StatusCode']." - ".$response->getData['ErrorInfo']." - ".$response->getData['ErrorMessage']);

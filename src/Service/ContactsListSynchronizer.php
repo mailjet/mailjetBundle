@@ -2,7 +2,6 @@
 
 namespace Welp\MailjetBundle\Service;
 
-use \Mailjet\Client;
 use \Mailjet\Resources;
 
 use Welp\MailjetBundle\Model\ContactsList;
@@ -13,10 +12,20 @@ use Welp\MailjetBundle\Model\ContactsList;
 */
 class ContactsListSynchronizer
 {
+    /**
+     * @var int
+     */
     const CONTACT_BATCH_SIZE = 500;
 
+    /**
+     * Mailjet client
+     * @var \Mailjet\Client
+     */
     protected $mailjet;
 
+    /**
+     * @param \Mailjet\Client $mailjet
+     */
     public function __construct(\Mailjet\Client $mailjet)
     {
         $this->mailjet = $mailjet;
@@ -26,7 +35,7 @@ class ContactsListSynchronizer
      * Multiple contacts can be uploaded asynchronously using that action.
      *
      * @param ContactsList $contactsList
-     * @return dataResponse
+     * @return array
      */
     public function synchronize(ContactsList $contactsList)
     {

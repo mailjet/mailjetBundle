@@ -2,16 +2,14 @@
 
 namespace Welp\MailjetBundle\Command;
 
-use \Mailjet\Client;
-use \Mailjet\Resources;
-
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
-use Welp\MailjetBundle\Model\Contact;
 use Welp\MailjetBundle\Model\ContactsList;
+use Welp\MailjetBundle\Provider\ProviderInterface;
 
 /**
  * Class SyncUserCommand
@@ -23,7 +21,7 @@ class SyncUserCommand extends ContainerAwareCommand
 {
 
     /**
-     * @var Array
+     * @var array
      */
     private $lists;
 
@@ -53,7 +51,6 @@ class SyncUserCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         foreach ($this->lists as $listId => $listParameters) {
             $provider = $this->getProvider($listParameters['contact_provider']);
 
@@ -68,7 +65,7 @@ class SyncUserCommand extends ContainerAwareCommand
 
     /**
      * Get contact provider
-     * @param String $providerServiceKey
+     * @param string $providerServiceKey
      * @return ProviderInterface $provider
      */
     private function getProvider($providerServiceKey)

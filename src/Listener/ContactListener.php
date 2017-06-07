@@ -2,11 +2,14 @@
 
 namespace Welp\MailjetBundle\Listener;
 
-use Welp\MailjetBundle\Service\ContactManager;
+use Welp\MailjetBundle\Service\ContactsListManager;
 use Welp\MailjetBundle\Event\ContactEvent;
 
 class ContactListener
 {
+    /**
+     * @var ContactManager
+     */
     protected $contactManager;
 
     public function __construct(ContactManager $contactManager)
@@ -55,5 +58,4 @@ class ContactListener
             $event->getOldEmail()
         );
     }*/
-
 }

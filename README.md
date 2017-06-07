@@ -6,7 +6,7 @@
 
 Symfony bundle for handling Mailjet API V3 using this wrapper: <https://github.com/mailjet/mailjet-apiv3-php>
 
-**/!\ WORK IN PROGRESS... NOT READY TO USE /!\ Wait for a release before using it.**
+🚧 **WORK IN PROGRESS...** 🚧
 
 ## Features
 

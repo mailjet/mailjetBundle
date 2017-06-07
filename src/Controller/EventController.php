@@ -76,22 +76,32 @@ class EventController extends Controller
         }
 
         return $this->prepareResponse(200);
-
     }
 
     /**
      * Override this to use another event dispatcher
+     * @return EventDispatcherInterface
      */
-    public function getDispatcher(){
+    public function getDispatcher()
+    {
         // NOTE: use a better dispatcher such as rabbitMQ if you have a huge amount of events
         return $this->get('event_dispatcher');
     }
 
+    /**
+
+     * @param  Request $request
+     * @return array
+     */
     private function extractData(Request $request)
     {
         return json_decode($request->getContent(), true);
     }
 
+    /**
+     * @param  int $status
+     * @return JsonResponse
+     */
     private function prepareResponse($status)
     {
         return new JsonResponse(array(), $status);
