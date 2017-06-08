@@ -1,8 +1,9 @@
 parameters:
     welp_mailjet.api.class: Mailjet\Client
-    welp_mailjet.contacts_list_synchronizer.class: Welp\MailjetBundle\Service\ContactsListSynchronizer
-    welp_mailjet.event_callback_manager.class: Welp\MailjetBundle\Service\EventCallbackManager
-    welp_mailjet.contacts_list_manager.class: Welp\MailjetBundle\Service\ContactsListManager
+    welp_mailjet.event_callback_manager.class: Welp\MailjetBundle\Manager\EventCallbackManager
+    welp_mailjet.contact_metadata_manager.class: Welp\MailjetBundle\Manager\ContactMetadataManager
+    welp_mailjet.contacts_list_manager.class: Welp\MailjetBundle\Manager\ContactsListManager
+    welp_mailjet.contacts_list_synchronizer.class: Welp\MailjetBundle\Synchronizer\ContactsListSynchronizer
     welp_mailjet.contact_listener.class: Welp\MailjetBundle\Listener\ContactListener
 
 services:
@@ -27,6 +28,11 @@ services:
 
     welp_mailjet.service.event_callback_manager:
         class: "%welp_mailjet.event_callback_manager.class%"
+        arguments:
+            - "@welp_mailjet.api"
+
+    welp_mailjet.service.contact_metadata_manager:
+        class: "%welp_mailjet.contact_metadata_manager.class%"
         arguments:
             - "@welp_mailjet.api"
 

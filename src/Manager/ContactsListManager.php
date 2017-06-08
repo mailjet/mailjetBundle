@@ -1,6 +1,6 @@
 <?php
 
-namespace Welp\MailjetBundle\Service;
+namespace Welp\MailjetBundle\Manager;
 
 use \Mailjet\Resources;
 
@@ -98,7 +98,7 @@ class ContactsListManager
         $contact->setAction(Contact::ACTION_REMOVE);
         $response = $this->_exec($listId, $contact);
         if (!$response->success()) {
-            $this->throwError("ContactsListManager:remove() failed:", $response);
+            $this->throwError("ContactsListManager:delete() failed:", $response);
         }
 
         return $reponse->getData();

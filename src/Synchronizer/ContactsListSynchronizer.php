@@ -1,6 +1,6 @@
 <?php
 
-namespace Welp\MailjetBundle\Service;
+namespace Welp\MailjetBundle\Synchronizer;
 
 use \Mailjet\Resources;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Welp\MailjetBundle\Service;
+namespace spec\Welp\MailjetBundle\Synchronizer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -14,6 +14,6 @@ class ContactsListSynchronizerSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Welp\MailjetBundle\Service\ContactsListSynchronizer');
+        $this->shouldHaveType('Welp\MailjetBundle\Synchronizer\ContactsListSynchronizer');
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace spec\Welp\MailjetBundle\Service;
+namespace spec\Welp\MailjetBundle\Manager;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class ContactsListManagerSpec extends ObjectBehavior
+class EventCallbackUrlManagerSpec extends ObjectBehavior
 {
     public function let(\Mailjet\Client $mailjet)
     {
@@ -14,6 +14,6 @@ class ContactsListManagerSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Welp\MailjetBundle\Service\ContactsListManager');
+        $this->shouldHaveType('Welp\MailjetBundle\Manager\EventCallbackUrlManager');
     }
 }
