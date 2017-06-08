@@ -2,7 +2,7 @@
 
 namespace Welp\MailjetBundle\Listener;
 
-use Welp\MailjetBundle\Service\ContactsListManager;
+use Welp\MailjetBundle\Manager\ContactsListManager;
 use Welp\MailjetBundle\Event\ContactEvent;
 
 class ContactListener
