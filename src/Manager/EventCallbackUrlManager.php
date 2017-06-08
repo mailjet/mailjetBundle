@@ -109,6 +109,6 @@ class EventCallbackUrlManager
      */
     private function throwError($title, $response)
     {
-        throw new \RuntimeException($title.": ".$response->getData['StatusCode']." - ".$response->getData['ErrorInfo']." - ".$response->getData['ErrorMessage']);
+        throw new \RuntimeException($title.": ".$response->getReasonPhrase());
     }
 }
