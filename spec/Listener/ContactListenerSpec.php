@@ -5,7 +5,7 @@ namespace spec\Welp\MailjetBundle\Listener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-use Welp\MailjetBundle\Service\ContactsListManager;
+use Welp\MailjetBundle\Manager\ContactsListManager;
 
 class ContactListenerSpec extends ObjectBehavior
 {
