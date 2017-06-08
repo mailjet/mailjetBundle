@@ -38,7 +38,7 @@ class EventCallbackUrlManager
             $this->throwError("EventCallbackUrlManager:getAll() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**
@@ -53,7 +53,7 @@ class EventCallbackUrlManager
             $this->throwError("EventCallbackUrlManager:get() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**
@@ -68,7 +68,7 @@ class EventCallbackUrlManager
             $this->throwError("EventCallbackUrlManager:create() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**
@@ -84,7 +84,7 @@ class EventCallbackUrlManager
             $this->throwError("EventCallbackUrlManager:update() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**
@@ -99,7 +99,7 @@ class EventCallbackUrlManager
             $this->throwError("EventCallbackUrlManager:delete() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**

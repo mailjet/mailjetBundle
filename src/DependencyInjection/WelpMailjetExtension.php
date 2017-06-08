@@ -19,6 +19,7 @@ class WelpMailjetExtension extends Extension
         $container->setParameter('welp_mailjet.event_endpoint_route', $config['event_endpoint_route']);
         $container->setParameter('welp_mailjet.event_endpoint_token', $config['event_endpoint_token']);
         $container->setParameter('welp_mailjet.lists', $config['lists']);
+        $container->setParameter('welp_mailjet.contact_metadata', $config['contact_metadata']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');

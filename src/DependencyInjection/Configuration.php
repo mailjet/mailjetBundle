@@ -41,6 +41,19 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                // ContactMetadata/ContactProperties
+                ->arrayNode('contact_metadata')
+                    ->prototype('array')
+                        ->children()
+                           ->scalarNode('name')
+                               ->isRequired()
+                           ->end()
+                           ->scalarNode('datatype')
+                               ->isRequired()
+                           ->end()
+                       ->end()
+                   ->end()
+                ->end()
             ->end()
         ;
 

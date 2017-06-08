@@ -41,7 +41,7 @@ class ContactsListManager
             $this->throwError("ContactsListManager:create() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**
@@ -55,7 +55,7 @@ class ContactsListManager
             $this->throwError("ContactsListManager:update() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**
@@ -73,7 +73,7 @@ class ContactsListManager
             $this->throwError("ContactsListManager:sub() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**
@@ -87,7 +87,7 @@ class ContactsListManager
             $this->throwError("ContactsListManager:unsub() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**
@@ -101,7 +101,7 @@ class ContactsListManager
             $this->throwError("ContactsListManager:delete() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /*

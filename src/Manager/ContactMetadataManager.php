@@ -38,7 +38,7 @@ class ContactMetadataManager
             $this->throwError("ContactMetadataManager:getAll() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**
@@ -53,7 +53,7 @@ class ContactMetadataManager
             $this->throwError("ContactMetadataManager:get() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**
@@ -67,7 +67,7 @@ class ContactMetadataManager
             $this->throwError("ContactMetadataManager:create() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**
@@ -82,7 +82,7 @@ class ContactMetadataManager
             $this->throwError("ContactMetadataManager:update() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**
@@ -96,7 +96,7 @@ class ContactMetadataManager
             $this->throwError("ContactMetadataManager:delete() failed:", $response);
         }
 
-        return $reponse->getData();
+        return $response->getData();
     }
 
     /**
@@ -106,6 +106,6 @@ class ContactMetadataManager
      */
     private function throwError($title, $response)
     {
-        throw new \RuntimeException($title.": ".$response->getData['StatusCode']." - ".$response->getData['ErrorInfo']." - ".$response->getData['ErrorMessage']);
+        throw new \RuntimeException($title.": ".$response->getReasonPhrase());
     }
 }

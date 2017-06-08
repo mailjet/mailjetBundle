@@ -15,7 +15,6 @@ use Welp\MailjetBundle\Provider\ProviderInterface;
  * Class SyncUserCommand
  * Sync users in a mailjet contact list
  *
- * @package AppBundle\Command
  */
 class SyncUserCommand extends ContainerAwareCommand
 {
