@@ -70,6 +70,8 @@
                 
                     <li><a class="toctree-l4" href="#configyml">config.yml</a></li>
                 
+                    <li><a class="toctree-l4" href="#contact-metadata-contact-properties">Contact Metadata (Contact Properties)</a></li>
+                
             
             </ul>
         
@@ -177,9 +179,79 @@
             contact_provider: 'yourapp.provider1'
         listId2:
             contact_provider: 'yourapp.provider2'
-        ...</code></pre>
+        # ...
+    contact_metadata:
+        -
+            name: firstname
+            datatype: str
+        -
+            name: lastname
+            datatype: str
+        -
+            name: postalcode
+            datatype: int
+        -
+            name: rank
+            datatype: int
+        -
+            name: hasavatar
+            datatype: bool
+        -
+            name: lastlogin
+            datatype: datetime
+        -
+            name: createdat
+            datatype: datetime
+        -
+            name: birthdate
+            datatype: datetime
+        # ...
+</code></pre>
 
 <p>Where <code>listIdX</code> is the list id of your Mailjet lists, and <code>yourapp.providerX</code> is the key of your provider's service that will provide the contacts that need to be synchronized in Mailjet. See the documentation on create <a href="../contact-provider/">your own Contact provider</a>.</p>
+<h2 id="contact-metadata-contact-properties">Contact Metadata (Contact Properties)</h2>
+<ul>
+<li><a href="https://app.mailjet.com/docs/manage_contact_lists#lists-contact-properties">Mailjet FAQ</a></li>
+<li><a href="https://dev.mailjet.com/email-api/v3/contactmetadata/">Mailjet Documentation</a></li>
+</ul>
+<p>You can find all parameters in Mailjet documentation.</p>
+<p>Example:</p>
+<pre class="highlight"><code class="language-yaml linenums">contact_metadata:
+    -
+        name: firstname
+        datatype: str
+    -
+        name: lastname
+        datatype: str
+    -
+        name: organisation
+        datatype: str
+    -
+        name: town
+        datatype: str
+    -
+        name: postalcode
+        datatype: int
+    -
+        name: gender
+        datatype: str
+    -
+        name: rank
+        datatype: int
+    -
+        name: hasavatar
+        datatype: bool
+    -
+        name: lastlogin
+        datatype: datetime
+    -
+        name: createdat
+        datatype: datetime
+    -
+        name: birthdate
+        datatype: datetime</code></pre>
+
+<p>Available datatype: <code>str, int, float, bool, datetime</code></p>
               
             </div>
           </div>

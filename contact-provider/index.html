@@ -165,20 +165,20 @@
                 <h1 id="contact-provider">Contact Provider</h1>
 <p>After <a href="../configuration/">configuring your lists</a> in <code>config.yml</code>, you need to create at least one <code>Provider</code> that will be used by the SyncUser command.
 Your provider should be accessible via a service key (the same you reference in <code>contact_provider</code> in your configuration file):</p>
-<pre><code>services:
-    yourapp.mailjet.contact_provider1:
-        class: YourApp\AppBundle\Mailjet\MyContactProvider
-        arguments: [@yourapp.user.repository]
-</code></pre>
+<pre class="highlight"><code class="language-yaml linenums">    services:
+        yourapp.mailjet.contact_provider1:
+            class: YourApp\AppBundle\Mailjet\MyContactProvider
+            arguments: [@yourapp.user.repository]</code></pre>
+
 <p>You provider class should implement <code>Welp\MailjetBundle\Provider\ProviderInterface</code> and the method <code>getContacts</code> must return an array of <code>Welp\MailjetBundle\Model\Contact</code> objects.</p>
 <h2 id="example">Example</h2>
 <p>Here is an example of ContactProvider:</p>
-<pre class="highlight"><code class="language-php linenums">
-&lt;?php
+<pre class="highlight"><code class="language-php linenums">&lt;?php
 
 namespace YourApp\App\Mailjet;
 
 use Welp\MailjetBundle\Provider\ProviderInterface;
+use Welp\MailjetBundle\Model\Contact;
 
 use YourApp\Model\User\UserRepository;
 use YourApp\Model\User\User;
@@ -225,16 +225,17 @@ class ExampleContactProvider implements ProviderInterface
 
 <h2 id="foscontactprovider">FosContactProvider</h2>
 <p>We also provide a ready to use provider for FosUserBundle: <code>FosContactProvider</code>. You just need to register the service into your app:</p>
-<pre><code>services:
-    yourapp.mailjet.fos_contact_provider:
-        class: Welp\MailjetBundle\Provider\FosContactProvider
-        arguments: [@fos_user.user_manager]
-</code></pre>
+<pre class="highlight"><code class="language-yaml linenums">    services:
+        yourapp.mailjet.fos_contact_provider:
+            class: Welp\MailjetBundle\Provider\FosContactProvider
+            arguments: [@fos_user.user_manager]</code></pre>
+
 <p>After this, don't forget to add the service key for your list into your <code>config.yml</code>:</p>
-<pre><code>...
-listId1:
-    contact_provider: 'yourapp.mailjet.fos_contact_provider'
-</code></pre>
+<pre class="highlight"><code class="language-yaml linenums">    ...
+    listId1:
+        contact_provider: 'yourapp.mailjet.fos_contact_provider'</code></pre>
+
+<p>Note: You need to have <code>enabled</code> and <code>lastlogin</code> in your contact properties</p>
               
             </div>
           </div>

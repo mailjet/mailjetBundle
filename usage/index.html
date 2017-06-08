@@ -89,6 +89,8 @@
             
                 <li class="toctree-l3"><a href="#usage">Usage</a></li>
                 
+                    <li><a class="toctree-l4" href="#synchronize-contact-metadata-contact-properties">Synchronize Contact Metadata (Contact Properties)</a></li>
+                
                     <li><a class="toctree-l4" href="#full-synchronization-with-command">Full synchronization with command</a></li>
                 
                     <li><a class="toctree-l4" href="#unit-synchronization-with-events">Unit synchronization with events</a></li>
@@ -165,6 +167,14 @@
             <div class="section">
               
                 <h1 id="usage">Usage</h1>
+<h2 id="synchronize-contact-metadata-contact-properties">Synchronize Contact Metadata (Contact Properties)</h2>
+<p>Contact Metadata (or Contact Properties) are values you can add to your contacts (for example firstname, birthdate, isenabled, ...).
+You can use these metadata in your newsletters or to create segments out of them.</p>
+<p>This bundle provides a simple way to configure and synchronize these metadata with your Mailjet account.</p>
+<p>You just need to configure in your config.yml your <code>contact_metadata</code>: <a href="../configuration/">see the configuration</a>.</p>
+<p>Finally, you can use this command to synchronize your config with Mailjet:</p>
+<pre><code>php app/console welp:mailjet:contactmetadata-sync
+</code></pre>
 <h2 id="full-synchronization-with-command">Full synchronization with command</h2>
 <p>You can synchronize all users of your project with a Mailjet list at once by calling the Symfony command:</p>
 <pre><code>php app/console welp:mailjet:user-sync
@@ -173,12 +183,12 @@
 <p>NOTE: you must have configured and created <a href="../contact-provider/">your own contact provider</a>.</p>
 <h2 id="unit-synchronization-with-events">Unit synchronization with events</h2>
 <p>If you want realtime synchronization, you can dispatch custom events on your controllers/managers (or anywhere). The subscribe event can be used both for adding a new contact or updating an existing one. You can fired these events to trigger sync with Mailjet:</p>
-<pre><code>ContactEvent::EVENT_SUBSCRIBE = 'welp.mailjet.subscribe';
-ContactEvent::EVENT_UNSUBSCRIBE = 'welp.mailjet.unsubscribe';
-ContactEvent::EVENT_UPDATE = 'welp.mailjet.update';
-ContactEvent::EVENT_DELETE = 'welp.mailjet.delete';
-// NOT IMPLETENTED YET // ContactEvent::EVENT_CHANGE_EMAIL = 'welp.mailjet.change_email';
-</code></pre>
+<pre class="highlight"><code class="language-php linenums">    ContactEvent::EVENT_SUBSCRIBE = 'welp.mailjet.subscribe';
+    ContactEvent::EVENT_UNSUBSCRIBE = 'welp.mailjet.unsubscribe';
+    ContactEvent::EVENT_UPDATE = 'welp.mailjet.update';
+    ContactEvent::EVENT_DELETE = 'welp.mailjet.delete';
+    // NOT IMPLETENTED YET // ContactEvent::EVENT_CHANGE_EMAIL = 'welp.mailjet.change_email';</code></pre>
+
 <h3 id="subscribe-new-user">Subscribe new User</h3>
 <p>Here is an example of a subscribe event dispatch:</p>
 <pre class="highlight"><code class="language-php linenums">&lt;?php

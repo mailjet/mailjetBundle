@@ -181,11 +181,12 @@
 <h2 id="features">Features</h2>
 <ul class="task-list">
 <li class="task-list-item"><input type="checkbox" disabled checked> Retrieve <a href="https://github.com/mailjet/mailjet-apiv3-php">\Mailjet\Client</a> to make custom Mailjet API V3 requests</li>
-<li class="task-list-item"><input type="checkbox" disabled checked> Synchronize your user with MailJet contact list <em>(need more tests)</em></li>
-<li class="task-list-item"><input type="checkbox" disabled checked> Use your own userProvider (basic <code>FosContactProvider</code> included to interface with FosUserBundle) <em>(need more tests)</em></li>
+<li class="task-list-item"><input type="checkbox" disabled checked> <a href="https://github.com/welpdev/MailjetSwiftMailer">SwiftMailer Transport integration</a></li>
+<li class="task-list-item"><input type="checkbox" disabled checked> Synchronize Contact Metadata (Contact Properties) with your config</li>
+<li class="task-list-item"><input type="checkbox" disabled checked> Synchronize your user with MailJet contact list</li>
+<li class="task-list-item"><input type="checkbox" disabled checked> Use your own userProvider (basic <code>FosContactProvider</code> included to interface with FosUserBundle)</li>
 <li class="task-list-item"><input type="checkbox" disabled checked> Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List <em>(need more tests)</em></li>
 <li class="task-list-item"><input type="checkbox" disabled> Register Event API - real time notifications (webhook) <em>(need more tests)</em></li>
-<li class="task-list-item"><input type="checkbox" disabled> <a href="https://github.com/welpdev/MailjetSwiftMailer">SwiftMailer Transport integration</a></li>
 </ul>
 <h2 id="setup">Setup</h2>
 <p>Add bundle to your project:</p>
@@ -208,11 +209,16 @@
 <li>Moar tests...</li>
 <li>handle when user changes email</li>
 <li>Unit Synchronize User</li>
+<li>Debug/Sandbox configuration mode</li>
 </ul>
 <h2 id="mailjet-issues">MailJet issues</h2>
 <ul>
 <li>How to change user email? (workaround: remove old, add new...)</li>
-<li>Event API/webhook: how to synchronize specific contact subscribe event ? (available sent, open, click, bounce, spam, blocked, unsub)</li>
+<li>Event API/webhook: how to synchronize specific contact subscribe event ? (available sent, open, click, bounce, spam, blocked, unsub)<ul>
+<li>When user unsubscribe from external link ??</li>
+<li>When user resubscribe to list (widget or admin)</li>
+</ul>
+</li>
 </ul>
 <h2 id="contributing">Contributing</h2>
 <p>If you want to contribute to this project, look at <a href="CONTRIBUTING/">over here</a></p>
@@ -266,5 +272,5 @@
 
 <!--
 MkDocs version : 0.16.0
-Build Date UTC : 2017-06-07 10:10:32
+Build Date UTC : 2017-06-08 14:11:10
 -->
