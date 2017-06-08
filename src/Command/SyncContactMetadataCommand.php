@@ -49,6 +49,8 @@ class SyncContactMetadataCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        // @TODO create a ContactMetadataSynchronizer
+        // @TODO update existing ContactMetadata (in order to not throw error...)
         foreach ($this->contactMetadata as $contactMetadata) {
 
             $metadataObj = new ContactMetadata($contactMetadata['name'], $contactMetadata['datatype']);

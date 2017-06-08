@@ -7,9 +7,10 @@ use Welp\MailjetBundle\Provider\ProviderInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Model\User;
 
+use Welp\MailjetBundle\Model\Contact;
+
 class FosContactProvider implements ProviderInterface
 {
-
     const PROP_ENABLED = 'enabled';
     const PROP_LAST_LOGIN = 'lastlogin';
 
@@ -26,7 +27,7 @@ class FosContactProvider implements ProviderInterface
         // or find only enabled users :
         // $users = $this->userManager->findUserBy(array('enabled' => true));
 
-        $contacts = array_map(function(User $user) {
+        $contacts = array_map(function (User $user) {
             $userProperties = [
                 self::PROP_ENABLED => $user->isEnabled(),
                 self::PROP_LAST_LOGIN => $user->getLastLogin() ? $user->getLastLogin()->format('Y-m-d') : null

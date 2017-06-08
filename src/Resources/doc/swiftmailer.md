@@ -2,9 +2,11 @@
 
 ## Configuration
 
+```yaml
     # Swiftmailer Configuration
     swiftmailer:
         transport: welp_mailjet
+```
 
 ## Documentation
 

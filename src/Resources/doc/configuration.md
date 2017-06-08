@@ -20,7 +20,82 @@ welp_mailjet:
             contact_provider: 'yourapp.provider1'
         listId2:
             contact_provider: 'yourapp.provider2'
-        ...
+        # ...
+    contact_metadata:
+        -
+            name: firstname
+            datatype: str
+        -
+            name: lastname
+            datatype: str
+        -
+            name: postalcode
+            datatype: int
+        -
+            name: rank
+            datatype: int
+        -
+            name: hasavatar
+            datatype: bool
+        -
+            name: lastlogin
+            datatype: datetime
+        -
+            name: createdat
+            datatype: datetime
+        -
+            name: birthdate
+            datatype: datetime
+        # ...
+
 ```
 
 Where `listIdX` is the list id of your Mailjet lists, and `yourapp.providerX` is the key of your provider's service that will provide the contacts that need to be synchronized in Mailjet. See the documentation on create [your own Contact provider](contact-provider.md).
+
+## Contact Metadata (Contact Properties)
+
+* [Mailjet FAQ](https://app.mailjet.com/docs/manage_contact_lists#lists-contact-properties)
+* [Mailjet Documentation](https://dev.mailjet.com/email-api/v3/contactmetadata/)
+
+You can find all parameters in Mailjet documentation.
+
+Example:
+
+```yaml
+contact_metadata:
+    -
+        name: firstname
+        datatype: str
+    -
+        name: lastname
+        datatype: str
+    -
+        name: organisation
+        datatype: str
+    -
+        name: town
+        datatype: str
+    -
+        name: postalcode
+        datatype: int
+    -
+        name: gender
+        datatype: str
+    -
+        name: rank
+        datatype: int
+    -
+        name: hasavatar
+        datatype: bool
+    -
+        name: lastlogin
+        datatype: datetime
+    -
+        name: createdat
+        datatype: datetime
+    -
+        name: birthdate
+        datatype: datetime
+```
+
+Available datatype: `str, int, float, bool, datetime`

@@ -1,5 +1,19 @@
 # Usage
 
+## Synchronize Contact Metadata (Contact Properties)
+
+Contact Metadata (or Contact Properties) are values you can add to your contacts (for example firstname, birthdate, isenabled, ...).
+You can use these metadata in your newsletters or to create segments out of them.
+
+This bundle provides a simple way to configure and synchronize these metadata with your Mailjet account.
+
+You just need to configure in your config.yml your `contact_metadata`: [see the configuration](configuration.md).
+
+Finally, you can use this command to synchronize your config with Mailjet:
+
+    php app/console welp:mailjet:contactmetadata-sync
+
+
 ## Full synchronization with command
 
 You can synchronize all users of your project with a Mailjet list at once by calling the Symfony command:
@@ -15,11 +29,13 @@ NOTE: you must have configured and created [your own contact provider](contact-p
 
 If you want realtime synchronization, you can dispatch custom events on your controllers/managers (or anywhere). The subscribe event can be used both for adding a new contact or updating an existing one. You can fired these events to trigger sync with Mailjet:
 
+```php
     ContactEvent::EVENT_SUBSCRIBE = 'welp.mailjet.subscribe';
     ContactEvent::EVENT_UNSUBSCRIBE = 'welp.mailjet.unsubscribe';
     ContactEvent::EVENT_UPDATE = 'welp.mailjet.update';
     ContactEvent::EVENT_DELETE = 'welp.mailjet.delete';
     // NOT IMPLETENTED YET // ContactEvent::EVENT_CHANGE_EMAIL = 'welp.mailjet.change_email';
+```
 
 ### Subscribe new User
 

@@ -39,6 +39,7 @@ class ContactsListSynchronizer
      */
     public function synchronize(ContactsList $contactsList)
     {
+        // @TODO remove users which are not provided
         $batchResults = [];
         // we send multiple smaller requests instead of a bigger one
         $contactChunks = array_chunk($contactsList->getContacts(), self::CONTACT_BATCH_SIZE);

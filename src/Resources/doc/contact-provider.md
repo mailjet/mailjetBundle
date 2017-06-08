@@ -3,10 +3,12 @@
 After [configuring your lists](configuration.md) in `config.yml`, you need to create at least one `Provider` that will be used by the SyncUser command.
 Your provider should be accessible via a service key (the same you reference in `contact_provider` in your configuration file):
 
+```yaml
     services:
         yourapp.mailjet.contact_provider1:
             class: YourApp\AppBundle\Mailjet\MyContactProvider
             arguments: [@yourapp.user.repository]
+```
 
 You provider class should implement `Welp\MailjetBundle\Provider\ProviderInterface` and the method `getContacts` must return an array of `Welp\MailjetBundle\Model\Contact` objects.
 
@@ -14,13 +16,13 @@ You provider class should implement `Welp\MailjetBundle\Provider\ProviderInterfa
 
 Here is an example of ContactProvider:
 
-``` php
-
+```php
 <?php
 
 namespace YourApp\App\Mailjet;
 
 use Welp\MailjetBundle\Provider\ProviderInterface;
+use Welp\MailjetBundle\Model\Contact;
 
 use YourApp\Model\User\UserRepository;
 use YourApp\Model\User\User;
@@ -70,13 +72,19 @@ class ExampleContactProvider implements ProviderInterface
 
 We also provide a ready to use provider for FosUserBundle: `FosContactProvider`. You just need to register the service into your app:
 
+```yaml
     services:
         yourapp.mailjet.fos_contact_provider:
             class: Welp\MailjetBundle\Provider\FosContactProvider
             arguments: [@fos_user.user_manager]
+```
 
 After this, don't forget to add the service key for your list into your `config.yml`:
 
+```yaml
     ...
     listId1:
         contact_provider: 'yourapp.mailjet.fos_contact_provider'
+```
+
+Note: You need to have `enabled` and `lastlogin` in your contact properties

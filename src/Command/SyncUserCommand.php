@@ -58,6 +58,9 @@ class SyncUserCommand extends ContainerAwareCommand
             $response = $this->getContainer()->get('welp_mailjet.service.contacts_list_synchronizer')->synchronize($contactList);
             //@TODO get responses + parse all batch responses + show/format error + show result/count import
             // We need to retrieve Errors_logs file but in Mailjet UI it throw 500 error...
+            // $response = $mj->get(Resources::$ContactManagemanycontacts, ['actionID' => $id]);
+            // Recovering error file
+            // $response = $mj->get(Resources::$BatchjobJsonerror, ['id' => $JobID]);
 
             $output->writeln(sprintf('<info>OK listId: %s, see logs in Mailjet List</info>', $listId));
         }
