@@ -9,7 +9,7 @@ parameters:
 services:
     welp_mailjet.api:
         class: "%welp_mailjet.api.class%"
-        arguments: ["%welp_mailjet.api_key%", "%welp_mailjet.secret_key%"]
+        arguments: ["%welp_mailjet.api_key%", "%welp_mailjet.secret_key%", %welp_mailjet.call%, %welp_mailjet.options%]
 
     swiftmailer.transport.eventdispatcher.welp_mailjet:
         class: Swift_Events_SimpleEventDispatcher

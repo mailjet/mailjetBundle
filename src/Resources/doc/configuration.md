@@ -10,6 +10,12 @@ Define a configuration in your `config.yml`:
 welp_mailjet:
     api_key:    "%mailjet_api_key%"
     secret_key: "%mailjet_secret_key%"
+    call: true # Performs the API call or not
+    options:
+        url: "api.mailjet.com" # (Default: api.mailjet.com) : domain name of the API
+        version: "v3" # (Default: v3) : API version (only working for Mailjet API V3 +)
+        call: true # (Default: true) : turns on(true) / off the call to the API
+        secured: true # secured (Default: true) : turns on(true) / off the use of 'https'
     # route name to handle the callback
     event_endpoint_route: app_event_endpoint_route
     # secret to secure callback

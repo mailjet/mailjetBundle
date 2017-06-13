@@ -16,6 +16,14 @@ class WelpMailjetExtension extends Extension
 
         $container->setParameter('welp_mailjet.api_key', $config['api_key']);
         $container->setParameter('welp_mailjet.secret_key', $config['secret_key']);
+        $container->setParameter('welp_mailjet.call', $config['call']);
+
+        if (isset($config['options'])) {
+            $container->setParameter('welp_mailjet.options', $config['options']);
+        } else {
+            $container->setParameter('welp_mailjet.options', array());
+        }
+
         $container->setParameter('welp_mailjet.event_endpoint_route', $config['event_endpoint_route']);
         $container->setParameter('welp_mailjet.event_endpoint_token', $config['event_endpoint_token']);
         $container->setParameter('welp_mailjet.lists', $config['lists']);
