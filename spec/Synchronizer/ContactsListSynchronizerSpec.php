@@ -4,10 +4,11 @@ namespace spec\Welp\MailjetBundle\Synchronizer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Welp\MailjetBundle\Client\MailjetClient;
 
 class ContactsListSynchronizerSpec extends ObjectBehavior
 {
-    public function let(\Mailjet\Client $mailjet)
+    public function let(MailjetClient $mailjet)
     {
         $this->beConstructedWith($mailjet);
     }
