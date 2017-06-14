@@ -112,6 +112,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="../symfony-debug-toolbar/">Symfony Debug Toolbar</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="../tests/">Tests</a>
         
     </li>
@@ -288,14 +295,14 @@ public function deleteUser(User $user)
 <p>NOT POSSIBLE YET...(WORKAROUND: remove old, add new)</p>
 <h2 id="retrieve-mailjet-client-object-to-make-custom-mailjet-api-v3-requests">Retrieve Mailjet Client Object to make custom MailJet API V3 requests</h2>
 <p>You can also retrieve the MailJet Client Object which comes from the wrapper <a href="https://github.com/mailjet/mailjet-apiv3-php">mailjet/mailjet-apiv3-php</a>.</p>
-<p>The service key is <code>welp_mailjet.api</code>.</p>
+<p>The service key is <code>welp_mailjet.client</code>.</p>
 <p>Example:</p>
 <pre class="highlight"><code class="language-php linenums">&lt;?php
     use \Mailjet\Resources;
 
     // in any controller action...
     ...
-    $mailjet = $this-&gt;container-&gt;get('welp_mailjet.api');
+    $mailjet = $this-&gt;container-&gt;get('welp_mailjet.client');
 
     // Resources are all located in the Resources class
     $response = $mailjet-&gt;get(Resources::$Contact);

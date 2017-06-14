@@ -108,6 +108,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="../symfony-debug-toolbar/">Symfony Debug Toolbar</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="../tests/">Tests</a>
         
     </li>
@@ -169,6 +176,12 @@
 <pre class="highlight"><code class="language-yaml linenums">welp_mailjet:
     api_key:    &quot;%mailjet_api_key%&quot;
     secret_key: &quot;%mailjet_secret_key%&quot;
+    call: true # Performs the API call or not
+    options:
+        url: &quot;api.mailjet.com&quot; # (Default: api.mailjet.com) : domain name of the API
+        version: &quot;v3&quot; # (Default: v3) : API version (only working for Mailjet API V3 +)
+        call: true # (Default: true) : turns on(true) / off the call to the API
+        secured: true # secured (Default: true) : turns on(true) / off the use of 'https'
     # route name to handle the callback
     event_endpoint_route: app_event_endpoint_route
     # secret to secure callback

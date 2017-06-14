@@ -108,6 +108,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="../symfony-debug-toolbar/">Symfony Debug Toolbar</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="../tests/">Tests</a>
         
     </li>
@@ -209,9 +216,9 @@ class ExampleContactProvider implements ProviderInterface
                 self::PROP_NICKNAME =&gt; $user-&gt;getNickname(),
                 self::PROP_GENDER =&gt; $user-&gt;getGender(),
                 self::PROP_CITY =&gt; $user-&gt;getCity(),
-                self::PROP_BIRTHDATE =&gt; $user-&gt;getBirthday() ? $user-&gt;getBirthday()-&gt;format('Y-m-d') : null,
-                self::PROP_LAST_ACTIVITY_DATE =&gt; $user-&gt;getLastActivity() ? $user-&gt;getLastActivity()-&gt;format('Y-m-d') : null
-                self::PROP_REGISTRATION_DATE =&gt; $user-&gt;getRegistrateAt() ? $user-&gt;getRegistrateAt()-&gt;format('Y-m-d') : null
+                self::PROP_BIRTHDATE =&gt; $user-&gt;getBirthday() ? $user-&gt;getBirthday()-&gt;format('Y-m-d') : '',
+                self::PROP_LAST_ACTIVITY_DATE =&gt; $user-&gt;getLastActivity() ? $user-&gt;getLastActivity()-&gt;format('Y-m-d') : ''
+                self::PROP_REGISTRATION_DATE =&gt; $user-&gt;getRegistrateAt() ? $user-&gt;getRegistrateAt()-&gt;format('Y-m-d') : ''
             ];
 
             $contact = new Contact($user-&gt;getEmail(), $user-&gt;getUsername(), $userProperties);
