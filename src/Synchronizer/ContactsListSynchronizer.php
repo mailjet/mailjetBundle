@@ -5,6 +5,7 @@ namespace Welp\MailjetBundle\Synchronizer;
 use \Mailjet\Resources;
 
 use Welp\MailjetBundle\Model\ContactsList;
+use Welp\MailjetBundle\Client\MailjetClient;
 
 /**
 * https://dev.mailjet.com/email-api/v3/contactslist-managemanycontacts/
@@ -19,14 +20,14 @@ class ContactsListSynchronizer
 
     /**
      * Mailjet client
-     * @var \Mailjet\Client
+     * @var MailjetClient
      */
     protected $mailjet;
 
     /**
-     * @param \Mailjet\Client $mailjet
+     * @param MailjetClient $mailjet
      */
-    public function __construct(\Mailjet\Client $mailjet)
+    public function __construct(MailjetClient $mailjet)
     {
         $this->mailjet = $mailjet;
     }

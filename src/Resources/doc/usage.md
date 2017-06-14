@@ -160,7 +160,7 @@ NOT POSSIBLE YET...(WORKAROUND: remove old, add new)
 
 You can also retrieve the MailJet Client Object which comes from the wrapper [mailjet/mailjet-apiv3-php](https://github.com/mailjet/mailjet-apiv3-php).
 
-The service key is `welp_mailjet.api`.
+The service key is `welp_mailjet.client`.
 
 Example:
 
@@ -170,7 +170,7 @@ Example:
 
     // in any controller action...
     ...
-    $mailjet = $this->container->get('welp_mailjet.api');
+    $mailjet = $this->container->get('welp_mailjet.client');
 
     // Resources are all located in the Resources class
     $response = $mailjet->get(Resources::$Contact);

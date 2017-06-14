@@ -4,6 +4,7 @@ namespace Welp\MailjetBundle\Manager;
 
 use \Mailjet\Resources;
 
+use Welp\MailjetBundle\Client\MailjetClient;
 use Welp\MailjetBundle\Model\EventCallbackUrl;
 
 /**
@@ -15,14 +16,14 @@ class EventCallbackUrlManager
 
     /**
      * Mailjet client
-     * @var \Mailjet\Client
+     * @var MailjetClient
      */
     protected $mailjet;
 
     /**
-     * @param \Mailjet\Client $mailjet
+     * @param MailjetClient $mailjet
      */
-    public function __construct(\Mailjet\Client $mailjet)
+    public function __construct(MailjetClient $mailjet)
     {
         $this->mailjet = $mailjet;
     }
