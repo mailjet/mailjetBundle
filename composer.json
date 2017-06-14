@@ -1,7 +1,7 @@
 {
     "name": "welp/mailjet-bundle",
-    "description": "MailChimp API V3 Symfony Bundle",
-    "version": "1.0.0-dev",
+    "description": "Symfony bundle for Mailjet API V3",
+    "version": "1.0.0-beta.1",
     "type": "symfony-bundle",
     "homepage": "https://github.com/welpdev/mailjetBundle",
     "license": "MIT",

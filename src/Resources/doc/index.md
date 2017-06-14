@@ -49,17 +49,12 @@ welp_mailjet:
 
 ## ToDo
 
-* Moar tests...
+* More unit tests
+* Functionnal tests
 * handle when user changes email
-* Unit Synchronize User
-* Debug/Sandbox configuration mode
-
-## MailJet issues
-
-* How to change user email? (workaround: remove old, add new...)
-* Event API/webhook: how to synchronize specific contact subscribe event ? (available sent, open, click, bounce, spam, blocked, unsub)
-    - When user unsubscribe from external link ??
-    - When user resubscribe to list (widget or admin)
+* Bulletproof webhook handler
+* Specific config for transactionnal client (call, options)
+* Other features like Campaigns, stats, ...
 
 
 ## Contributing
