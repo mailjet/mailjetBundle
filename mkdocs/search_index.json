@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Mailjet Bundle\n\n\n\n\n\n\n\n\n\n\n\n\nSymfony bundle for handling Mailjet API V3 using this wrapper: \nhttps://github.com/mailjet/mailjet-apiv3-php\n\n\n\ud83d\udea7 \nWORK IN PROGRESS...\n \ud83d\udea7\n\n\nFeatures\n\n\n\n\n Retrieve \n\\Mailjet\\Client\n to make custom Mailjet API V3 requests\n\n\n \nSwiftMailer Transport integration\n\n\n Synchronize Contact Metadata (Contact Properties) with your config\n\n\n Synchronize your user with Mailjet contact list\n\n\n Use your own userProvider (basic \nFosContactProvider\n included to interface with FosUserBundle)\n\n\n Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List \n(need more tests)\n\n\n Register Event API - real time notifications (webhook) \n(need more tests)\n\n\n\n\nSetup\n\n\nAdd bundle to your project:\n\n\ncomposer require welp/mailjet-bundle\n\n\n\nAdd \nWelp\\MailjetBundle\\WelpMailjetBundle\n to your \nAppKernel.php\n:\n\n\n$bundles = [\n    // ...\n    new Welp\\MailjetBundle\\WelpMailjetBundle(),\n];\n\n\n\nMinimal Configuration\n\n\nIn your \nconfig.yml\n:\n\n\nwelp_mailjet:\n    api_key:    \n%mailjet_api_key%\n\n    secret_key: \n%mailjet_secret_key%\n\n\n\nToDo\n\n\n\n\nMoar tests...\n\n\nhandle when user changes email\n\n\nUnit Synchronize User\n\n\nDebug/Sandbox configuration mode\n\n\n\n\nMailJet issues\n\n\n\n\nHow to change user email? (workaround: remove old, add new...)\n\n\nEvent API/webhook: how to synchronize specific contact subscribe event ? (available sent, open, click, bounce, spam, blocked, unsub)\n\n\nWhen user unsubscribe from external link ??\n\n\nWhen user resubscribe to list (widget or admin)\n\n\n\n\n\n\n\n\nContributing\n\n\nIf you want to contribute to this project, look at \nover here", 
+            "text": "Mailjet Bundle\n\n\n\n\n\n\n\n\n\n\n\n\nSymfony bundle for handling Mailjet API V3 using this wrapper: \nhttps://github.com/mailjet/mailjet-apiv3-php\n\n\n\ud83d\udea7 \nWORK IN PROGRESS...\n \ud83d\udea7\n\n\nFeatures\n\n\n\n\n Retrieve \n\\Mailjet\\Client\n to make custom Mailjet API V3 requests\n\n\n \nSwiftMailer Transport integration\n\n\n Synchronize Contact Metadata (Contact Properties) with your config\n\n\n Synchronize your user with Mailjet contact list\n\n\n Use your own userProvider (basic \nFosContactProvider\n included to interface with FosUserBundle)\n\n\n Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List \n(need more tests)\n\n\n Register Event API - real time notifications (webhook) \n(need more tests)\n\n\n\n\nSetup\n\n\nAdd bundle to your project:\n\n\ncomposer require welp/mailjet-bundle\n\n\n\nAdd \nWelp\\MailjetBundle\\WelpMailjetBundle\n to your \nAppKernel.php\n:\n\n\n$bundles = [\n    // ...\n    new Welp\\MailjetBundle\\WelpMailjetBundle(),\n];\n\n\n\nMinimal Configuration\n\n\nIn your \nconfig.yml\n:\n\n\nwelp_mailjet:\n    api_key:    \n%mailjet_api_key%\n\n    secret_key: \n%mailjet_secret_key%\n\n\n\nToDo\n\n\n\n\nMore unit tests\n\n\nFunctionnal tests\n\n\nhandle when user changes email\n\n\nBulletproof webhook handler\n\n\nSpecific config for transactionnal client (call, options)\n\n\nOther features like Campaigns, stats, ...\n\n\n\n\nContributing\n\n\nIf you want to contribute to this project, look at \nover here", 
             "title": "Home"
         }, 
         {
@@ -27,13 +27,8 @@
         }, 
         {
             "location": "/#todo", 
-            "text": "Moar tests...  handle when user changes email  Unit Synchronize User  Debug/Sandbox configuration mode", 
+            "text": "More unit tests  Functionnal tests  handle when user changes email  Bulletproof webhook handler  Specific config for transactionnal client (call, options)  Other features like Campaigns, stats, ...", 
             "title": "ToDo"
-        }, 
-        {
-            "location": "/#mailjet-issues", 
-            "text": "How to change user email? (workaround: remove old, add new...)  Event API/webhook: how to synchronize specific contact subscribe event ? (available sent, open, click, bounce, spam, blocked, unsub)  When user unsubscribe from external link ??  When user resubscribe to list (widget or admin)", 
-            "title": "MailJet issues"
         }, 
         {
             "location": "/#contributing", 
