@@ -13,6 +13,7 @@ pages:
     - Contact Provider: contact-provider.md
     - Usage: usage.md
     - Event API (webhook): event-api.md
+    - Symfony Debug Toolbar: symfony-debug-toolbar.md
     - Tests: tests.md
     - Mailjet Doc: mailjet-doc.md
     - Contributing: CONTRIBUTING.md
