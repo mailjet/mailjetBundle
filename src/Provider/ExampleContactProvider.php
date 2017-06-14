@@ -33,9 +33,9 @@ class ExampleContactProvider implements ProviderInterface
                 self::PROP_NICKNAME => $user->getNickname(),
                 self::PROP_GENDER => $user->getGender(),
                 self::PROP_CITY => $user->getCity(),
-                self::PROP_BIRTHDATE => $user->getBirthday() ? $user->getBirthday()->format('Y-m-d') : null,
-                self::PROP_LAST_ACTIVITY_DATE => $user->getLastActivity() ? $user->getLastActivity()->format('Y-m-d') : null
-                self::PROP_REGISTRATION_DATE => $user->getRegistrateAt() ? $user->getRegistrateAt()->format('Y-m-d') : null
+                self::PROP_BIRTHDATE => $user->getBirthday() ? $user->getBirthday()->format('Y-m-d') : '',
+                self::PROP_LAST_ACTIVITY_DATE => $user->getLastActivity() ? $user->getLastActivity()->format('Y-m-d') : ''
+                self::PROP_REGISTRATION_DATE => $user->getRegistrateAt() ? $user->getRegistrateAt()->format('Y-m-d') : ''
             ];
 
             $contact = new Contact($user->getEmail(), $user->getUsername(), $userProperties);

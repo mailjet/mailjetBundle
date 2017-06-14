@@ -49,6 +49,7 @@ class Contact
         }
 
         if (!is_null($this->properties)) {
+            #$result[self::PROPERTIES_KEY] = $this->removeNullProperties($this->properties);
             $result[self::PROPERTIES_KEY] = $this->properties;
         }
 
@@ -98,5 +99,15 @@ class Contact
     {
         $this->action = $action;
         return $this;
+    }
+
+    /**
+     * Clean null properties to avoid conflict with API
+     * @param  array  $properties
+     * @return array
+     */
+    protected function removeNullProperties(array $properties)
+    {
+        return array_filter($properties);
     }
 }

@@ -30,7 +30,7 @@ class FosContactProvider implements ProviderInterface
         $contacts = array_map(function (User $user) {
             $userProperties = [
                 self::PROP_ENABLED => $user->isEnabled(),
-                self::PROP_LAST_LOGIN => $user->getLastLogin() ? $user->getLastLogin()->format('Y-m-d') : null
+                self::PROP_LAST_LOGIN => $user->getLastLogin() ? $user->getLastLogin()->format('Y-m-d') : ''
             ];
 
             $contact = new Contact($user->getEmail(), $user->getUsername(), $userProperties);
