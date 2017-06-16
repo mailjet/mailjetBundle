@@ -122,6 +122,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="../build-documentation/">Build Documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="../mailjet-doc/">Mailjet Doc</a>
         
     </li>
@@ -159,7 +166,7 @@
     <li>Configuration</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/welpdev/mailjetBundle/edit/master/docs/configuration.md"
+        <a href="https://github.com/mailjet/mailjetBundle/edit/master/docs/configuration.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -173,53 +180,54 @@
 <p>You need to have Mailjet account available</p>
 <h2 id="configyml">config.yml</h2>
 <p>Define a configuration in your <code>config.yml</code>:</p>
-<pre class="highlight"><code class="language-yaml linenums">welp_mailjet:
-    api_key:    &quot;%mailjet_api_key%&quot;
-    secret_key: &quot;%mailjet_secret_key%&quot;
-    call: true # Performs the API call or not
-    options:
-        url: &quot;api.mailjet.com&quot; # (Default: api.mailjet.com) : domain name of the API
-        version: &quot;v3&quot; # (Default: v3) : API version (only working for Mailjet API V3 +)
-        call: true # (Default: true) : turns on(true) / off the call to the API
-        secured: true # secured (Default: true) : turns on(true) / off the use of 'https'
-    # route name to handle the callback
-    event_endpoint_route: app_event_endpoint_route
-    # secret to secure callback
-    event_endpoint_token: &quot;secretCode12345678&quot;
-    lists:
-        listId1:
-            # provider used in full synchronization
-            contact_provider: 'yourapp.provider1'
-        listId2:
-            contact_provider: 'yourapp.provider2'
-        # ...
-    contact_metadata:
-        -
-            name: firstname
-            datatype: str
-        -
-            name: lastname
-            datatype: str
-        -
-            name: postalcode
-            datatype: int
-        -
-            name: rank
-            datatype: int
-        -
-            name: hasavatar
-            datatype: bool
-        -
-            name: lastlogin
-            datatype: datetime
-        -
-            name: createdat
-            datatype: datetime
-        -
-            name: birthdate
-            datatype: datetime
-        # ...
-</code></pre>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">mailjet</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">api_key</span><span class="p p-Indicator">:</span>    <span class="s">&quot;%mailjet.api_key%&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">secret_key</span><span class="p p-Indicator">:</span> <span class="s">&quot;%mailjet.secret_key%&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">call</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span> <span class="c1"># Performs the API call or not</span>
+    <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="s">&quot;api.mailjet.com&quot;</span> <span class="c1"># (Default: api.mailjet.com) : domain name of the API</span>
+        <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;v3&quot;</span> <span class="c1"># (Default: v3) : API version (only working for Mailjet API V3 +)</span>
+        <span class="l l-Scalar l-Scalar-Plain">call</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span> <span class="c1"># (Default: true) : turns on(true) / off the call to the API</span>
+        <span class="l l-Scalar l-Scalar-Plain">secured</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span> <span class="c1"># secured (Default: true) : turns on(true) / off the use of &#39;https&#39;</span>
+    <span class="c1"># route name to handle the callback, if you want to change it</span>
+    <span class="l l-Scalar l-Scalar-Plain">event_endpoint_route</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">app_event_endpoint_route</span>
+    <span class="c1"># secret to secure callback</span>
+    <span class="l l-Scalar l-Scalar-Plain">event_endpoint_token</span><span class="p p-Indicator">:</span> <span class="s">&quot;secretCode12345678&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">lists</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">listId1</span><span class="p p-Indicator">:</span>
+            <span class="c1"># provider used in full synchronization</span>
+            <span class="l l-Scalar l-Scalar-Plain">contact_provider</span><span class="p p-Indicator">:</span> <span class="s">&#39;yourapp.provider1&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">listId2</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">contact_provider</span><span class="p p-Indicator">:</span> <span class="s">&#39;yourapp.provider2&#39;</span>
+        <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">contact_metadata</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span>
+            <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">firstname</span>
+            <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
+        <span class="p p-Indicator">-</span>
+            <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">lastname</span>
+            <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
+        <span class="p p-Indicator">-</span>
+            <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">postalcode</span>
+            <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">int</span>
+        <span class="p p-Indicator">-</span>
+            <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rank</span>
+            <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">int</span>
+        <span class="p p-Indicator">-</span>
+            <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">hasavatar</span>
+            <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">bool</span>
+        <span class="p p-Indicator">-</span>
+            <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">lastlogin</span>
+            <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">datetime</span>
+        <span class="p p-Indicator">-</span>
+            <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">createdat</span>
+            <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">datetime</span>
+        <span class="p p-Indicator">-</span>
+            <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">birthdate</span>
+            <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">datetime</span>
+        <span class="c1"># ...</span>
+</pre></div>
+
 
 <p>Where <code>listIdX</code> is the list id of your Mailjet lists, and <code>yourapp.providerX</code> is the key of your provider's service that will provide the contacts that need to be synchronized in Mailjet. See the documentation on create <a href="../contact-provider/">your own Contact provider</a>.</p>
 <h2 id="contact-metadata-contact-properties">Contact Metadata (Contact Properties)</h2>
@@ -229,40 +237,42 @@
 </ul>
 <p>You can find all parameters in Mailjet documentation.</p>
 <p>Example:</p>
-<pre class="highlight"><code class="language-yaml linenums">contact_metadata:
-    -
-        name: firstname
-        datatype: str
-    -
-        name: lastname
-        datatype: str
-    -
-        name: organisation
-        datatype: str
-    -
-        name: town
-        datatype: str
-    -
-        name: postalcode
-        datatype: int
-    -
-        name: gender
-        datatype: str
-    -
-        name: rank
-        datatype: int
-    -
-        name: hasavatar
-        datatype: bool
-    -
-        name: lastlogin
-        datatype: datetime
-    -
-        name: createdat
-        datatype: datetime
-    -
-        name: birthdate
-        datatype: datetime</code></pre>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">contact_metadata</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">firstname</span>
+        <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
+    <span class="p p-Indicator">-</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">lastname</span>
+        <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
+    <span class="p p-Indicator">-</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">organisation</span>
+        <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
+    <span class="p p-Indicator">-</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">town</span>
+        <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
+    <span class="p p-Indicator">-</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">postalcode</span>
+        <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">int</span>
+    <span class="p p-Indicator">-</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">gender</span>
+        <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
+    <span class="p p-Indicator">-</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rank</span>
+        <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">int</span>
+    <span class="p p-Indicator">-</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">hasavatar</span>
+        <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">bool</span>
+    <span class="p p-Indicator">-</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">lastlogin</span>
+        <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">datetime</span>
+    <span class="p p-Indicator">-</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">createdat</span>
+        <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">datetime</span>
+    <span class="p p-Indicator">-</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">birthdate</span>
+        <span class="l l-Scalar l-Scalar-Plain">datatype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">datetime</span>
+</pre></div>
+
 
 <p>Available datatype: <code>str, int, float, bool, datetime</code></p>
               
@@ -302,7 +312,7 @@
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/welpdev/mailjetBundle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/mailjet/mailjetBundle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../setup/" style="color: #fcfcfc;">&laquo; Previous</a></span>

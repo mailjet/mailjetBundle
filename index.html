@@ -128,6 +128,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="build-documentation/">Build Documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="mailjet-doc/">Mailjet Doc</a>
         
     </li>
@@ -165,7 +172,7 @@
     <li>Home</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/welpdev/mailjetBundle/edit/master/docs/index.md"
+        <a href="https://github.com/mailjet/mailjetBundle/edit/master/docs/index.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -176,17 +183,17 @@
             <div class="section">
               
                 <h1 id="mailjet-bundle">Mailjet Bundle</h1>
-<p><a href="https://travis-ci.org/welpdev/mailjetBundle"><img alt="Build Status" src="https://travis-ci.org/welpdev/mailjetBundle.svg?branch=master" /></a>
-<a href="https://packagist.org/packages/welp/mailjet-bundle"><img alt="Packagist" src="https://img.shields.io/packagist/v/welp/mailjet-bundle.svg" /></a>
-<a href="https://packagist.org/packages/welp/mailjet-bundle"><img alt="Packagist" src="https://img.shields.io/packagist/dt/welp/mailjet-bundle.svg" /></a>
-<a href="https://github.com/welpdev/mailjetBundle/blob/master/LICENSE.md"><img alt="GitHub license" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
-<a href="https://welpdev.github.io/mailjetBundle/"><img alt="Documentation" src="https://img.shields.io/badge/documentation-gh--pages-blue.svg" /></a></p>
+<p><a href="https://travis-ci.org/mailjet/mailjetBundle"><img alt="Build Status" src="https://travis-ci.org/mailjet/mailjetBundle.svg?branch=master" /></a>
+<a href="https://packagist.org/packages/mailjet/mailjet-bundle"><img alt="Packagist" src="https://img.shields.io/packagist/v/mailjet/mailjet-bundle.svg" /></a>
+<a href="https://packagist.org/packages/mailjet/mailjet-bundle"><img alt="Packagist" src="https://img.shields.io/packagist/dt/mailjet/mailjet-bundle.svg" /></a>
+<a href="https://github.com/mailjet/mailjetBundle/blob/master/LICENSE.md"><img alt="GitHub license" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
+<a href="https://mailjet.github.io/mailjetBundle/"><img alt="Documentation" src="https://img.shields.io/badge/documentation-gh--pages-blue.svg" /></a></p>
 <p>Symfony bundle for handling Mailjet API V3 using this wrapper: <a href="https://github.com/mailjet/mailjet-apiv3-php">https://github.com/mailjet/mailjet-apiv3-php</a></p>
 <p>🚧 <strong>WORK IN PROGRESS...</strong> 🚧</p>
 <h2 id="features">Features</h2>
 <ul class="task-list">
 <li class="task-list-item"><input type="checkbox" disabled checked> Retrieve <a href="https://github.com/mailjet/mailjet-apiv3-php">\Mailjet\Client</a> to make custom Mailjet API V3 requests</li>
-<li class="task-list-item"><input type="checkbox" disabled checked> <a href="https://github.com/welpdev/MailjetSwiftMailer">SwiftMailer Transport integration</a></li>
+<li class="task-list-item"><input type="checkbox" disabled checked> <a href="https://github.com/mailjet/MailjetSwiftMailer">SwiftMailer Transport integration</a></li>
 <li class="task-list-item"><input type="checkbox" disabled checked> Synchronize Contact Metadata (Contact Properties) with your config</li>
 <li class="task-list-item"><input type="checkbox" disabled checked> Synchronize your user with Mailjet contact list</li>
 <li class="task-list-item"><input type="checkbox" disabled checked> Use your own userProvider (basic <code>FosContactProvider</code> included to interface with FosUserBundle)</li>
@@ -195,19 +202,25 @@
 </ul>
 <h2 id="setup">Setup</h2>
 <p>Add bundle to your project:</p>
-<pre class="highlight"><code class="language-bash linenums">composer require welp/mailjet-bundle</code></pre>
+<div class="highlight"><pre><span></span>composer require mailjet/mailjet-bundle
+</pre></div>
 
-<p>Add <code>Welp\MailjetBundle\WelpMailjetBundle</code> to your <code>AppKernel.php</code>:</p>
-<pre class="highlight"><code class="language-php linenums">$bundles = [
-    // ...
-    new Welp\MailjetBundle\WelpMailjetBundle(),
-];</code></pre>
+
+<p>Add <code>Mailjet\MailjetBundle\MailjetBundle</code> to your <code>AppKernel.php</code>:</p>
+<div class="highlight"><pre><span></span><span class="x">$bundles = [</span>
+<span class="x">    // ...</span>
+<span class="x">    new Mailjet\MailjetBundle\MailjetBundle(),</span>
+<span class="x">];</span>
+</pre></div>
+
 
 <h2 id="minimal-configuration">Minimal Configuration</h2>
 <p>In your <code>config.yml</code>:</p>
-<pre class="highlight"><code class="language-yaml linenums">welp_mailjet:
-    api_key:    &quot;%mailjet_api_key%&quot;
-    secret_key: &quot;%mailjet_secret_key%&quot;</code></pre>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">mailjet</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">api_key</span><span class="p p-Indicator">:</span>    <span class="s">&quot;%mailjet.api_key%&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">secret_key</span><span class="p p-Indicator">:</span> <span class="s">&quot;%mailjet.secret_key%&quot;</span>
+</pre></div>
+
 
 <h2 id="todo">ToDo</h2>
 <ul>
@@ -255,7 +268,7 @@
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/welpdev/mailjetBundle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/mailjet/mailjetBundle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
       
@@ -269,6 +282,6 @@
 </html>
 
 <!--
-MkDocs version : 0.16.0
-Build Date UTC : 2017-06-14 15:34:36
+MkDocs version : 0.16.1
+Build Date UTC : 2017-06-16 10:23:56
 -->

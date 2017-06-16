@@ -122,6 +122,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="../build-documentation/">Build Documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="../mailjet-doc/">Mailjet Doc</a>
         
     </li>
@@ -159,7 +166,7 @@
     <li>Contact Provider</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/welpdev/mailjetBundle/edit/master/docs/contact-provider.md"
+        <a href="https://github.com/mailjet/mailjetBundle/edit/master/docs/contact-provider.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -172,75 +179,83 @@
                 <h1 id="contact-provider">Contact Provider</h1>
 <p>After <a href="../configuration/">configuring your lists</a> in <code>config.yml</code>, you need to create at least one <code>Provider</code> that will be used by the SyncUser command.
 Your provider should be accessible via a service key (the same you reference in <code>contact_provider</code> in your configuration file):</p>
-<pre class="highlight"><code class="language-yaml linenums">    services:
-        yourapp.mailjet.contact_provider1:
-            class: YourApp\AppBundle\Mailjet\MyContactProvider
-            arguments: [@yourapp.user.repository]</code></pre>
+<div class="highlight"><pre><span></span>    <span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">yourapp.mailjet.contact_provider1</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">YourApp\AppBundle\Mailjet\MyContactProvider</span>
+            <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="err">@</span><span class="nv">yourapp.user.repository</span><span class="p p-Indicator">]</span>
+</pre></div>
 
-<p>You provider class should implement <code>Welp\MailjetBundle\Provider\ProviderInterface</code> and the method <code>getContacts</code> must return an array of <code>Welp\MailjetBundle\Model\Contact</code> objects.</p>
+
+<p>You provider class should implement <code>Mailjet\MailjetBundle\Provider\ProviderInterface</code> and the method <code>getContacts</code> must return an array of <code>Mailjet\MailjetBundle\Model\Contact</code> objects.</p>
 <h2 id="example">Example</h2>
 <p>Here is an example of ContactProvider:</p>
-<pre class="highlight"><code class="language-php linenums">&lt;?php
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
-namespace YourApp\App\Mailjet;
+<span class="k">namespace</span> <span class="nx">YourApp\App\Mailjet</span><span class="p">;</span>
 
-use Welp\MailjetBundle\Provider\ProviderInterface;
-use Welp\MailjetBundle\Model\Contact;
+<span class="k">use</span> <span class="nx">Mailjet\MailjetBundle\Provider\ProviderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Mailjet\MailjetBundle\Model\Contact</span><span class="p">;</span>
 
-use YourApp\Model\User\UserRepository;
-use YourApp\Model\User\User;
+<span class="k">use</span> <span class="nx">YourApp\Model\User\UserRepository</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">YourApp\Model\User\User</span><span class="p">;</span>
 
-class ExampleContactProvider implements ProviderInterface
-{
+<span class="k">class</span> <span class="nc">ExampleContactProvider</span> <span class="k">implements</span> <span class="nx">ProviderInterface</span>
+<span class="p">{</span>
 
-    const PROP_NICKNAME =           'nickname';
-    const PROP_GENDER =             'gender';
-    const PROP_CITY =               'city';
-    const PROP_BIRTHDATE =          'birthdate';
-    const PROP_LAST_ACTIVITY_DATE = 'last_activity';
-    const PROP_REGISTRATION_DATE =  'registration_date';
+    <span class="k">const</span> <span class="no">PROP_NICKNAME</span> <span class="o">=</span>           <span class="s1">&#39;nickname&#39;</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">PROP_GENDER</span> <span class="o">=</span>             <span class="s1">&#39;gender&#39;</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">PROP_CITY</span> <span class="o">=</span>               <span class="s1">&#39;city&#39;</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">PROP_BIRTHDATE</span> <span class="o">=</span>          <span class="s1">&#39;birthdate&#39;</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">PROP_LAST_ACTIVITY_DATE</span> <span class="o">=</span> <span class="s1">&#39;last_activity&#39;</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">PROP_REGISTRATION_DATE</span> <span class="o">=</span>  <span class="s1">&#39;registration_date&#39;</span><span class="p">;</span>
 
-    protected $userRepository;
+    <span class="k">protected</span> <span class="nv">$userRepository</span><span class="p">;</span>
 
-    public function __construct(UserRepository $userRepository)
-    {
-        $this-&gt;userRepository = $userRepository;
-    }
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">UserRepository</span> <span class="nv">$userRepository</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">userRepository</span> <span class="o">=</span> <span class="nv">$userRepository</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    public function getContacts()
-    {
-        $users = $this-&gt;userRepository-&gt;findUsers();
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getContacts</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$users</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">userRepository</span><span class="o">-&gt;</span><span class="na">findUsers</span><span class="p">();</span>
 
-        $contacts = array_map(function(User $user) {
-            $userProperties = [
-                self::PROP_NICKNAME =&gt; $user-&gt;getNickname(),
-                self::PROP_GENDER =&gt; $user-&gt;getGender(),
-                self::PROP_CITY =&gt; $user-&gt;getCity(),
-                self::PROP_BIRTHDATE =&gt; $user-&gt;getBirthday() ? $user-&gt;getBirthday()-&gt;format('Y-m-d') : '',
-                self::PROP_LAST_ACTIVITY_DATE =&gt; $user-&gt;getLastActivity() ? $user-&gt;getLastActivity()-&gt;format('Y-m-d') : ''
-                self::PROP_REGISTRATION_DATE =&gt; $user-&gt;getRegistrateAt() ? $user-&gt;getRegistrateAt()-&gt;format('Y-m-d') : ''
-            ];
+        <span class="nv">$contacts</span> <span class="o">=</span> <span class="nb">array_map</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$userProperties</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="nx">self</span><span class="o">::</span><span class="na">PROP_NICKNAME</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getNickname</span><span class="p">(),</span>
+                <span class="nx">self</span><span class="o">::</span><span class="na">PROP_GENDER</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getGender</span><span class="p">(),</span>
+                <span class="nx">self</span><span class="o">::</span><span class="na">PROP_CITY</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getCity</span><span class="p">(),</span>
+                <span class="nx">self</span><span class="o">::</span><span class="na">PROP_BIRTHDATE</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getBirthday</span><span class="p">()</span> <span class="o">?</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getBirthday</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">)</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                <span class="nx">self</span><span class="o">::</span><span class="na">PROP_LAST_ACTIVITY_DATE</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getLastActivity</span><span class="p">()</span> <span class="o">?</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getLastActivity</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">)</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span>
+                <span class="nx">self</span><span class="o">::</span><span class="na">PROP_REGISTRATION_DATE</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getRegistrateAt</span><span class="p">()</span> <span class="o">?</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getRegistrateAt</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">)</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span>
+            <span class="p">];</span>
 
-            $contact = new Contact($user-&gt;getEmail(), $user-&gt;getUsername(), $userProperties);
+            <span class="nv">$contact</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Contact</span><span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getEmail</span><span class="p">(),</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getUsername</span><span class="p">(),</span> <span class="nv">$userProperties</span><span class="p">);</span>
 
-            return $contact;
-        }, $users);
+            <span class="k">return</span> <span class="nv">$contact</span><span class="p">;</span>
+        <span class="p">},</span> <span class="nv">$users</span><span class="p">);</span>
 
-        return $contacts;
-    }
-}</code></pre>
+        <span class="k">return</span> <span class="nv">$contacts</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <h2 id="foscontactprovider">FosContactProvider</h2>
 <p>We also provide a ready to use provider for FosUserBundle: <code>FosContactProvider</code>. You just need to register the service into your app:</p>
-<pre class="highlight"><code class="language-yaml linenums">    services:
-        yourapp.mailjet.fos_contact_provider:
-            class: Welp\MailjetBundle\Provider\FosContactProvider
-            arguments: [@fos_user.user_manager]</code></pre>
+<div class="highlight"><pre><span></span>    <span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">yourapp.mailjet.fos_contact_provider</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Mailjet\MailjetBundle\Provider\FosContactProvider</span>
+            <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="err">@</span><span class="nv">fos_user.user_manager</span><span class="p p-Indicator">]</span>
+</pre></div>
+
 
 <p>After this, don't forget to add the service key for your list into your <code>config.yml</code>:</p>
-<pre class="highlight"><code class="language-yaml linenums">    ...
-    listId1:
-        contact_provider: 'yourapp.mailjet.fos_contact_provider'</code></pre>
+<div class="highlight"><pre><span></span>    <span class="l l-Scalar l-Scalar-Plain">...</span>
+    <span class="l l-Scalar l-Scalar-Plain">listId1</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">contact_provider</span><span class="p p-Indicator">:</span> <span class="s">&#39;yourapp.mailjet.fos_contact_provider&#39;</span>
+</pre></div>
+
 
 <p>Note: You need to have <code>enabled</code> and <code>lastlogin</code> in your contact properties</p>
               
@@ -280,7 +295,7 @@ class ExampleContactProvider implements ProviderInterface
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/welpdev/mailjetBundle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/mailjet/mailjetBundle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../swiftmailer/" style="color: #fcfcfc;">&laquo; Previous</a></span>

@@ -8,7 +8,7 @@
   
   <meta name="author" content="Titouan BENOIT">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Setup - Mailjet Bundle</title>
+  <title>Build Documentation - Mailjet Bundle</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Setup";
-    var mkdocs_page_input_path = "setup.md";
-    var mkdocs_page_url = "/setup/";
+    var mkdocs_page_name = "Build Documentation";
+    var mkdocs_page_input_path = "build-documentation.md";
+    var mkdocs_page_url = "/build-documentation/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -54,17 +54,8 @@
 <li>
           
             <li>
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Setup</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#setup">Setup</a></li>
-                
-                    <li><a class="toctree-l4" href="#minimal-configuration">Minimal Configuration</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../setup/">Setup</a>
         
     </li>
 <li>
@@ -119,8 +110,19 @@
 <li>
           
             <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../build-documentation/">Build Documentation</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Build Documentation</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#build-documentation">Build documentation</a></li>
+                
+                    <li><a class="toctree-l4" href="#mkdocs">MkDocs</a></li>
+                
+                    <li><a class="toctree-l4" href="#deploy-to-gh-pages">Deploy to gh-pages</a></li>
+                
+            
+            </ul>
         
     </li>
 <li>
@@ -161,10 +163,10 @@
     
       
     
-    <li>Setup</li>
+    <li>Build Documentation</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/mailjet/mailjetBundle/edit/master/docs/setup.md"
+        <a href="https://github.com/mailjet/mailjetBundle/edit/master/docs/build-documentation.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -174,29 +176,19 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="setup">Setup</h1>
-<p>Add bundle to your project:</p>
-<div class="highlight"><pre><span></span>composer require mailjet/mailjet-bundle
-</pre></div>
-
-
-<p>Add <code>Mailjet\MailjetBundle\MailjetBundle</code> to your <code>AppKernel.php</code>:</p>
-<div class="highlight"><pre><span></span><span class="x">$bundles = [</span>
-<span class="x">    // ...</span>
-<span class="x">    new Mailjet\MailjetBundle\MailjetBundle(),</span>
-<span class="x">];</span>
-</pre></div>
-
-
-<h2 id="minimal-configuration">Minimal Configuration</h2>
-<p>In your <code>config.yml</code>:</p>
-<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">mailjet</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">api_key</span><span class="p p-Indicator">:</span>    <span class="s">&quot;%mailjet.api_key%&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">secret_key</span><span class="p p-Indicator">:</span> <span class="s">&quot;%mailjet.secret_key%&quot;</span>
-</pre></div>
-
-
-<p><a href="../configuration/">More configuration</a></p>
+                <h1 id="build-documentation">Build documentation</h1>
+<p>You can read files in the folder <code>src/Resources/doc</code> or you can compile the documentation with MkDocs.</p>
+<h2 id="mkdocs">MkDocs</h2>
+<ul>
+<li>Install Python 2.7 and Pip 1.5</li>
+<li>Install MkDocs: <code>pip install mkdocs</code></li>
+<li>Install pymdown-extension: <code>pip install pymdown-extensions</code></li>
+<li>Compile the doc: <code>mkdocs build</code></li>
+<li>Preview the doc: <code>mkdocs serve</code> at <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a></li>
+</ul>
+<h2 id="deploy-to-gh-pages">Deploy to gh-pages</h2>
+<p>Documentation is deployed here: <a href="https://mailjet.github.io/mailjetBundle/">https://mailjet.github.io/mailjetBundle/</a></p>
+<p>In order to deploy a new version of documentation: <code>mkdocs gh-deploy</code></p>
               
             </div>
           </div>
@@ -204,10 +196,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../configuration/" class="btn btn-neutral float-right" title="Configuration">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../mailjet-doc/" class="btn btn-neutral float-right" title="Mailjet Doc">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../tests/" class="btn btn-neutral" title="Tests"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -237,10 +229,10 @@
           <a href="https://github.com/mailjet/mailjetBundle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../tests/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../configuration/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../mailjet-doc/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
