@@ -1,5 +1,5 @@
 <?php
-namespace Welp\MailjetBundle\Client;
+namespace Mailjet\MailjetBundle\Client;
 
 use Mailjet\Client;
 use Mailjet\Response;

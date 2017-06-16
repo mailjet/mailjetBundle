@@ -1,8 +1,8 @@
 <?php
 
-namespace Welp\MailjetBundle\Provider;
+namespace Mailjet\MailjetBundle\Provider;
 
-use Welp\MailjetBundle\Model\Contact;
+use Mailjet\MailjetBundle\Model\Contact;
 
 interface ProviderInterface
 {

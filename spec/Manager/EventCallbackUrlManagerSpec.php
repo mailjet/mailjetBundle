@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Welp\MailjetBundle\Manager;
+namespace spec\Mailjet\MailjetBundle\Manager;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Welp\MailjetBundle\Client\MailjetClient;
+use Mailjet\MailjetBundle\Client\MailjetClient;
 
 class EventCallbackUrlManagerSpec extends ObjectBehavior
 {
@@ -15,6 +15,6 @@ class EventCallbackUrlManagerSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Welp\MailjetBundle\Manager\EventCallbackUrlManager');
+        $this->shouldHaveType('Mailjet\MailjetBundle\Manager\EventCallbackUrlManager');
     }
 }

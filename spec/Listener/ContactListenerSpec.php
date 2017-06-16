@@ -1,11 +1,11 @@
 <?php
 
-namespace spec\Welp\MailjetBundle\Listener;
+namespace spec\Mailjet\MailjetBundle\Listener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-use Welp\MailjetBundle\Manager\ContactsListManager;
+use Mailjet\MailjetBundle\Manager\ContactsListManager;
 
 class ContactListenerSpec extends ObjectBehavior
 {
@@ -16,6 +16,6 @@ class ContactListenerSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Welp\MailjetBundle\Listener\ContactListener');
+        $this->shouldHaveType('Mailjet\MailjetBundle\Listener\ContactListener');
     }
 }

@@ -11,14 +11,14 @@ You just need to configure in your config.yml your `contact_metadata`: [see the 
 
 Finally, you can use this command to synchronize your config with Mailjet:
 
-    php app/console welp:mailjet:contactmetadata-sync
+    php app/console mailjet:mailjet:contactmetadata-sync
 
 
 ## Full synchronization with command
 
 You can synchronize all users of your project with a Mailjet list at once by calling the Symfony command:
 
-    php app/console welp:mailjet:user-sync
+    php app/console mailjet:mailjet:user-sync
 
 
 It will get all your User throught your Contact Provider and will add/update all your User to the configured list.
@@ -30,11 +30,11 @@ NOTE: you must have configured and created [your own contact provider](contact-p
 If you want realtime synchronization, you can dispatch custom events on your controllers/managers (or anywhere). The subscribe event can be used both for adding a new contact or updating an existing one. You can fired these events to trigger sync with Mailjet:
 
 ```php
-    ContactEvent::EVENT_SUBSCRIBE = 'welp.mailjet.subscribe';
-    ContactEvent::EVENT_UNSUBSCRIBE = 'welp.mailjet.unsubscribe';
-    ContactEvent::EVENT_UPDATE = 'welp.mailjet.update';
-    ContactEvent::EVENT_DELETE = 'welp.mailjet.delete';
-    // NOT IMPLETENTED YET // ContactEvent::EVENT_CHANGE_EMAIL = 'welp.mailjet.change_email';
+    ContactEvent::EVENT_SUBSCRIBE = 'mailjet.mailjet.subscribe';
+    ContactEvent::EVENT_UNSUBSCRIBE = 'mailjet.mailjet.unsubscribe';
+    ContactEvent::EVENT_UPDATE = 'mailjet.mailjet.update';
+    ContactEvent::EVENT_DELETE = 'mailjet.mailjet.delete';
+    // NOT IMPLETENTED YET // ContactEvent::EVENT_CHANGE_EMAIL = 'mailjet.mailjet.change_email';
 ```
 
 ### Subscribe new User
@@ -44,8 +44,8 @@ Here is an example of a subscribe event dispatch:
 ```php
 <?php
 
-use Welp\MailjetBundle\Event\ContactEvent;
-use Welp\MailjetBundle\Model\Contact;
+use Mailjet\MailjetBundle\Event\ContactEvent;
+use Mailjet\MailjetBundle\Model\Contact;
 
 // ...
 
@@ -74,8 +74,8 @@ Unsubscribe is simpler, you only need the email:
 ```php
 <?php
 
-use Welp\MailjetBundle\Event\ContactEvent;
-use Welp\MailjetBundle\Model\Contact;
+use Mailjet\MailjetBundle\Event\ContactEvent;
+use Mailjet\MailjetBundle\Model\Contact;
 
 // ...
 
@@ -99,8 +99,8 @@ If your User changes his information, you can sync with MailChimp:
 ```php
 <?php
 
-use Welp\MailjetBundle\Event\ContactEvent;
-use Welp\MailjetBundle\Model\Contact;
+use Mailjet\MailjetBundle\Event\ContactEvent;
+use Mailjet\MailjetBundle\Model\Contact;
 
 // ...
 
@@ -133,8 +133,8 @@ And finally delete a User:
 ```php
 <?php
 
-use Welp\MailjetBundle\Event\ContactEvent;
-use Welp\MailjetBundle\Model\Contact;
+use Mailjet\MailjetBundle\Event\ContactEvent;
+use Mailjet\MailjetBundle\Model\Contact;
 
 // ...
 
@@ -160,7 +160,7 @@ NOT POSSIBLE YET...(WORKAROUND: remove old, add new)
 
 You can also retrieve the MailJet Client Object which comes from the wrapper [mailjet/mailjet-apiv3-php](https://github.com/mailjet/mailjet-apiv3-php).
 
-The service key is `welp_mailjet.client`.
+The service key is `mailjet.client`.
 
 Example:
 
@@ -170,7 +170,7 @@ Example:
 
     // in any controller action...
     ...
-    $mailjet = $this->container->get('welp_mailjet.client');
+    $mailjet = $this->container->get('mailjet.client');
 
     // Resources are all located in the Resources class
     $response = $mailjet->get(Resources::$Contact);

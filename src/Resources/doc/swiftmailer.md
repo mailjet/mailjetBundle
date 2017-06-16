@@ -5,9 +5,9 @@
 ```yaml
     # Swiftmailer Configuration
     swiftmailer:
-        transport: welp_mailjet
+        transport: mailjet
 ```
 
 ## Documentation
 
-[here](https://github.com/welpdev/mailjetBundle)
+[here](https://github.com/mailjet/mailjetBundle)

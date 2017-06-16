@@ -1,9 +1,9 @@
 <?php
 
-namespace Welp\MailjetBundle\Listener;
+namespace Mailjet\MailjetBundle\Listener;
 
-use Welp\MailjetBundle\Manager\ContactsListManager;
-use Welp\MailjetBundle\Event\ContactEvent;
+use Mailjet\MailjetBundle\Manager\ContactsListManager;
+use Mailjet\MailjetBundle\Event\ContactEvent;
 
 class ContactListener
 {

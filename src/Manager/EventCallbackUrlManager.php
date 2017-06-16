@@ -1,11 +1,11 @@
 <?php
 
-namespace Welp\MailjetBundle\Manager;
+namespace Mailjet\MailjetBundle\Manager;
 
 use \Mailjet\Resources;
 
-use Welp\MailjetBundle\Client\MailjetClient;
-use Welp\MailjetBundle\Model\EventCallbackUrl;
+use Mailjet\MailjetBundle\Client\MailjetClient;
+use Mailjet\MailjetBundle\Model\EventCallbackUrl;
 
 /**
 * https://dev.mailjet.com/email-api/v3/eventcallbackurl/

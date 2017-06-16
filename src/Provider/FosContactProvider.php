@@ -1,13 +1,13 @@
 <?php
 
-namespace Welp\MailjetBundle\Provider;
+namespace Mailjet\MailjetBundle\Provider;
 
-use Welp\MailjetBundle\Provider\ProviderInterface;
+use Mailjet\MailjetBundle\Provider\ProviderInterface;
 
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Model\User;
 
-use Welp\MailjetBundle\Model\Contact;
+use Mailjet\MailjetBundle\Model\Contact;
 
 class FosContactProvider implements ProviderInterface
 {

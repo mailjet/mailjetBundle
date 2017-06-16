@@ -1,6 +1,6 @@
 <?php
 
-namespace Welp\MailjetBundle\DependencyInjection;
+namespace Mailjet\MailjetBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('welp_mailjet');
+        $rootNode = $treeBuilder->root('mailjet');
 
         $rootNode
             ->children()
@@ -34,7 +34,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->scalarNode('event_endpoint_route')
-                    ->defaultValue('welp_mailjet_event_endpoint')
+                    ->defaultValue('mailjet_event_endpoint')
                     ->info('Route name of the event API endpoint')
                 ->end()
                 ->scalarNode('event_endpoint_token')

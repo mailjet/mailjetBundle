@@ -3,15 +3,15 @@
 Add bundle to your project:
 
 ```bash
-composer require welp/mailjet-bundle
+composer require mailjet/mailjet-bundle
 ```
 
-Add `Welp\MailjetBundle\WelpMailjetBundle` to your `AppKernel.php`:
+Add `Mailjet\MailjetBundle\MailjetBundle` to your `AppKernel.php`:
 
 ```php
 $bundles = [
     // ...
-    new Welp\MailjetBundle\WelpMailjetBundle(),
+    new Mailjet\MailjetBundle\MailjetBundle(),
 ];
 ```
 
@@ -20,9 +20,9 @@ $bundles = [
 In your `config.yml`:
 
 ```yaml
-welp_mailjet:
-    api_key:    "%mailjet_api_key%"
-    secret_key: "%mailjet_secret_key%"
+mailjet:
+    api_key:    "%mailjet.api_key%"
+    secret_key: "%mailjet.secret_key%"
 ```
 
 [More configuration](configuration.md)

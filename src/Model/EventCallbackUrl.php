@@ -1,6 +1,6 @@
 <?php
 
-namespace Welp\MailjetBundle\Model;
+namespace Mailjet\MailjetBundle\Model;
 
 /**
 * https://dev.mailjet.com/email-api/v3/eventcallbackurl/

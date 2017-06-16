@@ -1,12 +1,12 @@
 <?php
 
-namespace spec\Welp\MailjetBundle\Model;
+namespace spec\Mailjet\MailjetBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-use Welp\MailjetBundle\Model\Contact;
-use Welp\MailjetBundle\Model\ContactsList;
+use Mailjet\MailjetBundle\Model\Contact;
+use Mailjet\MailjetBundle\Model\ContactsList;
 
 class ContactsListSpec extends ObjectBehavior
 {
@@ -22,6 +22,6 @@ class ContactsListSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Welp\MailjetBundle\Model\ContactsList');
+        $this->shouldHaveType('Mailjet\MailjetBundle\Model\ContactsList');
     }
 }

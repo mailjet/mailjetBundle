@@ -1,6 +1,6 @@
 <?php
 
-namespace Welp\MailjetBundle\Command;
+namespace Mailjet\MailjetBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -8,8 +8,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
-use Welp\MailjetBundle\Model\ContactMetadata;
-use Welp\MailjetBundle\Provider\ProviderInterface;
+use Mailjet\MailjetBundle\Model\ContactMetadata;
+use Mailjet\MailjetBundle\Provider\ProviderInterface;
 
 /**
  * Class SyncUserCommand
@@ -30,7 +30,7 @@ class SyncContactMetadataCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('welp:mailjet:contactmetadata-sync')
+            ->setName('mailjet:contactmetadata-sync')
             ->setDescription('Synchronize ContactMetadata in config with Mailjet');
     }
 
@@ -41,7 +41,7 @@ class SyncContactMetadataCommand extends ContainerAwareCommand
     {
         $output->writeln(sprintf('<info>%s</info>', $this->getDescription()));
 
-        $this->contactMetadata = $this->getContainer()->getParameter('welp_mailjet.contact_metadata');
+        $this->contactMetadata = $this->getContainer()->getParameter('mailjet.contact_metadata');
     }
 
     /**
@@ -54,14 +54,14 @@ class SyncContactMetadataCommand extends ContainerAwareCommand
         foreach ($this->contactMetadata as $contactMetadata) {
 
             $metadataObj = new ContactMetadata($contactMetadata['name'], $contactMetadata['datatype']);
-            
+
             try {
-                $response = $this->getContainer()->get('welp_mailjet.service.contact_metadata_manager')->create($metadataObj);
+                $response = $this->getContainer()->get('mailjet.service.contact_metadata_manager')->create($metadataObj);
                 $output->writeln(sprintf('<info>%s:%s added!</info>', $contactMetadata['name'], $contactMetadata['datatype']));
             } catch (\RuntimeException $e) {
                 $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
             }
-            
+
         }
     }
 }

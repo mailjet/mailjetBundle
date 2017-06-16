@@ -10,7 +10,7 @@ Your provider should be accessible via a service key (the same you reference in 
             arguments: [@yourapp.user.repository]
 ```
 
-You provider class should implement `Welp\MailjetBundle\Provider\ProviderInterface` and the method `getContacts` must return an array of `Welp\MailjetBundle\Model\Contact` objects.
+You provider class should implement `Mailjet\MailjetBundle\Provider\ProviderInterface` and the method `getContacts` must return an array of `Mailjet\MailjetBundle\Model\Contact` objects.
 
 ## Example
 
@@ -21,8 +21,8 @@ Here is an example of ContactProvider:
 
 namespace YourApp\App\Mailjet;
 
-use Welp\MailjetBundle\Provider\ProviderInterface;
-use Welp\MailjetBundle\Model\Contact;
+use Mailjet\MailjetBundle\Provider\ProviderInterface;
+use Mailjet\MailjetBundle\Model\Contact;
 
 use YourApp\Model\User\UserRepository;
 use YourApp\Model\User\User;
@@ -75,7 +75,7 @@ We also provide a ready to use provider for FosUserBundle: `FosContactProvider`.
 ```yaml
     services:
         yourapp.mailjet.fos_contact_provider:
-            class: Welp\MailjetBundle\Provider\FosContactProvider
+            class: Mailjet\MailjetBundle\Provider\FosContactProvider
             arguments: [@fos_user.user_manager]
 ```
 

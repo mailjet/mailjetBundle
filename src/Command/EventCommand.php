@@ -1,5 +1,5 @@
 <?php
-namespace Welp\MailjetBundle\Command;
+namespace Mailjet\MailjetBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -11,7 +11,7 @@ class EventCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('welp:mailjet:event-endpoint')
+            ->setName('mailjet:event-endpoint')
             ->setDescription('Prints URL endpoint that should be configured at mailjet.com website')
             ->addArgument('baseurl', InputArgument::REQUIRED, 'Baseurl with domain to be used in URL, i.e. https://example.com')
         ;
@@ -44,7 +44,7 @@ class EventCommand extends ContainerAwareCommand
      */
     protected function getRouteName()
     {
-        return $this->getContainer()->getParameter('welp_mailjet.event_endpoint_route');
+        return $this->getContainer()->getParameter('mailjet.event_endpoint_route');
     }
 
     /**
@@ -52,6 +52,6 @@ class EventCommand extends ContainerAwareCommand
      */
     protected function getToken()
     {
-        return $this->getContainer()->getParameter('welp_mailjet.event_endpoint_token');
+        return $this->getContainer()->getParameter('mailjet.event_endpoint_token');
     }
 }

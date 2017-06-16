@@ -1,11 +1,11 @@
 <?php
 
-namespace spec\Welp\MailjetBundle\Event;
+namespace spec\Mailjet\MailjetBundle\Event;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-use Welp\MailjetBundle\Model\Contact;
+use Mailjet\MailjetBundle\Model\Contact;
 
 class ContactEventSpec extends ObjectBehavior
 {
@@ -16,6 +16,6 @@ class ContactEventSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Welp\MailjetBundle\Event\ContactEvent');
+        $this->shouldHaveType('Mailjet\MailjetBundle\Event\ContactEvent');
     }
 }

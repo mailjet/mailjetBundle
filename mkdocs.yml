@@ -2,7 +2,7 @@ site_name: Mailjet Bundle
 site_description: Symfony bundle for handling Mailjet API V3.
 site_author: Titouan BENOIT
 copyright: MIT
-repo_url: https://github.com/welpdev/mailjetBundle
+repo_url: https://github.com/mailjet/mailjetBundle
 docs_dir: 'src/Resources/doc'
 site_dir: "docs"
 pages:
@@ -15,6 +15,7 @@ pages:
     - Event API (webhook): event-api.md
     - Symfony Debug Toolbar: symfony-debug-toolbar.md
     - Tests: tests.md
+    - Build Documentation: build-documentation.md
     - Mailjet Doc: mailjet-doc.md
     - Contributing: CONTRIBUTING.md
 theme: readthedocs

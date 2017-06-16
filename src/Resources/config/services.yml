@@ -1,62 +1,62 @@
 parameters:
-    welp_mailjet.client.class: Welp\MailjetBundle\Client\MailjetClient
-    welp_mailjet.event_callback_manager.class: Welp\MailjetBundle\Manager\EventCallbackManager
-    welp_mailjet.contact_metadata_manager.class: Welp\MailjetBundle\Manager\ContactMetadataManager
-    welp_mailjet.contacts_list_manager.class: Welp\MailjetBundle\Manager\ContactsListManager
-    welp_mailjet.contacts_list_synchronizer.class: Welp\MailjetBundle\Synchronizer\ContactsListSynchronizer
-    welp_mailjet.contact_listener.class: Welp\MailjetBundle\Listener\ContactListener
-    welp_mailjet.data_collector.mailjet.class: Welp\MailjetBundle\DataCollector\MailjetDataCollector
+    mailjet.client.class: Mailjet\MailjetBundle\Client\MailjetClient
+    mailjet.event_callback_manager.class: Mailjet\MailjetBundle\Manager\EventCallbackManager
+    mailjet.contact_metadata_manager.class: Mailjet\MailjetBundle\Manager\ContactMetadataManager
+    mailjet.contacts_list_manager.class: Mailjet\MailjetBundle\Manager\ContactsListManager
+    mailjet.contacts_list_synchronizer.class: Mailjet\MailjetBundle\Synchronizer\ContactsListSynchronizer
+    mailjet.contact_listener.class: Mailjet\MailjetBundle\Listener\ContactListener
+    mailjet.data_collector.mailjet.class: Mailjet\MailjetBundle\DataCollector\MailjetDataCollector
 
 services:
-    welp_mailjet.client:
-        class: "%welp_mailjet.client.class%"
-        arguments: ["%welp_mailjet.api_key%", "%welp_mailjet.secret_key%", %welp_mailjet.call%, %welp_mailjet.options%]
+    mailjet.client:
+        class: "%mailjet.client.class%"
+        arguments: ["%mailjet.api_key%", "%mailjet.secret_key%", %mailjet.call%, %mailjet.options%]
 
-    swiftmailer.transport.eventdispatcher.welp_mailjet:
+    swiftmailer.transport.eventdispatcher.mailjet:
         class: Swift_Events_SimpleEventDispatcher
 
-    swiftmailer.mailer.transport.welp_mailjet:
-        class: Welp\MailjetSwiftMailer\SwiftMailer\MailjetTransport
+    swiftmailer.mailer.transport.mailjet:
+        class: Mailjet\MailjetSwiftMailer\SwiftMailer\MailjetTransport
         arguments:
-            - "@swiftmailer.transport.eventdispatcher.welp_mailjet"
-            - "%welp_mailjet.api_key%"
-            - "%welp_mailjet.secret_key%"
+            - "@swiftmailer.transport.eventdispatcher.mailjet"
+            - "%mailjet.api_key%"
+            - "%mailjet.secret_key%"
 
-    welp_mailjet.service.contacts_list_synchronizer:
-        class: "%welp_mailjet.contacts_list_synchronizer.class%"
+    mailjet.service.contacts_list_synchronizer:
+        class: "%mailjet.contacts_list_synchronizer.class%"
         arguments:
-            - "@welp_mailjet.client"
+            - "@mailjet.client"
 
-    welp_mailjet.service.event_callback_manager:
-        class: "%welp_mailjet.event_callback_manager.class%"
+    mailjet.service.event_callback_manager:
+        class: "%mailjet.event_callback_manager.class%"
         arguments:
-            - "@welp_mailjet.client"
+            - "@mailjet.client"
 
-    welp_mailjet.service.contact_metadata_manager:
-        class: "%welp_mailjet.contact_metadata_manager.class%"
+    mailjet.service.contact_metadata_manager:
+        class: "%mailjet.contact_metadata_manager.class%"
         arguments:
-            - "@welp_mailjet.client"
+            - "@mailjet.client"
 
-    welp_mailjet.service.contacts_list_manager:
-        class: "%welp_mailjet.contacts_list_manager.class%"
+    mailjet.service.contacts_list_manager:
+        class: "%mailjet.contacts_list_manager.class%"
         arguments:
-            - "@welp_mailjet.client"
+            - "@mailjet.client"
 
     # Listener
-    welp_mailjet.listener.contact_listener:
-        class: %welp_mailjet.contact_listener.class%
+    mailjet.listener.contact_listener:
+        class: %mailjet.contact_listener.class%
         arguments:
-            - '@welp_mailjet.service.contacts_list_manager'
+            - '@mailjet.service.contacts_list_manager'
         tags:
-            - { name: kernel.event_listener, event: welp.mailjet.subscribe, method: onSubscribe }
-            - { name: kernel.event_listener, event: welp.mailjet.unsubscribe, method: onUnsubscribe }
-            - { name: kernel.event_listener, event: welp.mailjet.update, method: onUpdate }
-            - { name: kernel.event_listener, event: welp.mailjet.delete, method: onDelete }
-            #- { name: kernel.event_listener, event: welp.mailjet.change_email, method: onChangeEmail }
+            - { name: kernel.event_listener, event: mailjet.event.subscribe, method: onSubscribe }
+            - { name: kernel.event_listener, event: mailjet.event.unsubscribe, method: onUnsubscribe }
+            - { name: kernel.event_listener, event: mailjet.event.update, method: onUpdate }
+            - { name: kernel.event_listener, event: mailjet.event.delete, method: onDelete }
+            #- { name: kernel.event_listener, event: mailjet.event.change_email, method: onChangeEmail }
 
-    welp_mailjet.data_collector.mailjet:
-        class: '%welp_mailjet.data_collector.mailjet.class%'
+    mailjet.data_collector.mailjet:
+        class: '%mailjet.data_collector.mailjet.class%'
         arguments:
-            - '@welp_mailjet.client'
+            - '@mailjet.client'
         tags:
-            - { name: data_collector, template: WelpMailjetBundle:DataCollector:mailjet.html.twig, id: mailjet}
+            - { name: data_collector, template: MailjetBundle:DataCollector:mailjet.html.twig, id: mailjet}

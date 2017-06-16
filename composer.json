@@ -1,9 +1,8 @@
 {
-    "name": "welp/mailjet-bundle",
+    "name": "mailjet/mailjet-bundle",
     "description": "Symfony bundle for Mailjet API V3",
-    "version": "1.0.0-beta.1",
     "type": "symfony-bundle",
-    "homepage": "https://github.com/welpdev/mailjetBundle",
+    "homepage": "https://github.com/mailjet/mailjetBundle",
     "license": "MIT",
     "keywords": [
         "Symfony",
@@ -16,18 +15,24 @@
     "authors": [
         {
             "name": "Titouan BENOIT",
-            "email": "titouan@welp.today"
+            "email": "titouan.benoit@gmx.fr",
+            "homepage": "https://github.com/Nightbr"
+        },
+        {
+            "name": "Mailjet API",
+            "email": "api@mailjet.com",
+            "homepage": "https://dev.mailjet.com/"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Welp\\MailjetBundle\\": "src/"
+            "Mailjet\\MailjetBundle\\": "src/"
         }
     },
     "require": {
         "php": ">=5.6",
         "mailjet/mailjet-apiv3-php": "^1.2",
-        "welp/mailjet-swiftmailer": "dev-master"
+        "mailjet/mailjet-swiftmailer": "dev-master"
     },
     "require-dev": {
         "phpspec/phpspec": "~2@dev",

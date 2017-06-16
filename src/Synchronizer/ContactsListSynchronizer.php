@@ -1,11 +1,11 @@
 <?php
 
-namespace Welp\MailjetBundle\Synchronizer;
+namespace Mailjet\MailjetBundle\Synchronizer;
 
 use \Mailjet\Resources;
 
-use Welp\MailjetBundle\Model\ContactsList;
-use Welp\MailjetBundle\Client\MailjetClient;
+use Mailjet\MailjetBundle\Model\ContactsList;
+use Mailjet\MailjetBundle\Client\MailjetClient;
 
 /**
 * https://dev.mailjet.com/email-api/v3/contactslist-managemanycontacts/

@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Welp\MailjetBundle\Synchronizer;
+namespace spec\Mailjet\MailjetBundle\Synchronizer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Welp\MailjetBundle\Client\MailjetClient;
+use Mailjet\MailjetBundle\Client\MailjetClient;
 
 class ContactsListSynchronizerSpec extends ObjectBehavior
 {
@@ -15,6 +15,6 @@ class ContactsListSynchronizerSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Welp\MailjetBundle\Synchronizer\ContactsListSynchronizer');
+        $this->shouldHaveType('Mailjet\MailjetBundle\Synchronizer\ContactsListSynchronizer');
     }
 }

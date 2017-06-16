@@ -1,5 +1,5 @@
 <?php
-namespace Welp\MailjetBundle\Controller;
+namespace Mailjet\MailjetBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-use Welp\MailjetBundle\Event\CallbackEvent;
+use Mailjet\MailjetBundle\Event\CallbackEvent;
 
 /**
  * @Route("/mailjet-event")
@@ -27,7 +27,7 @@ class EventController extends Controller
      * Endpoint for the mailjet events (webhooks)
      * https://dev.mailjet.com/guides/#events
      * https://live-event-dashboard-demo.mailjet.com/
-     * @Route("/endpoint/{token}", name="welp_mailjet_event_endpoint")
+     * @Route("/endpoint/{token}", name="mailjet_event_endpoint")
      * @Method({"POST"})
      */
     public function indexAction(Request $request, $token)
@@ -112,6 +112,6 @@ class EventController extends Controller
      */
     private function getToken()
     {
-        return $this->container->getParameter('welp_mailjet.event_endpoint_token');
+        return $this->container->getParameter('mailjet.event_endpoint_token');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Welp\MailjetBundle\Event;
+namespace spec\Mailjet\MailjetBundle\Event;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -24,6 +24,6 @@ class CallbackEventSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Welp\MailjetBundle\Event\CallbackEvent');
+        $this->shouldHaveType('Mailjet\MailjetBundle\Event\CallbackEvent');
     }
 }

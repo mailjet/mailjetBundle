@@ -1,10 +1,10 @@
 # Mailjet Bundle
 
-[![Build Status](https://travis-ci.org/welpdev/mailjetBundle.svg?branch=master)](https://travis-ci.org/welpdev/mailjetBundle)
-[![Packagist](https://img.shields.io/packagist/v/welp/mailjet-bundle.svg)](https://packagist.org/packages/welp/mailjet-bundle)
-[![Packagist](https://img.shields.io/packagist/dt/welp/mailjet-bundle.svg)](https://packagist.org/packages/welp/mailjet-bundle)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/welpdev/mailjetBundle/blob/master/LICENSE.md)
-[![Documentation](https://img.shields.io/badge/documentation-gh--pages-blue.svg)](https://welpdev.github.io/mailjetBundle/)
+[![Build Status](https://travis-ci.org/mailjet/mailjetBundle.svg?branch=master)](https://travis-ci.org/mailjet/mailjetBundle)
+[![Packagist](https://img.shields.io/packagist/v/mailjet/mailjet-bundle.svg)](https://packagist.org/packages/mailjet/mailjet-bundle)
+[![Packagist](https://img.shields.io/packagist/dt/mailjet/mailjet-bundle.svg)](https://packagist.org/packages/mailjet/mailjet-bundle)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mailjet/mailjetBundle/blob/master/LICENSE.md)
+[![Documentation](https://img.shields.io/badge/documentation-gh--pages-blue.svg)](https://mailjet.github.io/mailjetBundle/)
 
 Symfony bundle for handling Mailjet API V3 using this wrapper: <https://github.com/mailjet/mailjet-apiv3-php>
 
@@ -13,7 +13,7 @@ Symfony bundle for handling Mailjet API V3 using this wrapper: <https://github.c
 ## Features
 
 * [x] Retrieve [\Mailjet\Client](https://github.com/mailjet/mailjet-apiv3-php) to make custom Mailjet API V3 requests
-* [x] [SwiftMailer Transport integration](https://github.com/welpdev/MailjetSwiftMailer)
+* [x] [SwiftMailer Transport integration](https://github.com/mailjet/MailjetSwiftMailer)
 * [x] Synchronize Contact Metadata (Contact Properties) with your config
 * [x] Synchronize your user with Mailjet contact list
 * [x] Use your own userProvider (basic `FosContactProvider` included to interface with FosUserBundle)
@@ -25,15 +25,15 @@ Symfony bundle for handling Mailjet API V3 using this wrapper: <https://github.c
 Add bundle to your project:
 
 ```bash
-composer require welp/mailjet-bundle
+composer require mailjet/mailjet-bundle
 ```
 
-Add `Welp\MailjetBundle\WelpMailjetBundle` to your `AppKernel.php`:
+Add `Mailjet\MailjetBundle\MailjetBundle` to your `AppKernel.php`:
 
 ```php
 $bundles = [
     // ...
-    new Welp\MailjetBundle\WelpMailjetBundle(),
+    new Mailjet\MailjetBundle\MailjetBundle(),
 ];
 ```
 
@@ -42,9 +42,9 @@ $bundles = [
 In your `config.yml`:
 
 ```yaml
-welp_mailjet:
-    api_key:    "%mailjet_api_key%"
-    secret_key: "%mailjet_secret_key%"
+mailjet:
+    api_key:    "%mailjet.api_key%"
+    secret_key: "%mailjet.secret_key%"
 ```
 
 ## ToDo

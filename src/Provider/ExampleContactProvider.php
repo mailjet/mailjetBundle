@@ -2,7 +2,7 @@
 
 namespace YourApp\App\Mailjet;
 
-use Welp\MailjetBundle\Provider\ProviderInterface;
+use Mailjet\MailjetBundle\Provider\ProviderInterface;
 
 use YourApp\Model\User\UserRepository;
 use YourApp\Model\User\User;

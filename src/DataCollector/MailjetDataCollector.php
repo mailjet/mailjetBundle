@@ -1,7 +1,7 @@
 <?php
-namespace Welp\MailjetBundle\DataCollector;
+namespace Mailjet\MailjetBundle\DataCollector;
 
-use Welp\MailjetBundle\Client\MailjetClient;
+use Mailjet\MailjetBundle\Client\MailjetClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
