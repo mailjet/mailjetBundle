@@ -7,11 +7,11 @@ use Mailjet\MailjetBundle\Model\Contact;
 
 class ContactEvent extends Event
 {
-    const EVENT_SUBSCRIBE = 'mailjet.mailjet.subscribe';
-    const EVENT_UNSUBSCRIBE = 'mailjet.mailjet.unsubscribe';
-    const EVENT_UPDATE = 'mailjet.mailjet.update';
-    const EVENT_DELETE = 'mailjet.mailjet.delete';
-    const EVENT_CHANGE_EMAIL = 'mailjet.mailjet.change_email'; # not implemented yet
+    const EVENT_SUBSCRIBE = 'mailjet.event.subscribe';
+    const EVENT_UNSUBSCRIBE = 'mailjet.event.unsubscribe';
+    const EVENT_UPDATE = 'mailjet.event.update';
+    const EVENT_DELETE = 'mailjet.event.delete';
+    const EVENT_CHANGE_EMAIL = 'mailjet.event.change_email'; # not implemented yet
 
     protected $listId;
     protected $contact;
