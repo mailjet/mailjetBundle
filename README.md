@@ -17,7 +17,7 @@ Symfony bundle for handling Mailjet API V3 using this wrapper: <https://github.c
 * [x] Synchronize Contact Metadata (Contact Properties) with your config
 * [x] Synchronize your user with Mailjet contact list
 * [x] Use your own userProvider (basic `FosContactProvider` included to interface with FosUserBundle)
-* [x] Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List *(need more tests)*
+* [x] Use lifecycle event to subscribe/unsubscribe/update/delete/changeMail user from a contact List
 * [ ] Register Event API - real time notifications (webhook) *(need more tests)*
 
 ## Setup
@@ -51,7 +51,6 @@ mailjet:
 
 * More unit tests
 * Functionnal tests
-* handle when user changes email
 * Bulletproof webhook handler
 * Other features like Campaigns, stats, ...
 

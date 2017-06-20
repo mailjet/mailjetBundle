@@ -50,12 +50,12 @@ class ContactListener
     }
 
     // @TODO How to change user email? (workaround: remove old, add new...)
-    /*public function onChangeEmail(ContactEvent $event)
+    public function onChangeEmail(ContactEvent $event)
     {
-        $this->contactManager->changeEmailAddress(
+        $this->contactManager->changeEmail(
             $event->getListId(),
             $event->getContact(),
             $event->getOldEmail()
         );
-    }*/
+    }
 }

@@ -47,6 +47,9 @@ class ContactsListManager
 
     /**
      * update a Contact to listId
+     * @param string $listId
+     * @param Contact $contact
+     * @param string $action
      */
     public function update($listId, Contact $contact, $action=Contact::ACTION_ADDNOFORCE)
     {
@@ -61,6 +64,9 @@ class ContactsListManager
 
     /**
      * re/subscribe a Contact to listId
+     * @param string $listId
+     * @param Contact $contact
+     * @param bool $force
      */
     public function subscribe($listId, Contact $contact, $force = true)
     {
@@ -79,6 +85,8 @@ class ContactsListManager
 
     /**
      * unsubscribe a Contact from listId
+     * @param string $listId
+     * @param Contact $contact
      */
     public function unsubscribe($listId, Contact $contact)
     {
@@ -93,6 +101,8 @@ class ContactsListManager
 
     /**
      * Delete a Contact from listId
+     * @param string $listId
+     * @param Contact $contact
      */
     public function delete($listId, Contact $contact)
     {
@@ -105,13 +115,43 @@ class ContactsListManager
         return $response->getData();
     }
 
-    /*
+    /**
      * Change email a Contact
-     *
-    public function changeEmail(Contact $contact, $oldEmail)
+     * @param string $listId
+     * @param Contact $contact
+     * @param string $oldEmail
+     */
+    public function changeEmail($listId, Contact $contact, $oldEmail)
     {
-        //@TODO
-    }*/
+        // get old contact properties
+        $response = $this->mailjet->get(Resources::$Contactdata, ['id' => $oldEmail]);
+        if (!$response->success()) {
+            $this->throwError("ContactsListManager:changeEmail() failed:", $response);
+        }
+
+        // copy contact properties
+        $oldContactData = $response->getData();
+        if(isset($oldContactData[0])){
+            $contact->setProperties($oldContactData[0]['Data']);
+        }
+
+        // add new contact
+        $contact->setAction(Contact::ACTION_ADDFORCE);
+        $response = $this->_exec($listId, $contact);
+        if (!$response->success()) {
+            $this->throwError("ContactsListManager:changeEmail() failed:", $response);
+        }
+
+        // remove old
+        $oldContact = new Contact($oldEmail);
+        $oldContact->setAction(Contact::ACTION_REMOVE);
+        $response = $this->_exec($listId, $oldContact);
+        if (!$response->success()) {
+            $this->throwError("ContactsListManager:changeEmail() failed:", $response);
+        }
+
+        return $response->getData();
+    }
 
     /**
     * An action for adding a contact to a contact list. Only POST is supported.
@@ -123,6 +163,8 @@ class ContactsListManager
     * or updates the entry with these values. On success,
     * the API returns a packet with the same format but with all properties available
     * for that contact.
+    * @param string $listId
+    * @param Contact $contact
     */
     private function _exec($listId, Contact $contact)
     {

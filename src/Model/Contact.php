@@ -57,11 +57,22 @@ class Contact
     }
 
     /**
-     * Correspond to Email in MailJet request
+     * Correspond to Email in Mailjet request
      */
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set contact email
+     * @param string $email
+     * @return Contact
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
     }
 
     /**
@@ -73,12 +84,34 @@ class Contact
     }
 
     /**
+     * Set contact name
+     * @param string $name
+     * @return Contact
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
      * Correspond to Properties in MailJet request
      * Array ['property' => value, ...]
      */
     public function getProperties()
     {
         return $this->properties;
+    }
+
+    /**
+     * Set array of Contact properties
+     * @param array $properties
+     * @return Contact
+     */
+    public function setProperties(array $properties)
+    {
+        $this->properties = $properties;
+        return $this;
     }
 
     /**

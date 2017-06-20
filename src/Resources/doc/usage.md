@@ -153,8 +153,26 @@ public function deleteUser(User $user)
 
 ### Change User's email address
 
-NOT POSSIBLE YET...(WORKAROUND: remove old, add new)
+```php
+<?php
 
+use Mailjet\MailjetBundle\Event\ContactEvent;
+use Mailjet\MailjetBundle\Model\Contact;
+
+public function changeEmailAddress($oldEmail, $newEmail)
+{
+    // ...
+    $contact = new Contact($newEmail);
+
+    $this->container->get('event_dispatcher')->dispatch(
+        ContactEvent::EVENT_CHANGE_EMAIL,
+        new ContactEvent('your_list_id', $contact, $oldEmail)
+    );
+
+}
+```
+
+WORKAROUND: remove old, add new
 
 ## Retrieve Mailjet Client Object to make custom MailJet API V3 requests
 
