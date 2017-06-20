@@ -10,12 +10,19 @@ Define a configuration in your `config.yml`:
 mailjet:
     api_key:    "%mailjet.api_key%"
     secret_key: "%mailjet.secret_key%"
-    call: true # Performs the API call or not
+    call: true # (Default: true) - Performs the API call or not
     options:
-        url: "api.mailjet.com" # (Default: api.mailjet.com) : domain name of the API
-        version: "v3" # (Default: v3) : API version (only working for Mailjet API V3 +)
-        call: true # (Default: true) : turns on(true) / off the call to the API
-        secured: true # secured (Default: true) : turns on(true) / off the use of 'https'
+        url: "api.mailjet.com" # (Default: api.mailjet.com) - domain name of the API
+        version: "v3" # (Default: v3) - API version (only working for Mailjet API V3 +)
+        call: true # (Default: true) - turns on(true) / off the call to the API
+        secured: true # (Default: true) - turns on(true) / off the use of 'https'
+    transactionnal:
+        call: true #  (Default: true) - Performs the API call or not
+        options:
+            url: "api.mailjet.com" # (Default: api.mailjet.com) - domain name of the API
+            version: "v3" # (Default: v3) - API version (only working for Mailjet API V3 +)
+            call: true # (Default: true) - turns on(true) / off the call to the API
+            secured: true # (Default: true) - turns on(true) / off the use of 'https'
     # route name to handle the callback, if you want to change it
     event_endpoint_route: app_event_endpoint_route
     # secret to secure callback

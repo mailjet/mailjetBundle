@@ -21,6 +21,8 @@ services:
             - "@swiftmailer.transport.eventdispatcher.mailjet"
             - "%mailjet.api_key%"
             - "%mailjet.secret_key%"
+            - %mailjet.transactionnal.call%
+            - %mailjet.transactionnal.options%
 
     mailjet.service.contacts_list_synchronizer:
         class: "%mailjet.contacts_list_synchronizer.class%"
