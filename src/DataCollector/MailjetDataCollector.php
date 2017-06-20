@@ -11,14 +11,25 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
  */
 class MailjetDataCollector extends DataCollector
 {
+    /**
+     * Mailjet client for common API Call
+     * @var MailjetClient
+     */
     protected $client;
+
+    /**
+     * Mailjet client for transactionnal email (swiftmailer)
+     * @var MailjetClient
+     */
+    protected $transactionnalClient;
 
     /**
      * @param MailjetClient $client
      */
-    public function __construct(MailjetClient $client)
+    public function __construct(MailjetClient $client, MailjetClient $transactionnalClient)
     {
         $this->client = $client;
+        $this->transactionnalClient = $transactionnalClient;
     }
     /**
      * Collects data for the given Request and Response.
@@ -29,7 +40,9 @@ class MailjetDataCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
+
         $this->data = $this->client->getCalls();
+        $this->data = array_merge($this->data, $this->transactionnalClient->getCalls());
     }
     /**
      * Returns the name of the collector.
@@ -40,6 +53,7 @@ class MailjetDataCollector extends DataCollector
     {
         return 'mailjet';
     }
+
     /**
      * @return array
      */
@@ -49,7 +63,7 @@ class MailjetDataCollector extends DataCollector
     }
 
     /**
-     * Return call number 
+     * Return call number
      * @method getCallCount
      * @return int
      */

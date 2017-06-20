@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block menu %}
-    <span class="label">
+    <span class="label {% if collector.callCount == 0 %}disabled{% endif %}">
         <span class="icon">
             <svg data-placement="top" height="29px" width="50px" x="0px" y="0px" viewBox="0 0 442.9 244.4" enable-background="new 0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><linearGradient id="gradient_mj_logo" gradientUnits="userSpaceOnUse" x1="284.4601" y1="378.0938" x2="78.2602" y2="104.4573" gradientTransform="matrix(1 0 0 -1 0 326.11)"><stop offset="0" style="stop-color:#FFBC48"></stop><stop offset="1" style="stop-color:#FFA414"></stop></linearGradient><path id="mj_logo" class="mailjet-logo" d="M148.6,116.6l-6.9,46.5l-48,70.2l16.2-8.9L373.6,79.2l49.1-27L148.6,116.6z M147,104.3l206.8-47
         l-13.4-1.8L286.1,48L170.9,32L20.1,11.1l55.3,40.6l69.5,51.1L147,104.3z"></path></svg>

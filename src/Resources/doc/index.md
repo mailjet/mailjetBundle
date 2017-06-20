@@ -53,7 +53,6 @@ mailjet:
 * Functionnal tests
 * handle when user changes email
 * Bulletproof webhook handler
-* DataCollector for transactionnal client
 * Other features like Campaigns, stats, ...
 
 
