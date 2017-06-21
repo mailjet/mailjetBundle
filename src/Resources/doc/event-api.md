@@ -140,6 +140,7 @@ class MailjetEventListener implements EventSubscriberInterface
 
 ### 2- Register the listener into services.yml
 
+```yaml
 services:
     app.listener.mailjet.webhook:
         class: AppBundle\Listener\MailjetEventListener
@@ -147,6 +148,6 @@ services:
             - { name: kernel.event_subscriber }
         arguments:
             - @logger
-
+```
 
 ### 3- Test with ngrok (or other localhost tunnel)
