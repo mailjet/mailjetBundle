@@ -47,16 +47,16 @@ class EventCallbackUrl
      * @param int    $version
      * @param bool   $groupEvent
      */
-    public function __construct($apikeyId, $url, $eventType = self::EVENT_TYPE_OPEN,
+    public function __construct($url, $eventType = self::EVENT_TYPE_OPEN, $groupEvent = false,
                                 $isBackup = false, $status = self::EVENT_STATUS_ALIVE,
-                                $version = 1, $groupEvent = false
+                                $version = 1, $apikeyId = null
     ) {
-        $this->apikeyId = $apikeyId;
         $this->url = $url;
         $this->eventType = $eventType;
         $this->isBackup = $isBackup;
         $this->status = $status;
         $this->version = $version;
+        $this->apikeyId = $apikeyId;
         $this->groupEvent = $groupEvent;
     }
 
@@ -72,13 +72,16 @@ class EventCallbackUrl
         }
 
         $result = [
-            'APIKeyID' => $this->apikeyId,
             'Url' => $this->url,
             'EventType' => $this->eventType,
             'IsBackup'  => $this->isBackup,
             'Status'    => $this->status,
             'Version'   => $this->version
         ];
+
+        if($this->apikeyId){
+            $result['APIKeyID'] = $this->apikeyId;
+        }
 
         return $result;
     }

@@ -202,7 +202,7 @@ Example:
       var_dump($response->getStatus());
 
     ...
-    // Send transactional emails
+    // Send transactional emails (note: prefer using SwiftMailer to send transactionnal emails)
 
     $body = [
         'FromEmail' => "pilot@mailjet.com",

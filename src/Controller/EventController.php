@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 use Mailjet\MailjetBundle\Event\CallbackEvent;
@@ -34,10 +35,18 @@ class EventController extends Controller
     {
         // Token validation
         if ($this->getToken() !== $token) {
-            throw $this->createAccessDeniedException('Token mismatch');
+            throw new BadRequestHttpException('Token mismatch');
         }
 
         $data = $this->extractData($request);
+
+        if(!$data){
+            throw new BadRequestHttpException('Malformatted or missing data');
+        }
+
+        if(isset($data['event'])){
+            $data = array($data);
+        }
         /*
             Please note that the event types in the collection can be mixed.
             We group together all the events of the last second for the same webhook url.
@@ -70,7 +79,7 @@ class EventController extends Controller
                     $dispatcher->dispatch(CallbackEvent::EVENT_UNSUB, new CallbackEvent($callbackData));
                     break;
                 default:
-                    throw $this->createAccessDeniedException('Type mismatch');
+                    throw new BadRequestHttpException('Type mismatch');
                     break;
             }
         }
@@ -104,7 +113,7 @@ class EventController extends Controller
      */
     private function prepareResponse($status)
     {
-        return new JsonResponse(array(), $status);
+        return new JsonResponse(array('success' => true), $status);
     }
 
     /**

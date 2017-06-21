@@ -1,6 +1,6 @@
 parameters:
     mailjet.client.class: Mailjet\MailjetBundle\Client\MailjetClient
-    mailjet.event_callback_manager.class: Mailjet\MailjetBundle\Manager\EventCallbackManager
+    mailjet.event_callback_manager.class: Mailjet\MailjetBundle\Manager\EventCallbackUrlManager
     mailjet.contact_metadata_manager.class: Mailjet\MailjetBundle\Manager\ContactMetadataManager
     mailjet.contacts_list_manager.class: Mailjet\MailjetBundle\Manager\ContactsListManager
     mailjet.contacts_list_synchronizer.class: Mailjet\MailjetBundle\Synchronizer\ContactsListSynchronizer

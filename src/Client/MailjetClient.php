@@ -71,7 +71,7 @@ class MailjetClient extends Client
             'success' => $response->success(),
             'response' => $response->getBody(),
         ];
-        return $resource;
+        return $response;
     }
     /**
      * Trigger a GET request
