@@ -197,8 +197,8 @@
 <li class="task-list-item"><input type="checkbox" disabled checked> Synchronize Contact Metadata (Contact Properties) with your config</li>
 <li class="task-list-item"><input type="checkbox" disabled checked> Synchronize your user with Mailjet contact list</li>
 <li class="task-list-item"><input type="checkbox" disabled checked> Use your own userProvider (basic <code>FosContactProvider</code> included to interface with FosUserBundle)</li>
-<li class="task-list-item"><input type="checkbox" disabled checked> Use lifecycle event to subscribe/unsubscribe/update/delete user from a contact List <em>(need more tests)</em></li>
-<li class="task-list-item"><input type="checkbox" disabled> Register Event API - real time notifications (webhook) <em>(need more tests)</em></li>
+<li class="task-list-item"><input type="checkbox" disabled checked> Use lifecycle event to subscribe/unsubscribe/update/delete/changeEmail user from a contact List</li>
+<li class="task-list-item"><input type="checkbox" disabled checked> Register Event API - real time notifications (webhook)</li>
 </ul>
 <h2 id="setup">Setup</h2>
 <p>Add bundle to your project:</p>
@@ -226,9 +226,7 @@
 <ul>
 <li>More unit tests</li>
 <li>Functionnal tests</li>
-<li>handle when user changes email</li>
-<li>Bulletproof webhook handler</li>
-<li>Specific config for transactionnal client (call, options)</li>
+<li>better SyncContact (remove/unsub contact already in list [diff method])</li>
 <li>Other features like Campaigns, stats, ...</li>
 </ul>
 <h2 id="contributing">Contributing</h2>
@@ -283,5 +281,5 @@
 
 <!--
 MkDocs version : 0.16.1
-Build Date UTC : 2017-06-16 10:23:56
+Build Date UTC : 2017-06-21 20:57:09
 -->

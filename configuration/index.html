@@ -183,12 +183,19 @@
 <div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">mailjet</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">api_key</span><span class="p p-Indicator">:</span>    <span class="s">&quot;%mailjet.api_key%&quot;</span>
     <span class="l l-Scalar l-Scalar-Plain">secret_key</span><span class="p p-Indicator">:</span> <span class="s">&quot;%mailjet.secret_key%&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">call</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span> <span class="c1"># Performs the API call or not</span>
+    <span class="l l-Scalar l-Scalar-Plain">call</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span> <span class="c1"># (Default: true) - Performs the API call or not</span>
     <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
-        <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="s">&quot;api.mailjet.com&quot;</span> <span class="c1"># (Default: api.mailjet.com) : domain name of the API</span>
-        <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;v3&quot;</span> <span class="c1"># (Default: v3) : API version (only working for Mailjet API V3 +)</span>
-        <span class="l l-Scalar l-Scalar-Plain">call</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span> <span class="c1"># (Default: true) : turns on(true) / off the call to the API</span>
-        <span class="l l-Scalar l-Scalar-Plain">secured</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span> <span class="c1"># secured (Default: true) : turns on(true) / off the use of &#39;https&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="s">&quot;api.mailjet.com&quot;</span> <span class="c1"># (Default: api.mailjet.com) - domain name of the API</span>
+        <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;v3&quot;</span> <span class="c1"># (Default: v3) - API version (only working for Mailjet API V3 +)</span>
+        <span class="l l-Scalar l-Scalar-Plain">call</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span> <span class="c1"># (Default: true) - turns on(true) / off the call to the API</span>
+        <span class="l l-Scalar l-Scalar-Plain">secured</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span> <span class="c1"># (Default: true) - turns on(true) / off the use of &#39;https&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">transactionnal</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">call</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span> <span class="c1">#  (Default: true) - Performs the API call or not</span>
+        <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="s">&quot;api.mailjet.com&quot;</span> <span class="c1"># (Default: api.mailjet.com) - domain name of the API</span>
+            <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;v3&quot;</span> <span class="c1"># (Default: v3) - API version (only working for Mailjet API V3 +)</span>
+            <span class="l l-Scalar l-Scalar-Plain">call</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span> <span class="c1"># (Default: true) - turns on(true) / off the call to the API</span>
+            <span class="l l-Scalar l-Scalar-Plain">secured</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span> <span class="c1"># (Default: true) - turns on(true) / off the use of &#39;https&#39;</span>
     <span class="c1"># route name to handle the callback, if you want to change it</span>
     <span class="l l-Scalar l-Scalar-Plain">event_endpoint_route</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">app_event_endpoint_route</span>
     <span class="c1"># secret to secure callback</span>

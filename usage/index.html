@@ -309,7 +309,26 @@ You can use these metadata in your newsletters or to create segments out of them
 
 
 <h3 id="change-users-email-address">Change User's email address</h3>
-<p>NOT POSSIBLE YET...(WORKAROUND: remove old, add new)</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">Mailjet\MailjetBundle\Event\ContactEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Mailjet\MailjetBundle\Model\Contact</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">changeEmailAddress</span><span class="p">(</span><span class="nv">$oldEmail</span><span class="p">,</span> <span class="nv">$newEmail</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nv">$contact</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Contact</span><span class="p">(</span><span class="nv">$newEmail</span><span class="p">);</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;event_dispatcher&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span>
+        <span class="nx">ContactEvent</span><span class="o">::</span><span class="na">EVENT_CHANGE_EMAIL</span><span class="p">,</span>
+        <span class="k">new</span> <span class="nx">ContactEvent</span><span class="p">(</span><span class="s1">&#39;your_list_id&#39;</span><span class="p">,</span> <span class="nv">$contact</span><span class="p">,</span> <span class="nv">$oldEmail</span><span class="p">)</span>
+    <span class="p">);</span>
+
+<span class="p">}</span>
+</pre></div>
+
+
+<p>WORKAROUND: remove old, add new</p>
 <h2 id="retrieve-mailjet-client-object-to-make-custom-mailjet-api-v3-requests">Retrieve Mailjet Client Object to make custom MailJet API V3 requests</h2>
 <p>You can also retrieve the MailJet Client Object which comes from the wrapper <a href="https://github.com/mailjet/mailjet-apiv3-php">mailjet/mailjet-apiv3-php</a>.</p>
 <p>The service key is <code>mailjet.client</code>.</p>
@@ -333,7 +352,7 @@ You can use these metadata in your newsletters or to create segments out of them
       <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatus</span><span class="p">());</span>
 
     <span class="o">...</span>
-    <span class="c1">// Send transactional emails</span>
+    <span class="c1">// Send transactional emails (note: prefer using SwiftMailer to send transactionnal emails)</span>
 
     <span class="nv">$body</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s1">&#39;FromEmail&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;pilot@mailjet.com&quot;</span><span class="p">,</span>

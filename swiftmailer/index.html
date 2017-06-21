@@ -77,6 +77,8 @@
                 
                     <li><a class="toctree-l4" href="#configuration">Configuration</a></li>
                 
+                    <li><a class="toctree-l4" href="#send-email-example">Send email example</a></li>
+                
                     <li><a class="toctree-l4" href="#documentation">Documentation</a></li>
                 
             
@@ -184,8 +186,28 @@
 </pre></div>
 
 
+<h2 id="send-email-example">Send email example</h2>
+<div class="highlight"><pre><span></span><span class="x">$message = \Swift_Message::newInstance()</span>
+<span class="x">    -&gt;setSubject(&#39;this is and email&#39;)</span>
+<span class="x">    -&gt;setFrom([&#39;no-reply@foo.bar&#39; =&gt; &#39;Transactionnal&#39;])</span>
+<span class="x">    -&gt;setTo(&#39;to@foo.bar&#39;)</span>
+<span class="x">    -&gt;setBody(</span>
+<span class="x">        &#39;&lt;strong&gt;hello world!&lt;/strong&gt;&#39;,</span>
+<span class="x">        &#39;text/html&#39;</span>
+<span class="x">    );</span>
+
+<span class="x">//Configure Headers</span>
+<span class="x">$headers = $message-&gt;getHeaders();</span>
+<span class="x">// Mailjet header</span>
+<span class="x">$headers-&gt;addTextHeader(&#39;X-MJ-CustomID&#39;, $this-&gt;getName());</span>
+
+<span class="x">// send email</span>
+<span class="x">$this-&gt;get(&#39;mailer&#39;)-&gt;send($message);</span>
+</pre></div>
+
+
 <h2 id="documentation">Documentation</h2>
-<p><a href="https://github.com/mailjet/mailjetBundle">here</a></p>
+<p><a href="https://github.com/mailjet/MailjetSwiftMailer">MailjetSwiftMailer github</a></p>
               
             </div>
           </div>
