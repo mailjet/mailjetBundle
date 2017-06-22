@@ -18,4 +18,20 @@ class ContactEventSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Mailjet\MailjetBundle\Event\ContactEvent');
     }
+
+    public function it_can_get_listid()
+    {
+        $this->getListId()->shouldReturn('listid01');
+    }
+
+    public function it_can_get_contact(Contact $contact)
+    {
+        $this->getContact()->shouldReturn($contact);
+    }
+
+    public function it_get_oldemail(Contact $contact){
+        $this->beConstructedWith('listid01', $contact, 'oldemail@foo.bar');
+
+        $this->getOldEmail()->shouldReturn('oldemail@foo.bar');
+    }
 }

@@ -21,13 +21,25 @@ class CallbackEvent extends Event
     const EVENT_NEWSENDER = 'mailjet.event.newsender';
     const EVENT_NEWSENDERAUTOVALID = 'mailjet.event.newsenderautovalid';
 
+    /**
+     * array of data payload from Mailjet Event
+     * @var array
+     */
     protected $data;
 
-    public function __construct($data)
+    /**
+     * @param  array $data
+     */
+    public function __construct(array $data)
     {
         $this->data = $data;
     }
 
+    /**
+     * Get data payload from Mailjet Event
+     * @method getData
+     * @return array
+     */
     public function getData()
     {
         return $this->data;
