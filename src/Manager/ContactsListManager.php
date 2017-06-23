@@ -39,7 +39,7 @@ class ContactsListManager
         $contact->setAction($action);
         $response = $this->_exec($listId, $contact);
         if (!$response->success()) {
-            $this->throwError("ContactsListManager:create() failed:", $response);
+            $this->throwError("ContactsListManager:create() failed", $response);
         }
 
         return $response->getData();
@@ -56,7 +56,7 @@ class ContactsListManager
         $contact->setAction($action);
         $response = $this->_exec($listId, $contact);
         if (!$response->success()) {
-            $this->throwError("ContactsListManager:update() failed:", $response);
+            $this->throwError("ContactsListManager:update() failed", $response);
         }
 
         return $response->getData();
@@ -77,7 +77,7 @@ class ContactsListManager
         }
         $response = $this->_exec($listId, $contact);
         if (!$response->success()) {
-            $this->throwError("ContactsListManager:sub() failed:", $response);
+            $this->throwError("ContactsListManager:sub() failed", $response);
         }
 
         return $response->getData();
@@ -93,7 +93,7 @@ class ContactsListManager
         $contact->setAction(Contact::ACTION_UNSUB);
         $response = $this->_exec($listId, $contact);
         if (!$response->success()) {
-            $this->throwError("ContactsListManager:unsub() failed:", $response);
+            $this->throwError("ContactsListManager:unsub() failed", $response);
         }
 
         return $response->getData();
@@ -109,7 +109,7 @@ class ContactsListManager
         $contact->setAction(Contact::ACTION_REMOVE);
         $response = $this->_exec($listId, $contact);
         if (!$response->success()) {
-            $this->throwError("ContactsListManager:delete() failed:", $response);
+            $this->throwError("ContactsListManager:delete() failed", $response);
         }
 
         return $response->getData();
@@ -126,7 +126,7 @@ class ContactsListManager
         // get old contact properties
         $response = $this->mailjet->get(Resources::$Contactdata, ['id' => $oldEmail]);
         if (!$response->success()) {
-            $this->throwError("ContactsListManager:changeEmail() failed:", $response);
+            $this->throwError("ContactsListManager:changeEmail() failed", $response);
         }
 
         // copy contact properties
@@ -139,7 +139,7 @@ class ContactsListManager
         $contact->setAction(Contact::ACTION_ADDFORCE);
         $response = $this->_exec($listId, $contact);
         if (!$response->success()) {
-            $this->throwError("ContactsListManager:changeEmail() failed:", $response);
+            $this->throwError("ContactsListManager:changeEmail() failed", $response);
         }
 
         // remove old
@@ -147,7 +147,7 @@ class ContactsListManager
         $oldContact->setAction(Contact::ACTION_REMOVE);
         $response = $this->_exec($listId, $oldContact);
         if (!$response->success()) {
-            $this->throwError("ContactsListManager:changeEmail() failed:", $response);
+            $this->throwError("ContactsListManager:changeEmail() failed", $response);
         }
 
         return $response->getData();
