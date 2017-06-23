@@ -2,8 +2,10 @@
 
 namespace Mailjet\MailjetBundle\Command;
 
+use Mailjet\MailjetBundle\Synchronizer\ContactsListSynchronizer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
@@ -25,13 +27,24 @@ class SyncUserCommand extends ContainerAwareCommand
     private $lists;
 
     /**
+     * @var ContactsListSynchronizer
+     */
+    private $synchronizer;
+
+    /**
      * {@inheritDoc}
      */
     protected function configure()
     {
         $this
             ->setName('mailjet:user-sync')
-            ->setDescription('Synchronize users with mailjet contact list');
+            ->setDescription('Synchronize users with mailjet contact list')
+            ->addOption(
+                'follow-sync',
+                null,
+                InputOption::VALUE_NONE,
+                'If you want to follow batches execution'
+            );
             // @TODO add params : listId, providerServiceKey
     }
 
@@ -43,6 +56,7 @@ class SyncUserCommand extends ContainerAwareCommand
         $output->writeln(sprintf('<info>%s</info>', $this->getDescription()));
 
         $this->lists = $this->getContainer()->getParameter('mailjet.lists');
+        $this->synchronizer = $this->getContainer()->get('mailjet.service.contacts_list_synchronizer');
     }
 
     /**
@@ -55,10 +69,19 @@ class SyncUserCommand extends ContainerAwareCommand
 
             $contactList = new ContactsList($listId, ContactsList::ACTION_ADDFORCE, $provider->getContacts());
 
-            $response = $this->getContainer()->get('mailjet.service.contacts_list_synchronizer')->synchronize($contactList);
-            //@TODO get responses + parse all batch responses + show/format error + show result/count import
-            // We need to retrieve Errors_logs file but in Mailjet UI it throw 500 error...
-            // $response = $mj->get(Resources::$ContactManagemanycontacts, ['actionID' => $id]);
+            $batchesResult = $this->synchronizer->synchronize($contactList);
+
+            if ($input->getOption('follow-sync')) {
+
+                $batchesResult = $this->refreshBatchesResult($listId, $batchesResult);
+                while (!$this->batchesFinished($batchesResult)) {
+                    $batchesResult = $this->refreshBatchesResult($listId, $batchesResult);
+                    foreach ($batchesResult as $key => $batch) {
+                        $output->writeln($this->displayBatchInfo($batch));
+                    }
+                    sleep(2);
+                }
+            }
             // Recovering error file
             // $response = $mj->get(Resources::$BatchjobJsonerror, ['id' => $JobID]);
 
@@ -82,5 +105,50 @@ class SyncUserCommand extends ContainerAwareCommand
             throw new \InvalidArgumentException(sprintf('Provider "%s" should implement Mailjet\MailjetBundle\Provider\ProviderInterface.', $providerServiceKey));
         }
         return $provider;
+    }
+
+    /**
+     * Refresh all batch from Mailjet API
+     * @param string $listId
+     * @param array $batchesResult
+     * @return array
+     */
+    private function refreshBatchesResult($listId, $batchesResult)
+    {
+        $refreshedBatchsResults = [];
+        foreach ($batchesResult as $key => $batch) {
+            $jobId = $batch['JobID'];
+            $batch = $this->synchronizer->getJob($listId, $jobId);
+            array_push($refreshedBatchsResults, array_merge(['JobID' => $jobId], $batch[0]));
+        }
+        return $refreshedBatchsResults;
+    }
+    /**
+     * Test if all batches are finished
+     * @param array $batchesResult
+     * @return bool
+     */
+    private function batchesFinished($batchesResult)
+    {
+        $allfinished = true;
+        foreach ($batchesResult as $key => $batch) {
+            if ($batch['Status'] != 'Completed') {
+                $allfinished = false;
+            }
+        }
+        return $allfinished;
+    }
+    /**
+     * Pretty display of batch info
+     * @param array $batch
+     * @return string
+     */
+    private function displayBatchInfo($batch)
+    {
+        if ($batch['Status'] == 'Completed') {
+            return sprintf('batch %s is Completed, %d operations %s', $batch['JobID'], $batch['Count'], $batch['Error']);
+        } else {
+            return sprintf('batch %s, current status %s, %d operations %s', $batch['JobID'], $batch['Status'], $batch['Count'], $batch['Error']);
+        }
     }
 }

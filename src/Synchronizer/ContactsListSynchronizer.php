@@ -4,6 +4,8 @@ namespace Mailjet\MailjetBundle\Synchronizer;
 
 use \Mailjet\Resources;
 
+use Mailjet\Response;
+use Mailjet\MailjetBundle\Exception\MailjetException;
 use Mailjet\MailjetBundle\Model\ContactsList;
 use Mailjet\MailjetBundle\Client\MailjetClient;
 
@@ -50,8 +52,39 @@ class ContactsListSynchronizer
             $currentBatch = $this->mailjet->post(Resources::$ContactslistManagemanycontacts,
                 ['id' => $subContactsList->getListId(), 'body' => $subContactsList->format()]
             );
-            array_push($batchResults, $currentBatch);
+            if($currentBatch->success()){
+                array_push($batchResults, $currentBatch->getData()[0]);
+            }else{
+                $this->throwError("ContactsListSynchronizer:synchronize() failed", $currentBatch);
+            }
         }
         return $batchResults;
+    }
+
+    /**
+     * Get Job data
+     * @method getJob
+     * @param  string $listId
+     * @param  string $jobId
+     * @return array
+     */
+    public function getJob($listId, $jobId)
+    {
+        $response = $this->mailjet->get(Resources::$ContactslistManagemanycontacts, ['id' => $listId, 'actionid' => $jobId]);
+        if (!$response->success()) {
+            $this->throwError("ContactsListSynchronizer:getJob() failed", $response);
+        }
+
+        return $response->getData();
+    }
+
+    /**
+     * Helper to throw error
+     * @param  string $title
+     * @param  array $response
+     */
+    private function throwError($title, Response $response)
+    {
+        throw new MailjetException(0, $title, $response);
     }
 }
