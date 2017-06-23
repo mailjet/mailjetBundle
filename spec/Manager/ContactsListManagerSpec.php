@@ -117,7 +117,7 @@ class ContactsListManagerSpec extends ObjectBehavior
         $this->delete('list01', $contact)->shouldReturn('successdata!');
     }
 
-    /**function it_change_email(MailjetClient $mailjet, \Mailjet\Response $response)
+    function it_change_email(MailjetClient $mailjet, \Mailjet\Response $response, \Mailjet\Response $responseFinal)
     {
 
         $contact = new Contact('foo@bar');
@@ -129,13 +129,22 @@ class ContactsListManagerSpec extends ObjectBehavior
         $mailjet->get(Resources::$Contactdata, ['id' => 'oldemail@foo.bar'])
             ->shouldBeCalled()
             ->willReturn($response);
-            $contact->setAction(Contact::ACTION_ADDFORCE);
-
+        $contact->setProperties(['foo' => 'bar']);
         $mailjet->post(Resources::$ContactslistManagecontact, ['id' => 'list01', 'body' => $contact->format()])
             ->shouldBeCalled()
             ->willReturn($response);
 
-        $this->changeEmail('list01', $contact, 'oldemail@foo.bar')->shouldReturn('successdata!');
-    }**/
+        $oldContact = new Contact('oldemail@foo.bar');
+        $oldContact->setAction(Contact::ACTION_REMOVE);
+
+        $responseFinal->success()->shouldBeCalled()->willReturn(true);
+        $responseFinal->getData()->shouldBeCalled()->willReturn('success');
+
+        $mailjet->post(Resources::$ContactslistManagecontact, ['id' => 'list01', 'body' => $oldContact->format()])
+            ->shouldBeCalled()
+            ->willReturn($responseFinal);
+
+        $this->changeEmail('list01', $contact, 'oldemail@foo.bar')->shouldReturn('success');
+    }
 
 }
