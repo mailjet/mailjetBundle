@@ -33,7 +33,7 @@ class MailjetExtension extends Extension
             } else {
                 $container->setParameter('mailjet.transactionnal.options', array());
             }
-        }else{
+        } else {
             $container->setParameter('mailjet.transactionnal.call', true);
             $container->setParameter('mailjet.transactionnal.options', array());
         }
@@ -46,6 +46,9 @@ class MailjetExtension extends Extension
         $container->setParameter('mailjet.lists', $config['lists']);
         # Contact Properties config
         $container->setParameter('mailjet.contact_metadata', $config['contact_metadata']);
+
+        //set some alias
+        $container->setAlias('mailjet', 'swiftmailer.mailer.transport.mailjet');
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
