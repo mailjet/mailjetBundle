@@ -3,9 +3,11 @@
 namespace Mailjet\MailjetBundle\Manager;
 
 use \Mailjet\Resources;
+use \Mailjet\Response;
 
 use Mailjet\MailjetBundle\Client\MailjetClient;
 use Mailjet\MailjetBundle\Model\EventCallbackUrl;
+use Mailjet\MailjetBundle\Exception\MailjetException;
 
 /**
 * https://dev.mailjet.com/email-api/v3/eventcallbackurl/
@@ -36,7 +38,7 @@ class EventCallbackUrlManager
     {
         $response = $this->mailjet->get(Resources::$Eventcallbackurl);
         if (!$response->success()) {
-            $this->throwError("EventCallbackUrlManager:getAll() failed:", $response);
+            $this->throwError("EventCallbackUrlManager:getAll() failed", $response);
         }
 
         return $response->getData();
@@ -51,7 +53,7 @@ class EventCallbackUrlManager
     {
         $response = $this->mailjet->get(Resources::$Eventcallbackurl, ['id' => $id]);
         if (!$response->success()) {
-            $this->throwError("EventCallbackUrlManager:get() failed:", $response);
+            $this->throwError("EventCallbackUrlManager:get() failed", $response);
         }
 
         return $response->getData();
@@ -66,7 +68,7 @@ class EventCallbackUrlManager
     {
         $response = $this->mailjet->post(Resources::$Eventcallbackurl, ['body' => $eventCallbackUrl->format()]);
         if (!$response->success()) {
-            $this->throwError("EventCallbackUrlManager:create() failed:", $response);
+            $this->throwError("EventCallbackUrlManager:create() failed", $response);
         }
 
         return $response->getData();
@@ -82,7 +84,7 @@ class EventCallbackUrlManager
     {
         $response = $this->mailjet->put(Resources::$Eventcallbackurl, ['id' => $id, 'body' => $eventCallbackUrl->format()]);
         if (!$response->success()) {
-            $this->throwError("EventCallbackUrlManager:update() failed:", $response);
+            $this->throwError("EventCallbackUrlManager:update() failed", $response);
         }
 
         return $response->getData();
@@ -97,7 +99,7 @@ class EventCallbackUrlManager
     {
         $response = $this->mailjet->delete(Resources::$Eventcallbackurl, ['id' => $id]);
         if (!$response->success()) {
-            $this->throwError("EventCallbackUrlManager:delete() failed:", $response);
+            $this->throwError("EventCallbackUrlManager:delete() failed", $response);
         }
 
         return $response->getData();
@@ -106,10 +108,11 @@ class EventCallbackUrlManager
     /**
      * Helper to throw error
      * @param  string $title
+     * @param  Response $response
      * @param  array $response
      */
-    private function throwError($title, $response)
-    {
-        throw new \RuntimeException($title.": ".$response->getReasonPhrase());
-    }
+     private function throwError($title, Response $response)
+     {
+         throw new MailjetException(0, $title, $response);
+     }
 }

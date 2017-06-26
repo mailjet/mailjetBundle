@@ -3,8 +3,10 @@
 namespace Mailjet\MailjetBundle\Manager;
 
 use \Mailjet\Resources;
+use \Mailjet\Response;
 
 use Mailjet\MailjetBundle\Client\MailjetClient;
+use Mailjet\MailjetBundle\Exception\MailjetException;
 use Mailjet\MailjetBundle\Model\Contact;
 
 /**
@@ -131,7 +133,7 @@ class ContactsListManager
 
         // copy contact properties
         $oldContactData = $response->getData();
-        if(isset($oldContactData[0])){
+        if (isset($oldContactData[0])) {
             $contact->setProperties($oldContactData[0]['Data']);
         }
 
@@ -176,10 +178,11 @@ class ContactsListManager
     /**
      * Helper to throw error
      * @param  string $title
+     * @param  Response $response
      * @param  array $response
      */
-    private function throwError($title, $response)
-    {
-        throw new \RuntimeException($title.": ".$response->getReasonPhrase());
-    }
+     private function throwError($title, Response $response)
+     {
+         throw new MailjetException(0, $title, $response);
+     }
 }

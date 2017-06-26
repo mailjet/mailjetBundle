@@ -2,6 +2,7 @@
 
 namespace spec\Mailjet\MailjetBundle\Manager;
 
+use Mailjet\MailjetBundle\Exception\MailjetException;
 use Mailjet\MailjetBundle\Model\Contact;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -21,9 +22,8 @@ class ContactsListManagerSpec extends ObjectBehavior
         $this->shouldHaveType('Mailjet\MailjetBundle\Manager\ContactsListManager');
     }
 
-    function it_create(MailjetClient $mailjet, \Mailjet\Response $response)
+    public function it_create(MailjetClient $mailjet, \Mailjet\Response $response)
     {
-
         $contact = new Contact('foo@bar');
         $contact->setAction(Contact::ACTION_ADDFORCE);
 
@@ -37,25 +37,27 @@ class ContactsListManagerSpec extends ObjectBehavior
         $this->create('list01', $contact)->shouldReturn('successdata!');
     }
 
-    function it_throw_error_during_create(MailjetClient $mailjet, \Mailjet\Response $response)
+    public function it_throw_error_during_create(MailjetClient $mailjet, \Mailjet\Response $response)
     {
-
         $contact = new Contact('foo@bar');
         $contact->setAction(Contact::ACTION_ADDFORCE);
 
         $response->success()->shouldBeCalled()->willReturn(false);
+        $response->getStatus()->shouldBeCalled()->willReturn(500);
         $response->getReasonPhrase()->shouldBeCalled()->willReturn('test');
+        $response->getBody()->shouldBeCalled()->willReturn(null);
 
         $mailjet->post(Resources::$ContactslistManagecontact,
             ['id' => 'list01', 'body' => $contact->format()]
         )->shouldBeCalled()->willReturn($response);
 
-        $this->shouldThrow(new \RuntimeException("ContactsListManager:create() failed: test"))->duringCreate('list01', $contact);
+
+        $this->shouldThrow(new MailjetException(500, "ContactsListManager:create() failed: test"))
+            ->duringCreate('list01', $contact);
     }
 
-    function it_update(MailjetClient $mailjet, \Mailjet\Response $response)
+    public function it_update(MailjetClient $mailjet, \Mailjet\Response $response)
     {
-
         $contact = new Contact('foo@bar');
         $contact->setAction(Contact::ACTION_ADDNOFORCE);
 
@@ -69,9 +71,8 @@ class ContactsListManagerSpec extends ObjectBehavior
         $this->update('list01', $contact)->shouldReturn('successdata!');
     }
 
-    function it_subscribe(MailjetClient $mailjet, \Mailjet\Response $response)
+    public function it_subscribe(MailjetClient $mailjet, \Mailjet\Response $response)
     {
-
         $contact = new Contact('foo@bar');
         $contact->setAction(Contact::ACTION_ADDFORCE);
 
@@ -85,9 +86,8 @@ class ContactsListManagerSpec extends ObjectBehavior
         $this->subscribe('list01', $contact)->shouldReturn('successdata!');
     }
 
-    function it_unsubscribe(MailjetClient $mailjet, \Mailjet\Response $response)
+    public function it_unsubscribe(MailjetClient $mailjet, \Mailjet\Response $response)
     {
-
         $contact = new Contact('foo@bar');
         $contact->setAction(Contact::ACTION_UNSUB);
 
@@ -101,9 +101,8 @@ class ContactsListManagerSpec extends ObjectBehavior
         $this->unsubscribe('list01', $contact)->shouldReturn('successdata!');
     }
 
-    function it_delete(MailjetClient $mailjet, \Mailjet\Response $response)
+    public function it_delete(MailjetClient $mailjet, \Mailjet\Response $response)
     {
-
         $contact = new Contact('foo@bar');
         $contact->setAction(Contact::ACTION_REMOVE);
 
@@ -117,9 +116,8 @@ class ContactsListManagerSpec extends ObjectBehavior
         $this->delete('list01', $contact)->shouldReturn('successdata!');
     }
 
-    function it_change_email(MailjetClient $mailjet, \Mailjet\Response $response, \Mailjet\Response $responseFinal)
+    public function it_change_email(MailjetClient $mailjet, \Mailjet\Response $response, \Mailjet\Response $responseFinal)
     {
-
         $contact = new Contact('foo@bar');
         $contact->setAction(Contact::ACTION_ADDFORCE);
 
@@ -146,5 +144,4 @@ class ContactsListManagerSpec extends ObjectBehavior
 
         $this->changeEmail('list01', $contact, 'oldemail@foo.bar')->shouldReturn('success');
     }
-
 }
