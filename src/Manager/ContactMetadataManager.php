@@ -2,9 +2,11 @@
 
 namespace Mailjet\MailjetBundle\Manager;
 
+use \Mailjet\Response;
 use \Mailjet\Resources;
 
 use Mailjet\MailjetBundle\Client\MailjetClient;
+use Mailjet\MailjetBundle\Exception\MailjetException;
 use Mailjet\MailjetBundle\Model\ContactMetadata;
 
 /**
@@ -103,10 +105,10 @@ class ContactMetadataManager
     /**
      * Helper to throw error
      * @param  string $title
-     * @param  array $response
+     * @param  Response $response
      */
-    private function throwError($title, $response)
+    private function throwError($title, Response $response)
     {
-        throw new \RuntimeException($title.": ".$response->getReasonPhrase());
+        throw new MailjetException(0, $title, $response);
     }
 }

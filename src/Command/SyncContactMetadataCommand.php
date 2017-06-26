@@ -58,7 +58,7 @@ class SyncContactMetadataCommand extends ContainerAwareCommand
             try {
                 $response = $this->getContainer()->get('mailjet.service.contact_metadata_manager')->create($metadataObj);
                 $output->writeln(sprintf('<info>%s:%s added!</info>', $contactMetadata['name'], $contactMetadata['datatype']));
-            } catch (\RuntimeException $e) {
+            } catch (\Exception $e) {
                 $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
             }
 
