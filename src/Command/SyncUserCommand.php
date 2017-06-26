@@ -72,15 +72,18 @@ class SyncUserCommand extends ContainerAwareCommand
             $batchesResult = $this->synchronizer->synchronize($contactList);
 
             if ($input->getOption('follow-sync')) {
-
-                $batchesResult = $this->refreshBatchesResult($listId, $batchesResult);
+                $batchesError = [];
+                $batchesResult = $this->refreshBatchesResult($listId, $batchesResult, $batchesError);
                 while (!$this->batchesFinished($batchesResult)) {
-                    $batchesResult = $this->refreshBatchesResult($listId, $batchesResult);
+                    $batchesResult = $this->refreshBatchesResult($listId, $batchesResult, $batchesError);
                     foreach ($batchesResult as $key => $batch) {
                         $output->writeln($this->displayBatchInfo($batch));
                     }
                     sleep(2);
+                    $output->writeln('----------------------------------------');
                 }
+
+                $output->writeln(sprintf('<info>There are %d batches in error.</info>', count($batchesError)));
             }
             // Recovering error file
             // $response = $mj->get(Resources::$BatchjobJsonerror, ['id' => $JobID]);
@@ -113,13 +116,17 @@ class SyncUserCommand extends ContainerAwareCommand
      * @param array $batchesResult
      * @return array
      */
-    private function refreshBatchesResult($listId, $batchesResult)
+    private function refreshBatchesResult($listId, $batchesResult, $batchesError)
     {
         $refreshedBatchsResults = [];
         foreach ($batchesResult as $key => $batch) {
             $jobId = $batch['JobID'];
             $batch = $this->synchronizer->getJob($listId, $jobId);
-            array_push($refreshedBatchsResults, array_merge(['JobID' => $jobId], $batch[0]));
+            if ($batch[0]['Status'] == 'Error') {
+                array_push($batchesError, array_merge(['JobID' => $jobId], $batch[0]));
+            } else {
+                array_push($refreshedBatchsResults, array_merge(['JobID' => $jobId], $batch[0]));
+            }
         }
         return $refreshedBatchsResults;
     }

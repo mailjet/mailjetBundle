@@ -11,17 +11,21 @@ You just need to configure in your config.yml your `contact_metadata`: [see the 
 
 Finally, you can use this command to synchronize your config with Mailjet:
 
-    php app/console mailjet:mailjet:contactmetadata-sync
+    php app/console mailjet:contactmetadata-sync
 
 
 ## Full synchronization with command
 
 You can synchronize all users of your project with a Mailjet list at once by calling the Symfony command:
 
-    php app/console mailjet:mailjet:user-sync
+    php app/console mailjet:user-sync
 
 
 It will get all your User throught your Contact Provider and will add/update all your User to the configured list.
+
+You can use the option `--follow-sync` to supervise batch jobs.
+
+    php app/console mailjet:user-sync --follow-sync
 
 NOTE: you must have configured and created [your own contact provider](contact-provider.md).
 
