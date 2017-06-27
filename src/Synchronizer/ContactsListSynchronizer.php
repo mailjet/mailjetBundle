@@ -6,6 +6,8 @@ use \Mailjet\Resources;
 
 use Mailjet\Response;
 use Mailjet\MailjetBundle\Exception\MailjetException;
+use Mailjet\MailjetBundle\Manager\ContactsListManager;
+use Mailjet\MailjetBundle\Model\Contact;
 use Mailjet\MailjetBundle\Model\ContactsList;
 use Mailjet\MailjetBundle\Client\MailjetClient;
 
@@ -15,23 +17,27 @@ use Mailjet\MailjetBundle\Client\MailjetClient;
 */
 class ContactsListSynchronizer
 {
-    /**
-     * @var int
-     */
-    const CONTACT_BATCH_SIZE = 500;
 
     /**
      * Mailjet client
-     * @var MailjetClient
+     * @var MailjetClient $mailjet
      */
     protected $mailjet;
 
     /**
-     * @param MailjetClient $mailjet
+     * ContactsList Manager
+     * @var ContactsListManager $manager
      */
-    public function __construct(MailjetClient $mailjet)
+    protected $manager;
+
+    /**
+     * @param MailjetClient $mailjet
+     * @param ContactsListManager $manager
+     */
+    public function __construct(MailjetClient $mailjet, ContactsListManager $manager)
     {
         $this->mailjet = $mailjet;
+        $this->manager = $manager;
     }
 
     /**
@@ -42,23 +48,13 @@ class ContactsListSynchronizer
      */
     public function synchronize(ContactsList $contactsList)
     {
-        // @TODO remove users which are not provided
-        $batchResults = [];
-        // we send multiple smaller requests instead of a bigger one
-        $contactChunks = array_chunk($contactsList->getContacts(), self::CONTACT_BATCH_SIZE);
-        foreach ($contactChunks as $contactChunk) {
-            // create a sub-contactList to divide large request
-            $subContactsList = new ContactsList($contactsList->getListId(), $contactsList->getAction(), $contactChunk);
-            $currentBatch = $this->mailjet->post(Resources::$ContactslistManagemanycontacts,
-                ['id' => $subContactsList->getListId(), 'body' => $subContactsList->format()]
-            );
-            if ($currentBatch->success()) {
-                array_push($batchResults, $currentBatch->getData()[0]);
-            } else {
-                $this->throwError("ContactsListSynchronizer:synchronize() failed", $currentBatch);
-            }
-        }
-        return $batchResults;
+
+        // Remove diff Contacts
+        $batchesResultRemove = $this->batchRemoveContact($contactsList);
+        // Add Contacts
+        $batchesResultAdd = $this->batchAddContact($contactsList);
+
+        return array_merge($batchesResultRemove, $batchesResultAdd);
     }
 
     /**
@@ -94,9 +90,70 @@ class ContactsListSynchronizer
     }
 
     /**
+     * Get contacts in Mailjet list and remove the difference with $contactsList
+     * @param  ContactsList $contactsList
+     * @return array
+     */
+    private function batchRemoveContact(ContactsList $contactsList)
+    {
+        $emailsOnLists = [];
+        $offset = 0;
+        $limit = 1000;
+        $run = true;
+
+        // Retrieve Emails from list
+        while ($run) {
+            $filters = ['ContactsList'=> $contactsList->getListId(),'limit' => $limit, 'offset' => $offset];
+            $response = $this->mailjet->get(Resources::$Contact, ['filters' => $filters]);
+            if (!$response->success()) {
+                $this->throwError("ContactsListSynchronizer:batchRemoveContact() failed", $response);
+            }
+            $data = $response->getData();
+
+            foreach ($data as $key => $contact) {
+                array_push($emailsOnLists, $contact['Email']);
+            }
+
+            $offset += $limit;
+            if ($response->getCount() < $limit) {
+                $run = false;
+            }
+        }
+
+        $emailsInternal = array_map(function (Contact $contact) {
+            return $contact->getEmail();
+        }, $contactsList->getContacts());
+
+        $diffEmails = array_diff($emailsOnLists, $emailsInternal);
+        if (sizeof($diffEmails) == 0) {
+            return [];
+        }
+
+        // Remove difference contacts
+        $diffContacts = array_map(function ($email) {
+            return new Contact($email);
+        }, $diffEmails);
+
+        $diffContactsList = new ContactsList($contactsList->getListId(), ContactsList::ACTION_REMOVE, $diffContacts);
+
+        return $this->manager->manageManyContactsList($diffContactsList);
+    }
+
+    /**
+     * Create batches to add Contacts to List
+     * @param  ContactsList $contactsList
+     * @return array
+     */
+    private function batchAddContact(ContactsList $contactsList)
+    {
+        $contactsList->setAction(ContactsList::ACTION_ADDFORCE);
+        return $this->manager->manageManyContactsList($contactsList);
+    }
+
+    /**
      * Helper to throw error
      * @param  string $title
-     * @param  array $response
+     * @param  Response $response
      */
     private function throwError($title, Response $response)
     {

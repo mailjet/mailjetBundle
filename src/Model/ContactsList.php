@@ -55,9 +55,8 @@ class ContactsList
         return $result;
     }
 
-
     /**
-     *
+     * Get list id
      */
     public function getListId()
     {
@@ -65,7 +64,22 @@ class ContactsList
     }
 
     /**
-     *
+     * Set Action
+     * @param string $action
+     */
+    public function setAction($action)
+    {
+        if (!$this->validateAction($action)) {
+            throw new \RuntimeException("$action: is not a valide Action.");
+        }
+
+        $this->action = $action;
+
+        return $this;
+    }
+
+    /**
+     * Get action
      */
     public function getAction()
     {
@@ -73,14 +87,12 @@ class ContactsList
     }
 
     /**
-     *
+     * Get contacts
      */
     public function getContacts()
     {
         return $this->contacts;
     }
-
-
 
     /**
      * Validate if action is authorized

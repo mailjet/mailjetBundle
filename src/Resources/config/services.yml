@@ -40,6 +40,7 @@ services:
         class: "%mailjet.contacts_list_synchronizer.class%"
         arguments:
             - "@mailjet.client"
+            - "@mailjet.service.contacts_list_manager"
 
     mailjet.service.event_callback_manager:
         class: "%mailjet.event_callback_manager.class%"

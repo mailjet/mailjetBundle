@@ -8,6 +8,7 @@ use \Mailjet\Response;
 use Mailjet\MailjetBundle\Client\MailjetClient;
 use Mailjet\MailjetBundle\Exception\MailjetException;
 use Mailjet\MailjetBundle\Model\Contact;
+use Mailjet\MailjetBundle\Model\ContactsList;
 
 /**
 * https://dev.mailjet.com/email-api/v3/contactslist-managecontact/
@@ -16,6 +17,11 @@ use Mailjet\MailjetBundle\Model\Contact;
 */
 class ContactsListManager
 {
+    /**
+     * @var int
+     */
+    const CONTACT_BATCH_SIZE = 1000;
+
     /**
      * Mailjet client
      * @var MailjetClient
@@ -156,6 +162,32 @@ class ContactsListManager
     }
 
     /**
+     * Manage Many Contacts to List
+     * https://dev.mailjet.com/email-api/v3/contactslist-managemanycontacts/
+     * @param  ContactsList $contactsList
+     * @return array
+     */
+    public function manageManyContactsList(ContactsList $contactsList)
+    {
+        $batchResults = [];
+        // we send multiple smaller requests instead of a bigger one
+        $contactChunks = array_chunk($contactsList->getContacts(), self::CONTACT_BATCH_SIZE);
+        foreach ($contactChunks as $contactChunk) {
+            // create a sub-contactList to divide large request
+            $subContactsList = new ContactsList($contactsList->getListId(), $contactsList->getAction(), $contactChunk);
+            $currentBatch = $this->mailjet->post(Resources::$ContactslistManagemanycontacts,
+                ['id' => $subContactsList->getListId(), 'body' => $subContactsList->format()]
+            );
+            if ($currentBatch->success()) {
+                array_push($batchResults, $currentBatch->getData()[0]);
+            } else {
+                $this->throwError("ContactsListManager:manageManyContactsList() failed", $currentBatch);
+            }
+        }
+        return $batchResults;
+    }
+
+    /**
     * An action for adding a contact to a contact list. Only POST is supported.
     * The API will internally create the new contact if it does not exist,
     * add or update the name and properties.
@@ -179,7 +211,6 @@ class ContactsListManager
      * Helper to throw error
      * @param  string $title
      * @param  Response $response
-     * @param  array $response
      */
      private function throwError($title, Response $response)
      {
