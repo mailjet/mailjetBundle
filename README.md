@@ -8,8 +8,6 @@
 
 Symfony bundle for handling Mailjet API V3 using this wrapper: <https://github.com/mailjet/mailjet-apiv3-php>
 
-🚧 **WORK IN PROGRESS...** 🚧
-
 ## Features
 
 * [x] Retrieve [\Mailjet\Client](https://github.com/mailjet/mailjet-apiv3-php) to make custom Mailjet API V3 requests
@@ -51,7 +49,6 @@ mailjet:
 
 * More unit tests
 * Functionnal tests
-* better SyncContact (remove/unsub contact already in list [diff method])
 * Other features like Campaigns, stats, ...
 
 ## Contributing
