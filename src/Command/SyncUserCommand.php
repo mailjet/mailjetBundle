@@ -85,7 +85,9 @@ class SyncUserCommand extends ContainerAwareCommand
 
                 $output->writeln(sprintf('<info>There are %d batches in error.</info>', count($batchesError)));
                 // Recovering error file
-                $this->displayBatchesErrorFile($batchesError);
+                foreach ($this->displayBatchesErrorFile($batchesError) as $line) {
+                    $output->writeln($line);
+                }
             }
 
             $output->writeln(sprintf('<info>OK listId: %s, see logs in Mailjet List</info>', $listId));
@@ -165,13 +167,16 @@ class SyncUserCommand extends ContainerAwareCommand
     /**
      * Print Batches Errors
      * @param  array $batchesError
-     * @return void
+     * @return array
      */
     private function displayBatchesErrorFile($batchesError)
     {
+        $output = [];
         foreach ($batchesError as $key => $batch) {
             $errors = $this->synchronizer->getJobJsonError($batch['JobID']);
-            $output->writeln(sprintf('<error>%s</error>', $errors));
+            array_push($output, sprintf('<error>%s</error>', $errors));
         }
+
+        return $output;
     }
 }
