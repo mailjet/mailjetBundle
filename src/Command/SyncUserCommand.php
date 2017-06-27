@@ -84,9 +84,9 @@ class SyncUserCommand extends ContainerAwareCommand
                 }
 
                 $output->writeln(sprintf('<info>There are %d batches in error.</info>', count($batchesError)));
+                // Recovering error file
+                $this->displayBatchesErrorFile($batchesError);
             }
-            // Recovering error file
-            // $response = $mj->get(Resources::$BatchjobJsonerror, ['id' => $JobID]);
 
             $output->writeln(sprintf('<info>OK listId: %s, see logs in Mailjet List</info>', $listId));
         }
@@ -114,14 +114,16 @@ class SyncUserCommand extends ContainerAwareCommand
      * Refresh all batch from Mailjet API
      * @param string $listId
      * @param array $batchesResult
+     * @param &array $batchesError
      * @return array
      */
-    private function refreshBatchesResult($listId, $batchesResult, $batchesError)
+    private function refreshBatchesResult($listId, $batchesResult, &$batchesError)
     {
         $refreshedBatchsResults = [];
         foreach ($batchesResult as $key => $batch) {
             $jobId = $batch['JobID'];
             $batch = $this->synchronizer->getJob($listId, $jobId);
+            // We need to array merge because Mailjet API doesn't send jobid in response.
             if ($batch[0]['Status'] == 'Error') {
                 array_push($batchesError, array_merge(['JobID' => $jobId], $batch[0]));
             } else {
@@ -130,6 +132,7 @@ class SyncUserCommand extends ContainerAwareCommand
         }
         return $refreshedBatchsResults;
     }
+
     /**
      * Test if all batches are finished
      * @param array $batchesResult
@@ -156,6 +159,19 @@ class SyncUserCommand extends ContainerAwareCommand
             return sprintf('batch %s is Completed, %d operations %s', $batch['JobID'], $batch['Count'], $batch['Error']);
         } else {
             return sprintf('batch %s, current status %s, %d operations %s', $batch['JobID'], $batch['Status'], $batch['Count'], $batch['Error']);
+        }
+    }
+
+    /**
+     * Print Batches Errors
+     * @param  array $batchesError
+     * @return void
+     */
+    private function displayBatchesErrorFile($batchesError)
+    {
+        foreach ($batchesError as $key => $batch) {
+            $errors = $this->synchronizer->getJobJsonError($batch['JobID']);
+            $output->writeln(sprintf('<error>%s</error>', $errors));
         }
     }
 }

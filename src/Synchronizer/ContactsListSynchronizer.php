@@ -52,9 +52,9 @@ class ContactsListSynchronizer
             $currentBatch = $this->mailjet->post(Resources::$ContactslistManagemanycontacts,
                 ['id' => $subContactsList->getListId(), 'body' => $subContactsList->format()]
             );
-            if($currentBatch->success()){
+            if ($currentBatch->success()) {
                 array_push($batchResults, $currentBatch->getData()[0]);
-            }else{
+            } else {
                 $this->throwError("ContactsListSynchronizer:synchronize() failed", $currentBatch);
             }
         }
@@ -76,6 +76,21 @@ class ContactsListSynchronizer
         }
 
         return $response->getData();
+    }
+
+    /**
+     * Retrieve JsonError for a job
+     * @param  string $jobId
+     * @return array
+     */
+    public function getJobJsonError($jobId)
+    {
+        $response = $this->mailjet->get(Resources::$BatchjobJsonerror, ['id' => $jobId]);
+        if (!$response->success()) {
+            $this->throwError("ContactsListSynchronizer:getJobJsonError() failed", $response);
+        }
+
+        return $response->getBody();
     }
 
     /**
