@@ -174,7 +174,7 @@ class SyncUserCommand extends ContainerAwareCommand
         $output = [];
         foreach ($batchesError as $key => $batch) {
             $errors = $this->synchronizer->getJobJsonError($batch['JobID']);
-            array_push($output, sprintf('<error><pre>%s</pre></error>', print_r($errors)));
+            array_push($output, '<error><pre>'.print_r($errors).'</pre></error>');
         }
 
         return $output;
