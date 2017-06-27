@@ -172,7 +172,7 @@
     <li>Home</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/mailjet/mailjetBundle/edit/master/docs/index.md"
+        <a href="https://github.com/mailjet/mailjetBundle/edit/master/src/Resources/doc/index.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -189,7 +189,6 @@
 <a href="https://github.com/mailjet/mailjetBundle/blob/master/LICENSE.md"><img alt="GitHub license" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
 <a href="https://mailjet.github.io/mailjetBundle/"><img alt="Documentation" src="https://img.shields.io/badge/documentation-gh--pages-blue.svg" /></a></p>
 <p>Symfony bundle for handling Mailjet API V3 using this wrapper: <a href="https://github.com/mailjet/mailjet-apiv3-php">https://github.com/mailjet/mailjet-apiv3-php</a></p>
-<p>🚧 <strong>WORK IN PROGRESS...</strong> 🚧</p>
 <h2 id="features">Features</h2>
 <ul class="task-list">
 <li class="task-list-item"><input type="checkbox" disabled checked> Retrieve <a href="https://github.com/mailjet/mailjet-apiv3-php">\Mailjet\Client</a> to make custom Mailjet API V3 requests</li>
@@ -202,31 +201,24 @@
 </ul>
 <h2 id="setup">Setup</h2>
 <p>Add bundle to your project:</p>
-<div class="highlight"><pre><span></span>composer require mailjet/mailjet-bundle
-</pre></div>
-
+<pre class="highlight"><code class="language-bash linenums">composer require mailjet/mailjet-bundle</code></pre>
 
 <p>Add <code>Mailjet\MailjetBundle\MailjetBundle</code> to your <code>AppKernel.php</code>:</p>
-<div class="highlight"><pre><span></span><span class="x">$bundles = [</span>
-<span class="x">    // ...</span>
-<span class="x">    new Mailjet\MailjetBundle\MailjetBundle(),</span>
-<span class="x">];</span>
-</pre></div>
-
+<pre class="highlight"><code class="language-php linenums">$bundles = [
+    // ...
+    new Mailjet\MailjetBundle\MailjetBundle(),
+];</code></pre>
 
 <h2 id="minimal-configuration">Minimal Configuration</h2>
 <p>In your <code>config.yml</code>:</p>
-<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">mailjet</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">api_key</span><span class="p p-Indicator">:</span>    <span class="s">&quot;%mailjet.api_key%&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">secret_key</span><span class="p p-Indicator">:</span> <span class="s">&quot;%mailjet.secret_key%&quot;</span>
-</pre></div>
-
+<pre class="highlight"><code class="language-yaml linenums">mailjet:
+    api_key:    &quot;%mailjet.api_key%&quot;
+    secret_key: &quot;%mailjet.secret_key%&quot;</code></pre>
 
 <h2 id="todo">ToDo</h2>
 <ul>
 <li>More unit tests</li>
 <li>Functionnal tests</li>
-<li>better SyncContact (remove/unsub contact already in list [diff method])</li>
 <li>Other features like Campaigns, stats, ...</li>
 </ul>
 <h2 id="contributing">Contributing</h2>
@@ -280,6 +272,6 @@
 </html>
 
 <!--
-MkDocs version : 0.16.1
-Build Date UTC : 2017-06-21 21:00:09
+MkDocs version : 0.16.0
+Build Date UTC : 2017-06-27 14:15:29
 -->

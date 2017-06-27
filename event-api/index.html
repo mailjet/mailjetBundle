@@ -170,7 +170,7 @@
     <li>Event API (webhook)</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/mailjet/mailjetBundle/edit/master/docs/event-api.md"
+        <a href="https://github.com/mailjet/mailjetBundle/edit/master/src/Resources/doc/event-api.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -188,24 +188,20 @@
 <h2 id="configuration">Configuration</h2>
 <p>You need to add the webhook routing to your app routing:</p>
 <p><code>app/routing.yml</code></p>
-<div class="highlight"><pre><span></span><span class="c1"># Mailjet webhook route</span>
-<span class="l l-Scalar l-Scalar-Plain">myapp_mailjet_webhook</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&quot;@MailjetBundle/Resources/config/routing.yml&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">prefix</span><span class="p p-Indicator">:</span>   <span class="l l-Scalar l-Scalar-Plain">/mailjet</span>
-</pre></div>
-
+<pre class="highlight"><code class="language-yaml linenums"># Mailjet webhook route
+myapp_mailjet_webhook:
+    resource: &quot;@MailjetBundle/Resources/config/routing.yml&quot;
+    prefix:   /mailjet</code></pre>
 
 <p>Note: you can change the prefix as you like.</p>
 <p>This will generate an url to the webhook like this: <a href="http://domain.com/mailjet/mailjet-event/endpoint">http://domain.com/mailjet/mailjet-event/endpoint</a></p>
 <p>Also, Mailjet recommand to protect webhook url with a token parameter. So you need to add the secret token to your list in your config.yml</p>
 <p>config.yml</p>
-<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">mailjet</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">api_key</span><span class="p p-Indicator">:</span>    <span class="s">&quot;%mailjet.api_key%&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">secret_key</span><span class="p p-Indicator">:</span> <span class="s">&quot;%mailjet.api_secret%&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">...</span>
-    <span class="l l-Scalar l-Scalar-Plain">event_endpoint_token</span><span class="p p-Indicator">:</span> <span class="s">&quot;thisisTheSecretPass&quot;</span>
-</pre></div>
-
+<pre class="highlight"><code class="language-yaml linenums">mailjet:
+    api_key:    &quot;%mailjet.api_key%&quot;
+    secret_key: &quot;%mailjet.api_secret%&quot;
+    ...
+    event_endpoint_token: &quot;thisisTheSecretPass&quot;</code></pre>
 
 <p>Note: To access properly to the webhook function you will have to use the url with the secret parameter: <a href="http://domain.com/mailjet/mailjet-event/endpoint/thisisTheSecretPass">http://domain.com/mailjet/mailjet-event/endpoint/thisisTheSecretPass</a></p>
 <h2 id="register-callback-urls-manually">Register callback urls manually</h2>
@@ -213,105 +209,95 @@
 <p>You need to add the correct callback url such as: <a href="http://domain.com/mailjet/mailjet-event/endpoint/thisisTheSecretPass">http://domain.com/mailjet/mailjet-event/endpoint/thisisTheSecretPass</a></p>
 <h2 id="command-to-automatically-register-callback-urls">Command to automatically register callback Urls</h2>
 <p>You can use the Symfony command to automatically register callback Urls:</p>
-<div class="highlight"><pre><span></span>php app/console mailjet:event-endpoint http://domain.com
-</pre></div>
-
+<pre class="highlight"><code class="language-shell linenums">php app/console mailjet:event-endpoint http://domain.com</code></pre>
 
 <p>By default, this command will register the url to al event Type. You can specify type as options if you want to register to specific event type:</p>
-<div class="highlight"><pre><span></span>php app/console mailjet:event-endpoint http://domain.com --event-type<span class="o">=</span>open --event-type<span class="o">=</span>unsub
-</pre></div>
-
+<pre class="highlight"><code class="language-shell linenums">php app/console mailjet:event-endpoint http://domain.com --event-type=open --event-type=unsub</code></pre>
 
 <p>Event type list: <code>["sent", "open", "click", "bounce", "blocked", "spam", "unsub"]</code></p>
 <h2 id="events-to-listen">Events to listen</h2>
 <p>In order to integrate MailChimp into your app workflow, you can listen to different Event.</p>
 <p>Event you can listen:</p>
-<div class="highlight"><pre><span></span><span class="x">CallbackEvent::EVENT_SENT = &#39;mailjet.event.sent&#39;;</span>
-<span class="x">CallbackEvent::EVENT_OPEN = &#39;mailjet.event.open&#39;;</span>
-<span class="x">CallbackEvent::EVENT_CLICK = &#39;mailjet.event.click&#39;;</span>
-<span class="x">CallbackEvent::EVENT_BOUNCE = &#39;mailjet.event.bounce&#39;;</span>
-<span class="x">CallbackEvent::EVENT_SPAM = &#39;mailjet.event.spam&#39;;</span>
-<span class="x">CallbackEvent::EVENT_BLOCKED = &#39;mailjet.event.blocked&#39;;</span>
-<span class="x">CallbackEvent::EVENT_UNSUB = &#39;mailjet.event.unsub&#39;;</span>
-</pre></div>
-
+<pre class="highlight"><code class="language-php linenums">CallbackEvent::EVENT_SENT = 'mailjet.event.sent';
+CallbackEvent::EVENT_OPEN = 'mailjet.event.open';
+CallbackEvent::EVENT_CLICK = 'mailjet.event.click';
+CallbackEvent::EVENT_BOUNCE = 'mailjet.event.bounce';
+CallbackEvent::EVENT_SPAM = 'mailjet.event.spam';
+CallbackEvent::EVENT_BLOCKED = 'mailjet.event.blocked';
+CallbackEvent::EVENT_UNSUB = 'mailjet.event.unsub';</code></pre>
 
 <h3 id="1-create-an-event-listener">1- create an Event Listener</h3>
-<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<pre class="highlight"><code class="language-php linenums">&lt;?php
 
-<span class="k">namespace</span> <span class="nx">AppBundle\Listener</span><span class="p">;</span>
+namespace AppBundle\Listener;
 
-<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventSubscriberInterface</span><span class="p">;</span>
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-<span class="k">use</span> <span class="nx">Mailjet\MailjetBundle\Event\CallbackEvent</span><span class="p">;</span>
+use Mailjet\MailjetBundle\Event\CallbackEvent;
 
-<span class="k">class</span> <span class="nc">MailjetEventListener</span> <span class="k">implements</span> <span class="nx">EventSubscriberInterface</span>
-<span class="p">{</span>
+class MailjetEventListener implements EventSubscriberInterface
+{
 
-    <span class="k">protected</span> <span class="nv">$logger</span><span class="p">;</span>
+    protected $logger;
 
 
-    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$logger</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span> <span class="o">=</span> <span class="nv">$logger</span><span class="p">;</span>
-    <span class="p">}</span>
+    public function __construct($logger)
+    {
+        $this-&gt;logger = $logger;
+    }
 
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedEvents</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="nx">CallbackEvent</span><span class="o">::</span><span class="na">EVENT_SENT</span> <span class="o">=&gt;</span> <span class="s1">&#39;sent&#39;</span><span class="p">,</span>
-            <span class="nx">CallbackEvent</span><span class="o">::</span><span class="na">EVENT_OPEN</span> <span class="o">=&gt;</span> <span class="s1">&#39;open&#39;</span><span class="p">,</span>
-            <span class="nx">CallbackEvent</span><span class="o">::</span><span class="na">EVENT_CLICK</span> <span class="o">=&gt;</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span>
-            <span class="nx">CallbackEvent</span><span class="o">::</span><span class="na">EVENT_BOUNCE</span> <span class="o">=&gt;</span> <span class="s1">&#39;bounce&#39;</span><span class="p">,</span>
-            <span class="nx">CallbackEvent</span><span class="o">::</span><span class="na">EVENT_SPAM</span> <span class="o">=&gt;</span> <span class="s1">&#39;spam&#39;</span><span class="p">,</span>
-            <span class="nx">CallbackEvent</span><span class="o">::</span><span class="na">EVENT_BLOCKED</span> <span class="o">=&gt;</span> <span class="s1">&#39;blocked&#39;</span><span class="p">,</span>
-            <span class="nx">CallbackEvent</span><span class="o">::</span><span class="na">EVENT_UNSUB</span> <span class="o">=&gt;</span> <span class="s1">&#39;unsub&#39;</span>
+    public static function getSubscribedEvents()
+    {
+        return [
+            CallbackEvent::EVENT_SENT =&gt; 'sent',
+            CallbackEvent::EVENT_OPEN =&gt; 'open',
+            CallbackEvent::EVENT_CLICK =&gt; 'click',
+            CallbackEvent::EVENT_BOUNCE =&gt; 'bounce',
+            CallbackEvent::EVENT_SPAM =&gt; 'spam',
+            CallbackEvent::EVENT_BLOCKED =&gt; 'blocked',
+            CallbackEvent::EVENT_UNSUB =&gt; 'unsub'
 
-        <span class="p">];</span>
-    <span class="p">}</span>
+        ];
+    }
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">sent</span><span class="p">(</span><span class="nx">CallbackEvent</span> <span class="nv">$event</span><span class="p">){</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;sent Event:&#39;</span><span class="p">,</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">());</span>
-    <span class="p">}</span>
+    public function sent(CallbackEvent $event){
+        $this-&gt;logger-&gt;info('sent Event:', $event-&gt;getData());
+    }
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">open</span><span class="p">(</span><span class="nx">CallbackEvent</span> <span class="nv">$event</span><span class="p">){</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;open Event:&#39;</span><span class="p">,</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">());</span>
-    <span class="p">}</span>
+    public function open(CallbackEvent $event){
+        $this-&gt;logger-&gt;info('open Event:', $event-&gt;getData());
+    }
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">click</span><span class="p">(</span><span class="nx">CallbackEvent</span> <span class="nv">$event</span><span class="p">){</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;click Event:&#39;</span><span class="p">,</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">());</span>
-    <span class="p">}</span>
+    public function click(CallbackEvent $event){
+        $this-&gt;logger-&gt;info('click Event:', $event-&gt;getData());
+    }
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">bounce</span><span class="p">(</span><span class="nx">CallbackEvent</span> <span class="nv">$event</span><span class="p">){</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;bounce Event:&#39;</span><span class="p">,</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">());</span>
-    <span class="p">}</span>
+    public function bounce(CallbackEvent $event){
+        $this-&gt;logger-&gt;info('bounce Event:', $event-&gt;getData());
+    }
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">spam</span><span class="p">(</span><span class="nx">CallbackEvent</span> <span class="nv">$event</span><span class="p">){</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;spam Event:&#39;</span><span class="p">,</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">());</span>
-    <span class="p">}</span>
+    public function spam(CallbackEvent $event){
+        $this-&gt;logger-&gt;info('spam Event:', $event-&gt;getData());
+    }
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">blocked</span><span class="p">(</span><span class="nx">CallbackEvent</span> <span class="nv">$event</span><span class="p">){</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;blocked Event:&#39;</span><span class="p">,</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">());</span>
-    <span class="p">}</span>
+    public function blocked(CallbackEvent $event){
+        $this-&gt;logger-&gt;info('blocked Event:', $event-&gt;getData());
+    }
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">unsub</span><span class="p">(</span><span class="nx">CallbackEvent</span> <span class="nv">$event</span><span class="p">){</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;unsub Event:&#39;</span><span class="p">,</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">());</span>
-    <span class="p">}</span>
+    public function unsub(CallbackEvent $event){
+        $this-&gt;logger-&gt;info('unsub Event:', $event-&gt;getData());
+    }
 
-<span class="p">}</span>
-</pre></div>
-
+}</code></pre>
 
 <h3 id="2-register-the-listener-into-servicesyml">2- Register the listener into services.yml</h3>
-<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">app.listener.mailjet.webhook</span><span class="p p-Indicator">:</span>
-        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">AppBundle\Listener\MailjetEventListener</span>
-        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
-            <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">name</span><span class="p p-Indicator">:</span> <span class="nv">kernel.event_subscriber</span> <span class="p p-Indicator">}</span>
-        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
-            <span class="p p-Indicator">-</span> <span class="err">@</span><span class="l l-Scalar l-Scalar-Plain">logger</span>
-</pre></div>
-
+<pre class="highlight"><code class="language-yaml linenums">services:
+    app.listener.mailjet.webhook:
+        class: AppBundle\Listener\MailjetEventListener
+        tags:
+            - { name: kernel.event_subscriber }
+        arguments:
+            - @logger</code></pre>
 
 <h3 id="3-test-with-ngrok-or-other-localhost-tunnel">3- Test with ngrok (or other localhost tunnel)</h3>
               

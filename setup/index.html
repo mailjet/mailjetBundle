@@ -164,7 +164,7 @@
     <li>Setup</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/mailjet/mailjetBundle/edit/master/docs/setup.md"
+        <a href="https://github.com/mailjet/mailjetBundle/edit/master/src/Resources/doc/setup.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -176,25 +176,19 @@
               
                 <h1 id="setup">Setup</h1>
 <p>Add bundle to your project:</p>
-<div class="highlight"><pre><span></span>composer require mailjet/mailjet-bundle
-</pre></div>
-
+<pre class="highlight"><code class="language-bash linenums">composer require mailjet/mailjet-bundle</code></pre>
 
 <p>Add <code>Mailjet\MailjetBundle\MailjetBundle</code> to your <code>AppKernel.php</code>:</p>
-<div class="highlight"><pre><span></span><span class="x">$bundles = [</span>
-<span class="x">    // ...</span>
-<span class="x">    new Mailjet\MailjetBundle\MailjetBundle(),</span>
-<span class="x">];</span>
-</pre></div>
-
+<pre class="highlight"><code class="language-php linenums">$bundles = [
+    // ...
+    new Mailjet\MailjetBundle\MailjetBundle(),
+];</code></pre>
 
 <h2 id="minimal-configuration">Minimal Configuration</h2>
 <p>In your <code>config.yml</code>:</p>
-<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">mailjet</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">api_key</span><span class="p p-Indicator">:</span>    <span class="s">&quot;%mailjet.api_key%&quot;</span>
-    <span class="l l-Scalar l-Scalar-Plain">secret_key</span><span class="p p-Indicator">:</span> <span class="s">&quot;%mailjet.secret_key%&quot;</span>
-</pre></div>
-
+<pre class="highlight"><code class="language-yaml linenums">mailjet:
+    api_key:    &quot;%mailjet.api_key%&quot;
+    secret_key: &quot;%mailjet.secret_key%&quot;</code></pre>
 
 <p><a href="../configuration/">More configuration</a></p>
               
