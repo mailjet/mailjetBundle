@@ -44,9 +44,9 @@ class EventCommand extends ContainerAwareCommand
          */
         $manager = $this->getContainer()->get('mailjet.service.event_callback_manager');
 
-        if($input->getOption('event-type')){
+        if ($input->getOption('event-type')) {
             $eventTypes = $input->getOption('event-type');
-        }else{
+        } else {
             $eventTypes = ["sent", "open", "click", "bounce", "blocked", "spam", "unsub"];
         }
 
@@ -57,14 +57,13 @@ class EventCommand extends ContainerAwareCommand
                 $manager->get($eventType);
                 $output->writeln('update '.$eventType);
                 $manager->update($eventType, $eventCallBackUrl);
-            } catch (\RuntimeException $e) {
+            } catch (\Exception $e) {
                 $output->writeln('create '.$eventType);
                 $manager->create($eventCallBackUrl);
             }
         }
 
         $output->writeln(sprintf('<info>%s callback url has been added to your Mailjet account!</info>', $url));
-
     }
 
     /**
