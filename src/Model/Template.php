@@ -52,7 +52,7 @@ class Template {
      * Correspond to properties in MailJet request
      * Array ['PropertyName' => value, ...]
      */
-    public function getProperties() {
+    public function getOptionalProperties() {
         return $this->optionalProperties;
     }
 
@@ -61,7 +61,7 @@ class Template {
      * @param array $property
      * @return Properties
      */
-    public function setProperties(array $properties) {
+    public function setOptionalProperties(array $properties) {
         $this->optionalProperties = $properties;
         return $this->optionalProperties;
     }
@@ -87,8 +87,8 @@ class Template {
         }
         return $this->optionalProperties;
     }
-    
-      /**
+
+    /**
      * Get  Template content
      * @return $content
      */

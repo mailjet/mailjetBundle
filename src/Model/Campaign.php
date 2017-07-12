@@ -23,8 +23,9 @@ class Campaign {
     /**
      * @param $Locale
      */
-    public function __construct($fromEmail) {
+    public function __construct($fromEmail, $optionalProperties = null) {
         $this->fromEmail = $fromEmail;
+        $this->optionalProperties = $optionalProperties;
     }
 
     /**

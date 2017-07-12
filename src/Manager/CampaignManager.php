@@ -57,7 +57,7 @@ class CampaignManager {
      * @return array
      */
     public function updateCampaign($id, Campaign $campaign) {
-        $response = $this->mailjet->get(Resources::$Campaign, ['id' => $id, 'body' => $campaign->format()]);
+        $response = $this->mailjet->put(Resources::$Campaign, ['id' => $id, 'body' => $campaign->format()]);
         if (!$response->success()) {
             $this->throwError("CampaignManager:updateCampaign() failed", $response);
         }
