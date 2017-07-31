@@ -39,11 +39,11 @@ class CampaignManager {
 
     /**
      * Access a given campaign resource
-     * @param string $id
+     * @param string $CampaignId
      * @return array
      */
-    public function findByCampaignId($id) {
-        $response = $this->mailjet->get(Resources::$Campaign, ['id' => $id]);
+    public function findByCampaignId($CampaignId) {
+        $response = $this->mailjet->get(Resources::$Campaign, ['id' => $CampaignId]);
         if (!$response->success()) {
             $this->throwError("CampaignManager:findByCampaignId() failed", $response);
         }
@@ -56,8 +56,8 @@ class CampaignManager {
      * @param string $id
      * @return array
      */
-    public function updateCampaign($id, Campaign $campaign) {
-        $response = $this->mailjet->put(Resources::$Campaign, ['id' => $id, 'body' => $campaign->format()]);
+    public function updateCampaign($CampaignId, Campaign $campaign) {
+        $response = $this->mailjet->put(Resources::$Campaign, ['id' => $CampaignId, 'body' => $campaign->format()]);
         if (!$response->success()) {
             $this->throwError("CampaignManager:updateCampaign() failed", $response);
         }

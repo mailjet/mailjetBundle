@@ -234,13 +234,11 @@ use Mailjet\MailjetBundle\Manager\CampaignDraftManager;
 // ...
 public function campaignDraftExample() {
     // ...
-    $mailjet = $this->container->get('mailjet.client');
-    $campaignDraftManager = new CampaignDraftManager($mailjet);
-
+    $campaignDraftManager = $this->container->get('mailjet.service.campaign_draft_manager');
     $optionalProp['Title'] = 'Friday newsletter';
     $optionalProp['SenderName'] = 'Mailjet team';
     $optionalProp['EditMode'] = 'html2';
-    $campaignDraft = new CampaignDraft("en_US", "Lyubo", "latanasov@mailjet.com", "Symfony bundle test", "5410");
+    $campaignDraft = new CampaignDraft("en_US", "Lyubo", "api@mailjet.com", "Symfony bundle test", "5410");
     $campaignDraft->setOptionalProperties($optionalProp);
     $ID = $campaignDraftManager->create($campaignDraft)[0]['ID'];
 
@@ -270,9 +268,8 @@ use Mailjet\MailjetBundle\Manager\TemplateManager;
 // ...
 public function templateExample() {
     // ...
-     $mailjet = $this->container->get('mailjet.client');
         //Example create template
-        $templateManager = new TemplateManager($mailjet);
+        $templateManager = $this->container->get('mailjet.service.template_manager');
         $optionalProp['Author'] = 'Mailjet team';
         $optionalProp['EditMode'] = 1;
         $optionalProp['Purposes'] = ['transactional'];
@@ -307,9 +304,8 @@ use Mailjet\MailjetBundle\Manager\CampaignManager;
     // ...
 public function campaignExample() {
         // ...
-        $mailjet = $this->container->get('mailjet.client');
         //Example retrieve all (limit 10 :) ) stared campaigns
-        $campaignManager = new CampaignManager($mailjet);
+        $campaignManager = $this->container->get('mailjet.service.campaign_manager');
         $filters['IsStarred']=true;
         $result = $campaignManager->getAllCampaigns($filters);
 }
