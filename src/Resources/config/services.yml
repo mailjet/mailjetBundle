@@ -9,16 +9,16 @@ parameters:
 
 services:
     mailjet.client:
-        class: "%mailjet.client.class%"
-        arguments: ["%mailjet.api_key%", "%mailjet.secret_key%", %mailjet.call%, %mailjet.options%]
+        class: '%mailjet.client.class%'
+        arguments: ['%mailjet.api_key%', '%mailjet.secret_key%', '%mailjet.call%', '%mailjet.options%']
 
     mailjet.transactionnal.client:
-        class: "%mailjet.client.class%"
+        class: '%mailjet.client.class%'
         arguments:
-            - "%mailjet.api_key%"
-            - "%mailjet.secret_key%"
-            - %mailjet.transactionnal.call%
-            - %mailjet.transactionnal.options%
+            - '%mailjet.api_key%'
+            - '%mailjet.secret_key%'
+            - '%mailjet.transactionnal.call%'
+            - '%mailjet.transactionnal.options%'
 
     swiftmailer.transport.eventdispatcher.mailjet:
         class: Swift_Events_SimpleEventDispatcher
@@ -26,36 +26,36 @@ services:
     swiftmailer.mailer.transport.mailjet:
         class: Mailjet\MailjetSwiftMailer\SwiftMailer\MailjetTransport
         arguments:
-            - "@swiftmailer.transport.eventdispatcher.mailjet"
-            - "%mailjet.api_key%"
-            - "%mailjet.secret_key%"
-            - %mailjet.transactionnal.call%
-            - %mailjet.transactionnal.options%
+            - '@swiftmailer.transport.eventdispatcher.mailjet'
+            - '%mailjet.api_key%'
+            - '%mailjet.secret_key%'
+            - '%mailjet.transactionnal.call%'
+            - '%mailjet.transactionnal.options%'
         calls:
             - method: setExternalMailjetClient
               arguments:
                   - '@mailjet.transactionnal.client'
 
     mailjet.service.contacts_list_synchronizer:
-        class: "%mailjet.contacts_list_synchronizer.class%"
+        class: '%mailjet.contacts_list_synchronizer.class%'
         arguments:
-            - "@mailjet.client"
-            - "@mailjet.service.contacts_list_manager"
+            - '@mailjet.client'
+            - '@mailjet.service.contacts_list_manager'
 
     mailjet.service.event_callback_manager:
-        class: "%mailjet.event_callback_manager.class%"
+        class: '%mailjet.event_callback_manager.class%'
         arguments:
-            - "@mailjet.client"
+            - '@mailjet.client'
 
     mailjet.service.contact_metadata_manager:
-        class: "%mailjet.contact_metadata_manager.class%"
+        class: '%mailjet.contact_metadata_manager.class%'
         arguments:
-            - "@mailjet.client"
+            - '@mailjet.client'
 
     mailjet.service.contacts_list_manager:
-        class: "%mailjet.contacts_list_manager.class%"
+        class: '%mailjet.contacts_list_manager.class%'
         arguments:
-            - "@mailjet.client"
+            - '@mailjet.client'
 
     # Listener
     mailjet.listener.contact_listener:
