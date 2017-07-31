@@ -75,6 +75,7 @@ services:
         arguments:
             - '@mailjet.client'    
 
+
     # Listener
     mailjet.listener.contact_listener:
         class: %mailjet.contact_listener.class%
