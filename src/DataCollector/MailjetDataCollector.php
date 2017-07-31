@@ -1,4 +1,5 @@
 <?php
+
 namespace Mailjet\MailjetBundle\DataCollector;
 
 use Mailjet\MailjetBundle\Client\MailjetClient;
@@ -18,19 +19,21 @@ class MailjetDataCollector extends DataCollector
     protected $client;
 
     /**
-     * Mailjet client for transactionnal email (swiftmailer)
+     * Mailjet client for transactional email (swiftmailer)
      * @var MailjetClient
      */
-    protected $transactionnalClient;
+    protected $transactionalClient;
 
     /**
      * @param MailjetClient $client
+     * @param MailjetClient $transactionalClient
      */
-    public function __construct(MailjetClient $client, MailjetClient $transactionnalClient)
+    public function __construct(MailjetClient $client, MailjetClient $transactionalClient)
     {
         $this->client = $client;
-        $this->transactionnalClient = $transactionnalClient;
+        $this->transactionalClient = $transactionalClient;
     }
+
     /**
      * Collects data for the given Request and Response.
      *
@@ -42,8 +45,9 @@ class MailjetDataCollector extends DataCollector
     {
 
         $this->data = $this->client->getCalls();
-        $this->data = array_merge($this->data, $this->transactionnalClient->getCalls());
+        $this->data = array_merge($this->data, $this->transactionalClient->getCalls());
     }
+
     /**
      * Returns the name of the collector.
      *
