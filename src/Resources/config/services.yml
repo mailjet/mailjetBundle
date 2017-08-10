@@ -6,6 +6,9 @@ parameters:
     mailjet.contacts_list_synchronizer.class: Mailjet\MailjetBundle\Synchronizer\ContactsListSynchronizer
     mailjet.contact_listener.class: Mailjet\MailjetBundle\Listener\ContactListener
     mailjet.data_collector.mailjet.class: Mailjet\MailjetBundle\DataCollector\MailjetDataCollector
+    mailjet.campaign_draft_manager.class: Mailjet\MailjetBundle\Manager\CampaignDraftManager
+    mailjet.campaign_manager.class: Mailjet\MailjetBundle\Manager\CampaignManager
+    mailjet.template_manager.class: Mailjet\MailjetBundle\Manager\TemplateManager
 
 services:
     mailjet.client:
@@ -56,6 +59,22 @@ services:
         class: '%mailjet.contacts_list_manager.class%'
         arguments:
             - '@mailjet.client'
+
+    mailjet.service.campaign_draft_manager:
+        class: '%mailjet.campaign_draft_manager.class%'
+        arguments:
+            - '@mailjet.client'
+
+    mailjet.service.campaign_manager:
+        class: '%mailjet.campaign_manager.class%'
+        arguments:
+            - '@mailjet.client'
+
+    mailjet.service.template_manager:
+        class: '%mailjet.template_manager.class%'
+        arguments:
+            - '@mailjet.client'    
+
 
     # Listener
     mailjet.listener.contact_listener:

@@ -220,3 +220,93 @@ Example:
     $response = $mailjet->post(Resources::$Email, ['body' => $body]);
 
 ```
+## Campaigndraft Example
+
+You can also access the [/campaigndraft](https://dev.mailjet.com/email-api/v3/campaigndraft) api through the CampaignDraftManager 
+
+Example:
+
+``` php
+<?php
+use \Mailjet\Resources;
+use Mailjet\MailjetBundle\Model\CampaignDraft;
+use Mailjet\MailjetBundle\Manager\CampaignDraftManager;
+// ...
+public function campaignDraftExample() {
+    // ...
+    $campaignDraftManager = $this->container->get('mailjet.service.campaign_draft_manager');
+    $optionalProp['Title'] = 'Friday newsletter';
+    $optionalProp['SenderName'] = 'Mailjet team';
+    $optionalProp['EditMode'] = 'html2';
+    $campaignDraft = new CampaignDraft("en_US", "Lyubo", "api@mailjet.com", "Symfony bundle test", "5410");
+    $campaignDraft->setOptionalProperties($optionalProp);
+    $ID = $campaignDraftManager->create($campaignDraft)[0]['ID'];
+
+    /*     * Get the ID from the newly created CampaignDraft* */
+    $campaignDraft->setId($ID);
+    /*     * Set and create content** */
+    $content = ['Html-part' => "Hello <strong>world</strong>!",
+        'Text-part' => "Hello world!"];
+    $campaignDraft->setContent($content);
+    $campaignDraftManager->createDetailContent($campaignDraft->getId(), $campaignDraft->getContent());
+      /*     * Send a campaigndraft** */
+    $campaignDraftManager->sendCampaign($campaignDraft->getId());
+}
+```
+## Template Example
+
+You can also access the [/template](https://dev.mailjet.com/email-api/v3/template) api through the TemplateManager 
+
+Example:
+
+``` php
+<?php
+use \Mailjet\Resources;
+use Mailjet\MailjetBundle\Model\Template;
+use Mailjet\MailjetBundle\Manager\TemplateManager;
+
+// ...
+public function templateExample() {
+    // ...
+        //Example create template
+        $templateManager = $this->container->get('mailjet.service.template_manager');
+        $optionalProp['Author'] = 'Mailjet team';
+        $optionalProp['EditMode'] = 1;
+        $optionalProp['Purposes'] = ['transactional'];
+        $template = new Template("Symfony Template Example!!! ", $optionalProp);
+        
+        $ID = $templateManager->create($template)[0]['ID'];
+        
+        //Add content to a template
+        $contentData = [
+            'Html-part' => "<html><body><p>Hello {{var:name}}</p></body></html>",
+            'Text-part' => "Hello {{var:name}}"
+        ];
+        $templateManager->createDetailContent($ID, $contentData);
+        
+        //Example list all templates based on multiple filters
+        $filters['OwnerType']='apikey';
+        $filters['EditMode']=1;
+        $result=$templateManager->getAll($filters);
+}
+```
+## Campaigns Example
+
+You can also access the [/campaign](https://dev.mailjet.com/email-api/v3/campaign) api through the CampaignManager 
+
+Example:
+
+``` php
+<?php
+use \Mailjet\Resources;
+use Mailjet\MailjetBundle\Model\Campaign;
+use Mailjet\MailjetBundle\Manager\CampaignManager;
+    // ...
+public function campaignExample() {
+        // ...
+        //Example retrieve all (limit 10 :) ) stared campaigns
+        $campaignManager = $this->container->get('mailjet.service.campaign_manager');
+        $filters['IsStarred']=true;
+        $result = $campaignManager->getAllCampaigns($filters);
+}
+```
