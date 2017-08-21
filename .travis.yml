@@ -1,23 +1,22 @@
 language: php
 php:
-  - 5.6
-  - 7.0
-
+- 5.6
+- 7.0
 env:
-  - SYMFONY_VERSION=2.7.*
-  - SYMFONY_VERSION=2.8.*
-  - SYMFONY_VERSION=3.0.*
-  - SYMFONY_VERSION=3.1.*
-
+- SYMFONY_VERSION=2.7.*
+- SYMFONY_VERSION=2.8.*
+- SYMFONY_VERSION=3.0.*
+- SYMFONY_VERSION=3.1.*
 before_install:
-  - composer require "symfony/config:${SYMFONY_VERSION}" --no-update
-  - composer require "symfony/dependency-injection:${SYMFONY_VERSION}" --no-update
-  - composer require "symfony/http-foundation:${SYMFONY_VERSION}" --no-update
-  - composer require "symfony/http-kernel:${SYMFONY_VERSION}" --no-update
-  - composer require "symfony/yaml:${SYMFONY_VERSION}" --no-update
-
+- composer require "symfony/config:${SYMFONY_VERSION}" --no-update
+- composer require "symfony/dependency-injection:${SYMFONY_VERSION}" --no-update
+- composer require "symfony/http-foundation:${SYMFONY_VERSION}" --no-update
+- composer require "symfony/http-kernel:${SYMFONY_VERSION}" --no-update
+- composer require "symfony/yaml:${SYMFONY_VERSION}" --no-update
 install:
-  - composer update --prefer-source
-
+- composer update --prefer-source
 script:
-  - bin/phpspec run -fpretty --verbose
+- bin/phpspec run -fpretty --verbose
+notifications:
+  slack:
+    secure: brr1IaTbOCEImnW4T+/G3lZgwmiMK4LnDMGbGKcHSn3j8HYIY4Va2QN70aGlTJZKpBu026hQNFe1nsOr0NMeisKt0zdrG9C9Q+SqW0fvvx+CozX2VpNQhfJVuUc7CXHve1BUBNg8DLqqHeaHEhQw/hUfk4X+cQe/tVWq64ytnNZImm81xXEzcO+oZs7wHOe9FLHXF0Ije1ML971U/Evi5nbfLe36RtMjxUc3IvvuTellEutgxUeH7RKtIVgVg/MEOxQZ9TVbMOoG5XxW4xaIJSypRsBwOSzzaaek3cxdbMQcBKbbTXbLZYB2acoYNmqFe+Y8WzyzWbZkOatPHaJB5b8kE8WilecowYkb1SKhfm+3rG4Bcjv9iu0cJuXw4v17mBTmg/LpTYS34StjUBO8Pb6dKkyBaIf/Ly70wdnCkYIP5ZLdkp3Gpv9pmZm/+sB6KbyNAbM/YJbkDrJLjl9MiFTMzO4ev8ku8nL98I98Hg27UmS+NXdX/Tpe3Tw6H09YPRaEjxLZsQd8o1qEY2j6njsmBk14ws40uQ+IRFocxQ6knBP5xeGF2vi2iBGM+vAgJzqdQA5PW9RUPwUSeORXbQkRUVM3l8IL1DpeteulbY3WaFPzf0KkfQBund2WlsB33YzLu+PLFpKJuCtghHnux5HwNylX+irMeQ1xaZl3l30=
