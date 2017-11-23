@@ -78,7 +78,7 @@ services:
 
     # Listener
     mailjet.listener.contact_listener:
-        class: %mailjet.contact_listener.class%
+        class: '%mailjet.contact_listener.class%'
         arguments:
             - '@mailjet.service.contacts_list_manager'
         tags:
