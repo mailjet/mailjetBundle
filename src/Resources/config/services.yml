@@ -94,4 +94,4 @@ services:
             - '@mailjet.client'
             - '@mailjet.transactionnal.client'
         tags:
-            - { name: data_collector, template: MailjetBundle:DataCollector:mailjet.html.twig, id: mailjet}
+            - { name: data_collector, template: '@Mailjet/data_collector/mailjet.html.twig', id: mailjet}
