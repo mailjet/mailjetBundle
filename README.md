@@ -20,29 +20,29 @@ Symfony bundle for handling Mailjet API V3 using this wrapper: <https://github.c
 
 ## Setup
 
-Add bundle to your project:
-
-```bash
-composer require mailjet/mailjet-bundle
-```
-
-Add `Mailjet\MailjetBundle\MailjetBundle` to your `AppKernel.php`:
+Add `Mailjet\MailjetBundle\MailjetBundle` to your `bundles.php`:
 
 ```php
 $bundles = [
     // ...
-    new Mailjet\MailjetBundle\MailjetBundle(),
+    Mailjet\MailjetBundle\MailjetBundle::class => ['all' => true]
 ];
 ```
 
 ## Minimal Configuration
 
-In your `config.yml`:
+In your `config.yml` add:
 
 ```yaml
 mailjet:
     api_key:    "%mailjet.api_key%"
     secret_key: "%mailjet.secret_key%"
+```
+
+Add bundle to your project:
+
+```bash
+composer require mailjet/mailjet-bundle
 ```
 
 ## ToDo
