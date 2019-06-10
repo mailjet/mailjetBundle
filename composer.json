@@ -35,7 +35,7 @@
         "mailjet/mailjet-swiftmailer": "dev-develop"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2@dev",
+        "phpspec/phpspec": "~4@dev",
         "symfony/symfony": "~4.0 | ~4.1"
     },
     "config": {
