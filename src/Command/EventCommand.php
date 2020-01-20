@@ -3,14 +3,27 @@ namespace Mailjet\MailjetBundle\Command;
 
 use Mailjet\MailjetBundle\Manager\EventCallbackUrlManager;
 use Mailjet\MailjetBundle\Model\EventCallbackUrl;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Routing\RouterInterface;
 
-class EventCommand extends ContainerAwareCommand
+class EventCommand extends Command
 {
+    public function __construct(
+        EventCallbackUrlManager $eventCallbackUrlManager,
+        RouterInterface $router,
+        $endPointRoute,
+        $endPointToken
+    ) {
+        $this->eventCallbackUrlManager = $eventCallbackUrlManager;
+        $this->router                  = $router;
+        $this->endPointRoute           = $endPointRoute;
+        $this->endPointToken           = $endPointToken;
+    }
+
     protected function configure()
     {
         $this
@@ -39,11 +52,6 @@ class EventCommand extends ContainerAwareCommand
         ));
         $url = sprintf('%s/%s', rtrim($domain, '/'), ltrim($uri, '/'));
 
-        /**
-         * @var EventCallbackUrlManager $manager
-         */
-        $manager = $this->getContainer()->get('mailjet.service.event_callback_manager');
-
         if ($input->getOption('event-type')) {
             $eventTypes = $input->getOption('event-type');
         } else {
@@ -54,12 +62,12 @@ class EventCommand extends ContainerAwareCommand
             $eventCallBackUrl = new EventCallbackUrl($url, $eventType, true);
 
             try {
-                $manager->get($eventType);
+                $this->eventCallbackUrlManager->get($eventType);
                 $output->writeln('update '.$eventType);
-                $manager->update($eventType, $eventCallBackUrl);
+                $this->eventCallbackUrlManager->update($eventType, $eventCallBackUrl);
             } catch (\Exception $e) {
                 $output->writeln('create '.$eventType);
-                $manager->create($eventCallBackUrl);
+                $this->eventCallbackUrlManager->create($eventCallBackUrl);
             }
         }
 
@@ -71,7 +79,7 @@ class EventCommand extends ContainerAwareCommand
      */
     protected function getRouter()
     {
-        return $this->getContainer()->get('router');
+        return $this->router;
     }
 
     /**
@@ -79,7 +87,7 @@ class EventCommand extends ContainerAwareCommand
      */
     protected function getRouteName()
     {
-        return $this->getContainer()->getParameter('mailjet.event_endpoint_route');
+        return $this->endPointRoute;
     }
 
     /**
@@ -87,6 +95,6 @@ class EventCommand extends ContainerAwareCommand
      */
     protected function getToken()
     {
-        return $this->getContainer()->getParameter('mailjet.event_endpoint_token');
+        return $this->endPointToken;
     }
 }

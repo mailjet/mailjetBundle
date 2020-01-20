@@ -9,6 +9,9 @@ parameters:
     mailjet.campaign_draft_manager.class: Mailjet\MailjetBundle\Manager\CampaignDraftManager
     mailjet.campaign_manager.class: Mailjet\MailjetBundle\Manager\CampaignManager
     mailjet.template_manager.class: Mailjet\MailjetBundle\Manager\TemplateManager
+    mailjet.command.event_endpoint.class: Mailjet\MailjetBundle\Command\EventCommand
+    mailjet.command.sync_user.class: Mailjet\MailjetBundle\Command\SyncUserCommand
+    mailjet.command.contactmetadata_sync.class: Mailjet\MailjetBundle\Command\SyncContactMetadataCommand
 
 services:
     mailjet.client:
@@ -73,7 +76,7 @@ services:
     mailjet.service.template_manager:
         class: '%mailjet.template_manager.class%'
         arguments:
-            - '@mailjet.client'    
+            - '@mailjet.client'
 
 
     # Listener
@@ -95,3 +98,31 @@ services:
             - '@mailjet.transactionnal.client'
         tags:
             - { name: data_collector, template: '@Mailjet/data_collector/mailjet.html.twig', id: mailjet}
+
+
+    # Commands
+    mailjet.command.sync_user:
+        class: '%mailjet.command.sync_user.class%'
+        arguments:
+            - '@mailjet.service.contacts_list_synchronizer'
+            - '%mailjer.lists%'
+        tags:
+            - { name: 'console.command', command: 'mailjet:user-sync' }
+
+    mailjet.command.event_endpoint:
+        class: '%mailjet.command.event_endpoint.class%'
+        arguments:
+            - '@mailjet.service.event_callback_manager'
+            - '@router'
+            - '%mailjet.event_endpoint_route%'
+            - '%mailjet.event_endpoint_token%'
+        tags:
+            - { name: 'console.command', command: 'mailjet:event-endpoint' }
+
+    mailjet.command.contactmetadata_sync:
+        class: '%mailjet.command.contactmetadata_sync.class%'
+        arguments:
+            - '@mailjet.service.contact_metadata_manager'
+            - '%mailjet.contact_metadata%'
+        tags:
+            - { name: 'console.command', command: 'contactmetadata-sync' }

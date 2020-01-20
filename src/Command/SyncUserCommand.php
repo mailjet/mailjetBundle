@@ -2,25 +2,23 @@
 
 namespace Mailjet\MailjetBundle\Command;
 
-use Mailjet\MailjetBundle\Synchronizer\ContactsListSynchronizer;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-
 use Mailjet\MailjetBundle\Model\ContactsList;
 use Mailjet\MailjetBundle\Provider\ProviderInterface;
+use Mailjet\MailjetBundle\Synchronizer\ContactsListSynchronizer;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
  * Class SyncUserCommand
  * Sync users in a mailjet contact list
  *
  */
-class SyncUserCommand extends ContainerAwareCommand
+class SyncUserCommand extends Command
 {
-
     /**
      * @var array
      */
@@ -30,6 +28,18 @@ class SyncUserCommand extends ContainerAwareCommand
      * @var ContactsListSynchronizer
      */
     private $synchronizer;
+
+    /**
+     * @param ContactsListSynchronizer $synchronizer
+     * @param array                    $lists
+     */
+    public function __construct(
+        ContactsListSynchronizer $synchronizer,
+        array $lists = []
+    ) {
+        $this->synchronizer = $synchronizer;
+        $this->lists        = $lists;
+    }
 
     /**
      * {@inheritDoc}
@@ -54,9 +64,6 @@ class SyncUserCommand extends ContainerAwareCommand
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $output->writeln(sprintf('<info>%s</info>', $this->getDescription()));
-
-        $this->lists = $this->getContainer()->getParameter('mailjet.lists');
-        $this->synchronizer = $this->getContainer()->get('mailjet.service.contacts_list_synchronizer');
     }
 
     /**
