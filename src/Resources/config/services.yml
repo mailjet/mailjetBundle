@@ -105,7 +105,7 @@ services:
         class: '%mailjet.command.sync_user.class%'
         arguments:
             - '@mailjet.service.contacts_list_synchronizer'
-            - '%mailjer.lists%'
+            - '%mailjet.lists%'
         tags:
             - { name: 'console.command', command: 'mailjet:user-sync' }
 

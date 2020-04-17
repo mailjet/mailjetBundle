@@ -50,3 +50,5 @@ composer.lock
 
 # mkdocs
 /docs
+
+/.idea
