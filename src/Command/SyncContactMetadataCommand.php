@@ -34,6 +34,8 @@ class SyncContactMetadataCommand extends Command
     ) {
         $this->metadataManager = $metadataManager;
         $this->contactMetadata = $contactMetadata;
+
+        parent::__construct('mailjet:contactmetadata-sync');
     }
 
     /**

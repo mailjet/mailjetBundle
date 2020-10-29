@@ -22,6 +22,8 @@ class EventCommand extends Command
         $this->router                  = $router;
         $this->endPointRoute           = $endPointRoute;
         $this->endPointToken           = $endPointToken;
+
+        parent::__construct('mailjet:event-endpoint');
     }
 
     protected function configure()

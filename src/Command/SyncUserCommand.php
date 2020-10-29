@@ -39,6 +39,8 @@ class SyncUserCommand extends Command
     ) {
         $this->synchronizer = $synchronizer;
         $this->lists        = $lists;
+
+        parent::__construct('mailjet:user-sync');
     }
 
     /**
