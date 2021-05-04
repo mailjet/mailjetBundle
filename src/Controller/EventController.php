@@ -2,7 +2,6 @@
 namespace Mailjet\MailjetBundle\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Annotation\Method;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,8 +27,7 @@ class EventController extends AbstractController
      * Endpoint for the mailjet events (webhooks)
      * https://dev.mailjet.com/guides/#events
      * https://live-event-dashboard-demo.mailjet.com/
-     * @Route("/endpoint/{token}", name="mailjet_event_endpoint")
-     * @Method({"POST"})
+     * @Route("/endpoint/{token}", name="mailjet_event_endpoint", methods={"POST"})
      */
     public function indexAction(Request $request, $token)
     {
