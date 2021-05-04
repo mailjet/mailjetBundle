@@ -1,10 +1,10 @@
 <?php
 namespace Mailjet\MailjetBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Annotation\Method;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -21,7 +21,7 @@ use Mailjet\MailjetBundle\Event\CallbackEvent;
  * Check regularly your server logs for any errors : all non 200 errors would be retried and could cause an increasing volume of calls to your system.
  * Leverage the transactional message tagging to simplify reconciliation between the events and your own system.
  */
-class EventController extends Controller
+class EventController extends AbstractController
 {
 
     /**
