@@ -44,7 +44,7 @@
         "symfony/yaml": "^4.4|^5.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.1"
+        "phpspec/phpspec": "^5.1|^6.0|^7.0"
     },
     "config": {
         "bin-dir": "bin"
