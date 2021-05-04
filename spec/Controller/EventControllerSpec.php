@@ -27,7 +27,7 @@ class EventControllerSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType('Mailjet\MailjetBundle\Controller\EventController');
-        $this->shouldHaveType('Symfony\Bundle\FrameworkBundle\Controller\Controller');
+        $this->shouldHaveType('Symfony\Bundle\FrameworkBundle\Controller\AbstractController');
 
     }
 
