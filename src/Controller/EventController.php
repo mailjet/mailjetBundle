@@ -56,25 +56,25 @@ class EventController extends AbstractController
             $type = $callbackData['event'];
             switch ($type) {
                 case 'sent':
-                    $dispatcher->dispatch(CallbackEvent::EVENT_SENT, new CallbackEvent($callbackData));
+                    $dispatcher->dispatch(new CallbackEvent($callbackData), CallbackEvent::EVENT_SENT);
                     break;
                 case 'open':
-                    $dispatcher->dispatch(CallbackEvent::EVENT_OPEN, new CallbackEvent($callbackData));
+                    $dispatcher->dispatch(new CallbackEvent($callbackData), CallbackEvent::EVENT_OPEN);
                     break;
                 case 'click':
-                    $dispatcher->dispatch(CallbackEvent::EVENT_CLICK, new CallbackEvent($callbackData));
+                    $dispatcher->dispatch(new CallbackEvent($callbackData), CallbackEvent::EVENT_CLICK);
                     break;
                 case 'bounce':
-                    $dispatcher->dispatch(CallbackEvent::EVENT_BOUNCE, new CallbackEvent($callbackData));
+                    $dispatcher->dispatch(new CallbackEvent($callbackData), CallbackEvent::EVENT_BOUNCE);
                     break;
                 case 'spam':
-                    $dispatcher->dispatch(CallbackEvent::EVENT_SPAM, new CallbackEvent($callbackData));
+                    $dispatcher->dispatch(new CallbackEvent($callbackData), CallbackEvent::EVENT_SPAM);
                     break;
                 case 'blocked':
-                    $dispatcher->dispatch(CallbackEvent::EVENT_BLOCKED, new CallbackEvent($callbackData));
+                    $dispatcher->dispatch(new CallbackEvent($callbackData), CallbackEvent::EVENT_BLOCKED);
                     break;
                 case 'unsub':
-                    $dispatcher->dispatch(CallbackEvent::EVENT_UNSUB, new CallbackEvent($callbackData));
+                    $dispatcher->dispatch(new CallbackEvent($callbackData), CallbackEvent::EVENT_UNSUB);
                     break;
                 default:
                     throw new BadRequestHttpException('Type mismatch');
