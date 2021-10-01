@@ -95,3 +95,9 @@ services:
             - '@mailjet.transactionnal.client'
         tags:
             - { name: data_collector, template: '@Mailjet/data_collector/mailjet.html.twig', id: mailjet}
+
+    # Controller
+    Mailjet\MailjetBundle\Controller\EventController:
+        public: true
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
