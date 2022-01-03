@@ -7,16 +7,16 @@ use Mailjet\Response;
 class MailjetClient extends Client
 {
     protected $calls = [];
+
     /**
-     * Trigger a POST request
+     * Trigger a POST request.
      *
      * @param array $resource Mailjet Resource/Action pair
-     * @param array $args     Request arguments
+     * @param array $args Request arguments
      * @param array $options
-     *
      * @return Response
      */
-    public function post($resource, array $args = [], array $options = [])
+    public function post(array $resource, array $args = [], array $options = []): Response
     {
         $response = parent::post($resource, $args, $options);
         $this->calls[] = [
@@ -29,16 +29,16 @@ class MailjetClient extends Client
         ];
         return $response;
     }
+
     /**
-     * Trigger a GET request
+     * Trigger a GET request.
      *
      * @param array $resource Mailjet Resource/Action pair
-     * @param array $args     Request arguments
+     * @param array $args Request arguments
      * @param array $options
-     *
      * @return Response
      */
-    public function get($resource, array $args = [], array $options = [])
+    public function get(array $resource, array $args = [], array $options = []): Response
     {
         $response = parent::get($resource, $args, $options);
         $this->calls[] = [
@@ -51,16 +51,16 @@ class MailjetClient extends Client
         ];
         return $response;
     }
+
     /**
-     * Trigger a POST request
+     * Trigger a POST request.
      *
      * @param array $resource Mailjet Resource/Action pair
-     * @param array $args     Request arguments
+     * @param array $args Request arguments
      * @param array $options
-     *
      * @return Response
      */
-    public function put($resource, array $args = [], array $options = [])
+    public function put(array $resource, array $args = [], array $options = []): Response
     {
         $response = parent::put($resource, $args, $options);
         $this->calls[] = [
@@ -73,16 +73,16 @@ class MailjetClient extends Client
         ];
         return $response;
     }
+
     /**
-     * Trigger a GET request
+     * Trigger a GET request.
      *
      * @param array $resource Mailjet Resource/Action pair
-     * @param array $args     Request arguments
+     * @param array $args Request arguments
      * @param array $options
-     *
      * @return Response
      */
-    public function delete($resource, array $args = [], array $options = [])
+    public function delete(array $resource, array $args = [], array $options = []): Response
     {
         $response = parent::delete($resource, $args, $options);
         $this->calls[] = [
