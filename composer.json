@@ -31,7 +31,7 @@
     },
     "require": {
         "php": ">=7.1.3",
-        "mailjet/mailjet-apiv3-php": "^1.2",
+        "mailjet/mailjet-apiv3-php": "^1.5.2",
         "mailjet/mailjet-swiftmailer": "^2.0",
         "symfony/config": "^4.4|^5.0",
         "symfony/console": "^4.4|^5.0",
